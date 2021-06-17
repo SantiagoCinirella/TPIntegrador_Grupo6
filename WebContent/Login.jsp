@@ -21,6 +21,8 @@
 <link rel="stylesheet" type="text/css" href="css/styleLogin.css">
 </head>
 
+<body background="https://images.pexels.com/photos/259200/pexels-photo-259200.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+
 <body translate="no">
 	<form class="login">
 		<input type="text" placeholder="Usuario"> <input
