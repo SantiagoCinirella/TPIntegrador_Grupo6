@@ -226,7 +226,7 @@
                     <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
                     <span class="text-nowrap">Desde el mes anterior</span>
                   </p>
-                  <a href="#" class="btn btn-sm btn-neutral">Ver historial</a>    
+                  <a href="HistorialDeMovimientos.jsp" class="btn btn-sm btn-neutral">Ver historial</a>    
                 </div>
               </div>
             </div>
@@ -249,7 +249,7 @@
                     <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
                     <span class="text-nowrap">Desde el mes anterior</span>
                   </p>
-                  <a href="#" class="btn btn-sm btn-neutral">Ver historial</a>         
+                  <a href="HistorialDeMovimientos.jsp" class="btn btn-sm btn-neutral">Ver historial</a>         
                 </div>
               </div>
             </div>
@@ -272,7 +272,7 @@
                     <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 1.48%</span>
                     <span class="text-nowrap">Desde el mes anterior</span>
                   </p>
-                  <a href="#" class="btn btn-sm btn-neutral">Ver historial</a>    
+                  <a href="HistorialDeMovimientos.jsp" class="btn btn-sm btn-neutral">Ver historial</a>    
                 </div>
               </div>
             </div>
@@ -295,7 +295,7 @@
                     <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 0.48%</span>
                     <span class="text-nowrap">Desde el mes anterior</span>
                   </p>
-                  <a href="#" class="btn btn-sm btn-neutral">Ver historial</a>         
+                  <a href="HistorialDeMovimientos.jsp" class="btn btn-sm btn-neutral">Ver historial</a>         
                 </div>
               </div>
             </div>
