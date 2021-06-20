@@ -1,3 +1,4 @@
+@charset "ISO-8859-1";
 body{
     background: #938982; /* Old browsers */
     background: url('../img/bg.jpg');
@@ -21,6 +22,7 @@ body{
 .description{
     margin-top: 60px;
     text-align: center;
+    color: white;
 }
 .description-footer{
     margin-bottom: 20px;
@@ -130,20 +132,8 @@ h1 small{
     border-color: #00bbff;
 }
 
-.fixed-plugin .badge-white{
-    background-color: #FFFFFF;
-}
 .fixed-plugin .badge-blue{
     background-color: #4087ea;
-}
-.fixed-plugin .badge-azure{
-    background-color: #36AFEC;
-}
-.fixed-plugin .badge-green{
-    background-color: #53A319;
-}
-.fixed-plugin .badge-orange{
-    background-color: #ffb33b;
 }
 
 .fixed-plugin .badge-red{
