@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
     <title>BANCO UTN FRGP</title>
+  <link rel="icon" href="https://play-lh.googleusercontent.com/on7AWbuav44mB2ztIB6mp1BUu6bhIMcNd-9YjbjNDxgViamcJ3bo1dkEo06EGbC7njw" type="image/png">
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -61,7 +62,7 @@ https://templatemo.com/tm-545-finance-business
                 <a class="nav-link" href="#QuienesSomos">Quienes somos</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="Login.jsp">Login</a>
+                <a class="nav-link" href="login.jsp">Login</a>
               </li>
             </ul>
           </div>
@@ -80,7 +81,7 @@ https://templatemo.com/tm-545-finance-business
                   <h4>SOMOS BANCO <br> UTN FRGP</h4>
                   <p>Tu Banco Digital, siempre
                     con vos,<br> est�s d�nde est�s.</p>
-                  <a href="login.html" class="filled-button">Contactanos</a>
+                  <a href="Login.jsp" class="filled-button">Contactanos</a>
                 </div>
             </div>
           </div>
@@ -92,7 +93,7 @@ https://templatemo.com/tm-545-finance-business
                   <h6></h6>
                   <h4>Hacete cliente de <br> BANCO UTN FRGP</h4>
                   <p>Enterate de nuestros beneficios <br> haciendote cliente nuestro.</p>
-                  <a href="login.html" class="filled-button">Empeza ya</a>
+                  <a href="Login.jsp" class="filled-button">Empeza ya</a>
                 </div>
             </div>
           </div>
@@ -115,7 +116,7 @@ https://templatemo.com/tm-545-finance-business
               <div class="down-content">
                 <h4>Sac� tu tarjeta de cr�dito</h4>
                 <p>Sac� tu tarjeta de credito gratis por 1 a�o, pedila en 5 minutos y accede a descuentos en viajes, preventas y mucho m�s.</p>
-                <a href="login.html" class="filled-button">Empeza ya</a>
+                <a href="Login.jsp" class="filled-button">Empeza ya</a>
               </div>
             </div>
           </div>
@@ -125,7 +126,7 @@ https://templatemo.com/tm-545-finance-business
               <div class="down-content">
                 <h4>Cobr� tu sueldo</h4>
                 <p>Disfrut� de tu cuenta 100% bonificada, tasas exclusivas en pr�stamos personales , descuentos en seguros y mucho m�s.</p>
-                <a href="login.html" class="filled-button">Empeza ya</a>
+                <a href="Login.jsp" class="filled-button">Empeza ya</a>
               </div>
             </div>
           </div>
@@ -135,7 +136,7 @@ https://templatemo.com/tm-545-finance-business
               <div class="down-content">
                 <h4>Acredit� tus ventas</h4>
                 <p>Te apoyamos en tu comercio, acredit� tus ventas con tarjetas de cr�dito y d�bito en una cuenta y ten� beneficios para vos y tus clientes. </p>
-                <a href="" class="filled-button">Empeza ya</a>
+                <a href="Login.jsp" class="filled-button">Empeza ya</a>
               </div>
             </div>
           </div>
@@ -151,7 +152,7 @@ https://templatemo.com/tm-545-finance-business
               <h2><em>BANCO UTN FRGP</em></h2>
               <p>Somos uno de los bancos l�deres en medios de pago, en comercio exterior, servicios transaccionales y cash management.
               <br><br> Y tambi�n uno de los principales protagonistas en los mercados burs�tiles, de t�tulos p�blicos y cambiarios. </p>
-              <a href="" class="filled-button">Empeza ya</a>
+              <a href="Login.jsp" class="filled-button">Empeza ya</a>
             </div>
           </div>
           <div class="col-md-6 align-self-center">
@@ -205,7 +206,7 @@ https://templatemo.com/tm-545-finance-business
                       El crecimiento del Banco se potenci� a partir de su expansi�n al sector financiero minorista y ocupo un rol importante en la recuperaci�n de la actividad financiera argentina luego de la crisis 2001-2002.
                         <br>  
                         <br>                                      
-                    <a href="#" class="filled-button">Empeza ya </a>
+                    <a href="Login.jsp" class="filled-button">Empeza ya </a>
                   </div>
                 </div>
               </div>
