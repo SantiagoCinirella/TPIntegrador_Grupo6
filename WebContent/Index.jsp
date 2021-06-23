@@ -62,7 +62,7 @@ https://templatemo.com/tm-545-finance-business
                 <a class="nav-link" href="#QuienesSomos">Quienes somos</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="login.jsp">Login</a>
+                <a class="nav-link" href="Login.jsp">Login</a>
               </li>
             </ul>
           </div>
@@ -80,7 +80,7 @@ https://templatemo.com/tm-545-finance-business
                 <div class="text-content">
                   <h4>SOMOS BANCO <br> UTN FRGP</h4>
                   <p>Tu Banco Digital, siempre
-                    con vos,<br> estés dónde estés.</p>
+                    con vos,<br> estes donde estes.</p>
                   <a href="Login.jsp" class="filled-button">Contactanos</a>
                 </div>
             </div>
@@ -114,8 +114,8 @@ https://templatemo.com/tm-545-finance-business
             <div class="service-item">
               <img src="assets/images/service_01.jpg" alt="">
               <div class="down-content">
-                <h4>Sacá tu tarjeta de crédito</h4>
-                <p>Sacá tu tarjeta de credito gratis por 1 año, pedila en 5 minutos y accede a descuentos en viajes, preventas y mucho más.</p>
+                <h4>SacA tu tarjeta de credito</h4>
+                <p>Saca tu tarjeta de credito gratis por 1 aï¿½o, pedila en 5 minutos y accede a descuentos en viajes, preventas y mucho mas.</p>
                 <a href="Login.jsp" class="filled-button">Empeza ya</a>
               </div>
             </div>
@@ -124,8 +124,8 @@ https://templatemo.com/tm-545-finance-business
             <div class="service-item">
               <img src="assets/images/service_02.jpg" alt="">
               <div class="down-content">
-                <h4>Cobrá tu sueldo</h4>
-                <p>Disfrutá de tu cuenta 100% bonificada, tasas exclusivas en préstamos personales , descuentos en seguros y mucho más.</p>
+                <h4>Cobra tu sueldo</h4>
+                <p>Disfruta de tu cuenta 100% bonificada, tasas exclusivas en prestamos personales , descuentos en seguros y mucho mas.</p>
                 <a href="Login.jsp" class="filled-button">Empeza ya</a>
               </div>
             </div>
@@ -134,8 +134,8 @@ https://templatemo.com/tm-545-finance-business
             <div class="service-item">
               <img src="assets/images/service_03.jpg" alt="">
               <div class="down-content">
-                <h4>Acreditá tus ventas</h4>
-                <p>Te apoyamos en tu comercio, acreditá tus ventas con tarjetas de crédito y débito en una cuenta y tené beneficios para vos y tus clientes. </p>
+                <h4>Acredita tus ventas</h4>
+                <p>Te apoyamos en tu comercio, acredita tus ventas con tarjetas de credito y debito en una cuenta y tene beneficios para vos y tus clientes. </p>
                 <a href="Login.jsp" class="filled-button">Empeza ya</a>
               </div>
             </div>
@@ -150,8 +150,8 @@ https://templatemo.com/tm-545-finance-business
           <div class="col-md-6">
             <div class="left-content">
               <h2><em>BANCO UTN FRGP</em></h2>
-              <p>Somos uno de los bancos líderes en medios de pago, en comercio exterior, servicios transaccionales y cash management.
-              <br><br> Y también uno de los principales protagonistas en los mercados bursátiles, de títulos públicos y cambiarios. </p>
+              <p>Somos uno de los bancos lideres en medios de pago, en comercio exterior, servicios transaccionales y cash management.
+              <br><br> Y tambien uno de los principales protagonistas en los mercados bursatiles, de titulos publicos y cambiarios. </p>
               <a href="Login.jsp" class="filled-button">Empeza ya</a>
             </div>
           </div>
@@ -202,8 +202,8 @@ https://templatemo.com/tm-545-finance-business
                   <div class="right-content">
                     <span>Quienes somos</span>
                     <h2>Conozca acerca del<em> BANCO UTN FRGP</em></h2>
-                    <p>BANCO UTN FRGP comenzó a operar en 1985 como agente de mercado abierto, especializado en trading de títulos públicos, pases y otras operaciones financieras.
-                      El crecimiento del Banco se potenció a partir de su expansión al sector financiero minorista y ocupo un rol importante en la recuperación de la actividad financiera argentina luego de la crisis 2001-2002.
+                    <p>BANCO UTN FRGP comenzo a operar en 1985 como agente de mercado abierto, especializado en trading de titulos publicos, pases y otras operaciones financieras.
+                      El crecimiento del Banco se potencia a partir de su expansion al sector financiero minorista y ocupo un rol importante en la recuperacion de la actividad financiera argentina luego de la crisis 2001-2002.
                         <br>  
                         <br>                                      
                     <a href="Login.jsp" class="filled-button">Empeza ya </a>
@@ -227,7 +227,7 @@ https://templatemo.com/tm-545-finance-business
           <div class="col-md-3 footer-item">
             <h4>BANCO UTN FRGP</h4>
             <p>Tu Banco Digital, siempre
-              con vos, estés dónde estés.</p>
+              con vos, estes donde estes.</p>
             <ul class="social-icons">
               <li><a rel="nofollow" href="https://fb.com/templatemo" target="_blank"><i class="fa fa-facebook"></i></a></li>
               <li><a href="#"><i class="fa fa-twitter"></i></a></li>

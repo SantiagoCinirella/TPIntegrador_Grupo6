@@ -97,23 +97,6 @@
 			<div class="container-fluid">
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<!-- Search form -->
-					<form class="navbar-search navbar-search-light form-inline mr-sm-3"
-						id="navbar-search-main">
-						<div class="form-group mb-0">
-							<div
-								class="input-group input-group-alternative input-group-merge">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fas fa-search"></i></span>
-								</div>
-								<input class="form-control" placeholder="Buscar" type="text"
-									onkeyup=Filtrar(this)>
-							</div>
-						</div>
-						<button type="button" class="close" data-action="search-close"
-							data-target="#navbar-search-main" aria-label="Close">
-							<span aria-hidden="true">Ã—</span>
-						</button>
-					</form>
 					<!-- Navbar links -->
 					<ul class="navbar-nav align-items-center  ml-md-auto ">
 						<li class="nav-item d-xl-none">
@@ -191,27 +174,27 @@
 						<div class="card-header bg-transparent">
 							<h3 class="mb-0">Cuentas</h3>
 						</div>
+									<div class="row">
 						<div class="card-body">
 							<div class="row icon-examples">
-
-								<div class="col-xl-8 order-xl-1">
+                					<div class="col-xl-12">
 									<div class="card">
 										<div class="card-header">
 											<div class="row align-items-center">
-												<div class="col-8">
+                								<div class="col-xl-12">
 													<h3 class="mb-0">Alta de cuenta</h3>
 												</div>
 											</div>
 										</div>
 										<div class="card-body">
 											<form>
-												<h6 class="heading-small text-muted mb-4">Información
+												<h6 class="heading-small text-muted mb-4">Informaciï¿½n
 													de cliente</h6>
 												<div class="pl-lg-4">
 													<div class="row">
 														<div class="col-lg-6">
 															<div class="form-group">
-																<label class="form-control-label" for="input-username">Username</label>
+																<label class="form-control-label" for="input-username">Cliente</label>
 																<select class="form-control" id="sel1">
 																	<option selected="true" disabled="disabled">Seleccione
 																		un cliente</option>
@@ -279,9 +262,9 @@
 														</div>
 														<div class="col-lg-4">
 															<div class="form-group">
-																<label class="form-control-label" for="input-country">N°
+																<label class="form-control-label" for="input-country">Nï¿½
 																	de cuenta</label> <input type="text" id="input-country"
-																	class="form-control" placeholder="N° de cuenta"
+																	class="form-control" placeholder="Nï¿½ de cuenta"
 																	disabled="disabled" value="123-44556-123">
 															</div>
 														</div>
@@ -299,7 +282,7 @@
 													<div class="form-group">
 														  <div class="col-12 text-center">
 										                  	<a href="#!" class="btn btn-sm btn-primary" style="width: 250px;">Alta</a>
-										                  	<a href="#!" class="btn btn-sm btn-primary" style="width: 250px;">Modificación</a>
+										                  	<a href="#!" class="btn btn-sm btn-primary" style="width: 250px;">Modificaciï¿½n</a>
 										                </div>
 													</div>
 											</form>
