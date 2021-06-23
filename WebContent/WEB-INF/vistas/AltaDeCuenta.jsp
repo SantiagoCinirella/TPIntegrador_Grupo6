@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,6 +98,23 @@
 			<div class="container-fluid">
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<!-- Search form -->
+					<form class="navbar-search navbar-search-light form-inline mr-sm-3"
+						id="navbar-search-main">
+						<div class="form-group mb-0">
+							<div
+								class="input-group input-group-alternative input-group-merge">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-search"></i></span>
+								</div>
+								<input class="form-control" placeholder="Buscar" type="text"
+									onkeyup=Filtrar(this)>
+							</div>
+						</div>
+						<button type="button" class="close" data-action="search-close"
+							data-target="#navbar-search-main" aria-label="Close">
+							<span aria-hidden="true">Ã</span>
+						</button>
+					</form>
 					<!-- Navbar links -->
 					<ul class="navbar-nav align-items-center  ml-md-auto ">
 						<li class="nav-item d-xl-none">
@@ -187,15 +205,15 @@
 											</div>
 										</div>
 										<div class="card-body">
-											<form>
-												<h6 class="heading-small text-muted mb-4">Informaci�n
+											<form action="agregarCuenta.html" method="get">
+												<h6 class="heading-small text-muted mb-4">Información
 													de cliente</h6>
 												<div class="pl-lg-4">
 													<div class="row">
 														<div class="col-lg-6">
 															<div class="form-group">
-																<label class="form-control-label" for="input-username">Cliente</label>
-																<select class="form-control" id="sel1">
+																<label class="form-control-label" for="input-username">Username</label>
+																<select class="form-control" name="DropDownCliente">
 																	<option selected="true" disabled="disabled">Seleccione
 																		un cliente</option>
 																	<option>11223344455</option>
@@ -241,7 +259,8 @@
 														<div class="col-md-12">
 															<div class="form-group">
 																<label class="form-control-label" for="input-address">Tipo
-																	de cuenta</label> <select class="form-control" id="sel1">
+																	de cuenta</label>
+																<select class="form-control"  name="txtTipoCuenta">
 																	<option selected="true" disabled="disabled">Seleccione
 																		un tipo de Cuenta</option>
 																	<option>Caja de ahorro en pesos</option>
@@ -255,24 +274,24 @@
 														<div class="col-lg-4">
 															<div class="form-group">
 																<label class="form-control-label" for="input-city">CBU</label>
-																<input type="text" id="input-city" class="form-control"
-																	placeholder="CBU" disabled="disabled"
-																	value="22334455667788">
+																<input type="text" name="txtCBU" class="form-control"
+																	placeholder="CBU" 
+																	value="23">
 															</div>
 														</div>
 														<div class="col-lg-4">
 															<div class="form-group">
-																<label class="form-control-label" for="input-country">N�
-																	de cuenta</label> <input type="text" id="input-country"
-																	class="form-control" placeholder="N� de cuenta"
-																	disabled="disabled" value="123-44556-123">
+																<label class="form-control-label" for="input-country">N°
+																	de cuenta</label> <input type="text" name="txtNumCuenta"
+																	class="form-control" placeholder="N° de cuenta"
+																	 value="123-44556-123">
 															</div>
 														</div>
 														<div class="col-lg-4">
 															<div class="form-group">
 																<label class="form-control-label" for="input-country">Alias</label>
-																<input type="number" id="input-postal-code"
-																	class="form-control" disabled="disabled"
+																<input type="number" name="txtAlias"
+																	class="form-control" 
 																	placeholder="Alias">
 															</div>
 														</div>
@@ -281,8 +300,8 @@
 												<hr class="my-12" />
 													<div class="form-group">
 														  <div class="col-12 text-center">
-										                  	<a href="#!" class="btn btn-sm btn-primary" style="width: 250px;">Alta</a>
-										                  	<a href="#!" class="btn btn-sm btn-primary" style="width: 250px;">Modificaci�n</a>
+										                  	<input type="submit" name="btnAgregarPersona" value="Agregar">
+										                  	<a href="#!" class="btn btn-sm btn-primary" style="width: 250px;">Modificación</a>
 										                </div>
 													</div>
 											</form>
@@ -294,9 +313,46 @@
 						</div>
 					</div>
 				</div>
+
 			</div>
 		</div>
 	</div>
+	 -->
+	
+	
+	
+<a href="recargaGrillaCuentas.html">Recargar Grillas</a>
+
+
+<h2> Listado de Usuarios</h2>
+
+
+
+	<table border="1px">
+		<thead>
+			<tr>
+				<th>cbu</th>
+				<th>Nro Cuenta</th>
+				<th>Alias</th>
+				<th>tipo de cuenta</th>
+			</tr>
+		</thead>
+		
+			<c:forEach items="${listaCuentas}" var="item">
+				
+				<tr>
+			
+				<td> ${item.cbu} </td>
+				<td>${item.nroCuenta}</td>
+				<td>${item.alias}</td>
+				<td>${item.tipoCuenta}</td>
+				</tr>
+				
+			</c:forEach>
+	
+	</table>
+
+				
 	<!-- Argon Scripts -->
 	<!-- Core -->
 	<script src="assets/vendor/jquery/dist/jquery.min.js"></script>
