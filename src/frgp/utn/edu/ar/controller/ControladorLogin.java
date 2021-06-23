@@ -11,21 +11,26 @@ import frgp.utn.edu.ar.negocio.LoginNegocio;
 public class ControladorLogin {
 
 	@Qualifier("loginNegocio")
-	
+
 	@RequestMapping("altaDeUsuarios.html")
 	public ModelAndView eventoRedirectLogin(String txtUsuario, String txtPassword) {
 
 		ModelAndView MV = new ModelAndView();
 		boolean verificarUsuario = false;
 		try {
-			verificarUsuario = new LoginNegocio().verificarUsuario(txtUsuario, txtPassword);
+			//TODO descomentar esto cuando se haya implementado la funcionalidad correctamente
+			verificarUsuario = true;//new LoginNegocio().verificarUsuario(txtUsuario, txtPassword) ? true : false;
+			if (verificarUsuario) {
+				MV.setViewName("AltaUsuarios");
+			} else {
+				MV.setViewName("Login");
+			}
 			MV.addObject("verificarUsuario", verificarUsuario);
 		} catch (Exception e) {
 			MV.addObject("verificarUsuario", verificarUsuario);
+			MV.setViewName("Login");
+			return MV;
 		}
-
-		MV.setViewName("AltaUsuarios");
 		return MV;
 	}
-
 }

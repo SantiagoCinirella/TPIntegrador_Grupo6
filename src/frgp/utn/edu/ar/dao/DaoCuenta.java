@@ -1,5 +1,4 @@
 package frgp.utn.edu.ar.dao;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -14,18 +13,13 @@ public class DaoCuenta {
 	
 	@Autowired
 	private Conexion conexion;
-	private Cuenta cuenta = new Cuenta();
 	
 	
 	public List<Cuenta> listarCuentas() {
 		Session session = conexion.abrirConexion();
 		
 		List<Cuenta> list = session.createCriteria(Cuenta.class).list();
-		
 		session.beginTransaction();
-		
-		
-		
 		session.close();
 		
 		return list;
