@@ -118,7 +118,7 @@
               </div>
             </div>
             <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
-              <span aria-hidden="true">×</span>
+              <span aria-hidden="true">ï¿½</span>
             </button>
           </form>
           <!-- Navbar links -->

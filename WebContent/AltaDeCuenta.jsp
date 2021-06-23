@@ -188,7 +188,7 @@
 										</div>
 										<div class="card-body">
 											<form>
-												<h6 class="heading-small text-muted mb-4">Información
+												<h6 class="heading-small text-muted mb-4">Informaciï¿½n
 													de cliente</h6>
 												<div class="pl-lg-4">
 													<div class="row">
@@ -262,9 +262,9 @@
 														</div>
 														<div class="col-lg-4">
 															<div class="form-group">
-																<label class="form-control-label" for="input-country">N°
+																<label class="form-control-label" for="input-country">Nï¿½
 																	de cuenta</label> <input type="text" id="input-country"
-																	class="form-control" placeholder="N° de cuenta"
+																	class="form-control" placeholder="Nï¿½ de cuenta"
 																	disabled="disabled" value="123-44556-123">
 															</div>
 														</div>
@@ -282,7 +282,7 @@
 													<div class="form-group">
 														  <div class="col-12 text-center">
 										                  	<a href="#!" class="btn btn-sm btn-primary" style="width: 250px;">Alta</a>
-										                  	<a href="#!" class="btn btn-sm btn-primary" style="width: 250px;">Modificación</a>
+										                  	<a href="#!" class="btn btn-sm btn-primary" style="width: 250px;">Modificaciï¿½n</a>
 										                </div>
 													</div>
 											</form>
