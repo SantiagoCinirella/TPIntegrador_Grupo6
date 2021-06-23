@@ -118,7 +118,7 @@
               </div>
             </div>
             <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
-              <span aria-hidden="true">×</span>
+              <span aria-hidden="true">ï¿½</span>
             </button>
           </form>
           <!-- Navbar links -->
@@ -185,7 +185,7 @@
               </nav>
             </div>
             <div class="col-lg-6 col-5 text-right">
-              <a href="#" class="btn btn-sm btn-neutral">Nuevo cliente</a>
+              <a href="AltaUsuarios.jsp" class="btn btn-sm btn-neutral">Nuevo cliente</a>
             </div>
           </div>
         </div>
@@ -199,52 +199,59 @@
             <div class="card-header bg-transparent">
               <h3 class="mb-0">Clientes</h3>
             </div>
-            <div class="card-body">
-              <div class="row icon-examples">
-              <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-              <table id="example" class="display" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                <th>DNI</th>          
-                <th>Cliente</th>
-                <th>Profesion</th>
-                <th>Fecha de inicio</th>
-                <th>Modificar</th>
-                <th>Eliminar</th>   
-            </tr>
-        </thead>
- 
-        <tbody>
-            <tr>
-                <td>Pedro Tonello</td>
-                <td>40391972</td>
-                <td>Desarrollador</td>
-                <td>2011/04/25</td>
-                <td><a href="#" class="btn btn-sm btn-neutral">Modificar</a></td>
-                <td><a href="#" class="btn btn-sm btn-neutral">Eliminar</a>  </td>         
-            </tr>
-            <tr>
-                <td>Gabriel Dilacio</td>
-                <td>40392912</td>
-                <td>Desarrollador</td>
-                <td>2011/07/25</td>
-                <td><a href="#" class="btn btn-sm btn-neutral">Modificar</a></td>
-                <td><a href="#" class="btn btn-sm btn-neutral">Eliminar</a> </td>
-            </tr>
-            <tr>
-                <td>Santiago Cinirella</td>
-                <td>40391971</td>
-                <td>Desarrollador</td>
-                <td>2009/01/12</td>
-                <td><a href="#" class="btn btn-sm btn-neutral">Modificar</a></td>
-                <td><a href="#" class="btn btn-sm btn-neutral">Eliminar</a> </td>
-            </tr> 
-        </tbody>        
-    </table>
-              
-              </div>
+            				<br>
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card bg-default">
+            <div class="card-header bg-transparent">
+              <div class="row align-items-center">
+                <div class="col-xl-12">
+											</div>
+											<div class="table-responsive">
+											              <table id="example" class="table align-items-center table-dark table-flush display" cellspacing="0" width="100%">
 
-            </div>
+													<thead class="thead-dark" id="example" >
+														<tr>
+															<th scope="col" class="sort" data-sort="name">Nombre</th>
+															<th scope="col" class="sort" data-sort="budget">Apellido</th>
+															<th scope="col" class="sort" data-sort="status">DNI</th>
+															<th scope="col" class="sort" data-sort="status">Modificar</th>
+															<th scope="col" class="sort" data-sort="status">Eliminar</th>
+														</tr>
+													</thead>
+													<tbody class="list">
+														<tr>
+															<td>Pedro</td>
+															<td>Tonello</td>
+															<td>40391972</td>
+															<td><a href="#" class="btn btn-sm btn-neutral">Modificar</a></td>
+															<td><a href="#" class="btn btn-sm btn-neutral">Eliminar</a></td>
+															
+														</tr>
+														<tr>
+															<td>Gabriel</td>
+															<td>Dilacio</td>
+															<td>40391921</td>
+															<td><a href="#" class="btn btn-sm btn-neutral">Modificar</a></td>
+															<td><a href="#" class="btn btn-sm btn-neutral">Eliminar</a></td>
+															
+														</tr>
+														<tr>
+															<td>Santiago</td>
+															<td>Cinirella</td>
+															<td>40391982</td>
+															<td><a href="#" class="btn btn-sm btn-neutral">Modificar</a></td>
+															<td><a href="#" class="btn btn-sm btn-neutral">Eliminar</a></td>
+														</tr>
+
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
           </div>
         </div>
       </div>
