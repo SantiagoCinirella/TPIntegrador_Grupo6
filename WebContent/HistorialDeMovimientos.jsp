@@ -23,7 +23,27 @@
 </head>
 
 <body>
- 
+   <script type="text/javascript">
+                    function Filtrar(strKey) {
+                        var strData = strKey.value.toLowerCase().split(" ");
+                        var tblData = document.getElementById('example');
+                        var rowData;
+                        for (var i = 1; i < tblData.rows.length; i++) {
+                            rowData = tblData.rows[i].innerHTML;
+                            var styleDisplay = 'none';
+                            for (var j = 0; j < strData.length; j++) {
+                                if (rowData.toLowerCase().indexOf(strData[j]) >= 0)
+                                    styleDisplay = '';
+                                else {
+                                    styleDisplay = 'none';
+                                    break;
+                                }
+                            }
+                            tblData.rows[i].style.display = styleDisplay;
+                        }
+                    }                    
+                </script>
+
   <!-- Sidenav -->
   <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
     <div class="scrollbar-inner">
@@ -61,7 +81,19 @@
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Search form -->
-
+ <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
+            <div class="form-group mb-0">
+              <div class="input-group input-group-alternative input-group-merge">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-search"></i></span>
+                </div>
+                <input class="form-control" placeholder="Buscar" type="text" onkeyup=Filtrar(this)>
+              </div>
+            </div>
+            <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </form>
           <!-- Navbar links -->
           <ul class="navbar-nav align-items-center  ml-md-auto ">
             <li class="nav-item d-xl-none">
@@ -197,186 +229,103 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="#">Cuentas</a></li>
+                  <li class="breadcrumb-item"><a href="#">Historial</a></li>
                 </ol>
               </nav>
             </div>
-                        <div class="col-lg-6 col-5 text-right">
-              <a href="Transferencia.jsp" class="btn btn-sm btn-neutral">Nueva transferencia</a>
-            </div>
-          </div>
-          <!-- Card stats -->
-          <div class="row">
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Caja de ahorro pesos</h5>
-                      <span class="h2 font-weight-bold mb-0">$3500,89</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-blue text-white rounded-circle shadow">
-                        <i class="ni ni-chart-pie-35"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Desde el mes anterior</span>
-                  </p>
-                  <a href="#" class="btn btn-sm btn-neutral">Ver historial</a>    
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Caja de ahorro dolares</h5>
-                      <span class="h2 font-weight-bold mb-0">$2,3</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
-                        <i class="ni ni-chart-pie-35"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Desde el mes anterior</span>
-                  </p>
-                  <a href="#" class="btn btn-sm btn-neutral">Ver historial</a>         
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Caja de ahorro pesos</h5>
-                      <span class="h2 font-weight-bold mb-0">$5310,89</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                        <i class="ni ni-chart-pie-35"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 1.48%</span>
-                    <span class="text-nowrap">Desde el mes anterior</span>
-                  </p>
-                  <a href="#" class="btn btn-sm btn-neutral">Ver historial</a>    
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Caja de ahorro dolares</h5>
-                      <span class="h2 font-weight-bold mb-0">$500,3</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                        <i class="ni ni-chart-pie-35"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 0.48%</span>
-                    <span class="text-nowrap">Desde el mes anterior</span>
-                  </p>
-                  <a href="#" class="btn btn-sm btn-neutral">Ver historial</a>         
-                </div>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Page content -->
-    <div class="container-fluid mt--6">
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+		<!-- Header -->
+		<!-- Page content -->
+		<div class="container-fluid mt--6">
+			<div class="row justify-content-center">
+				<div class=" col ">
+					<div class="card">
+						<div class="card-header bg-transparent">
+							<h3 class="mb-0">Movimientos de cuenta</h3>
+							<br>
+							<select class="form-control" id="sel1">
+								<option selected="true" disabled="disabled">Seleccione
+									una cuenta</option>
+								<option>11223344455</option>
+								<option>22222222222</option>
+								<option>33333333333</option>
+							</select>
+				<br>
       <div class="row">
-        <div class="col-xl-8">
+        <div class="col-xl-12">
           <div class="card bg-default">
             <div class="card-header bg-transparent">
               <div class="row align-items-center">
-                <div class="col">
-                  <h6 class="text-light text-uppercase ls-1 mb-1">Informacion general</h6>
-                  <h5 class="h3 text-white mb-0">Ingresos de todas las cuentas</h5>
-                </div>
-                <div class="col">
-                  <ul class="nav nav-pills justify-content-end">
-                    <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}' data-prefix="$" data-suffix="k">
-                      <a href="#" class="nav-link py-2 px-3 active" data-toggle="tab">
-                        <span class="d-none d-md-block">Mes</span>
-                        <span class="d-md-none">M</span>
-                      </a>
-                    </li>
-                    <li class="nav-item" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}' data-prefix="$" data-suffix="k">
-                      <a href="#" class="nav-link py-2 px-3" data-toggle="tab">
-                        <span class="d-none d-md-block">Semana</span>
-                        <span class="d-md-none">W</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <!-- Chart -->
-              <div class="chart">
-                <!-- Chart wrapper -->
-                <canvas id="chart-sales-dark" class="chart-canvas"></canvas>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-4">
-          <div class="card">
-            <div class="card-header bg-transparent">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h6 class="text-uppercase text-muted ls-1 mb-1">Performance</h6>
-                  <h5 class="h3 mb-0">Ingresos</h5>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <!-- Chart -->
-              <div class="chart">
-                <canvas id="chart-bars" class="chart-canvas"></canvas>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+                <div class="col-xl-12">
+											</div>
+											<div class="table-responsive">
+											              <table id="example" class="table align-items-center table-dark table-flush display" cellspacing="0" width="100%">
 
-      <!-- Footer -->
-    </div>
-  </div>
-  <!-- Argon Scripts -->
-  <!-- Core -->
-  <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
-  <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/js-cookie/js.cookie.js"></script>
-  <script src="assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
-  <script src="assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
-  <!-- Optional JS -->
-  <script src="assets/vendor/chart.js/dist/Chart.min.js"></script>
-  <script src="assets/vendor/chart.js/dist/Chart.extension.js"></script>
-  <!-- Argon JS -->
-  <script src="assets/js/argon.js?v=1.2.0"></script>
+													<thead class="thead-dark" id="example" >
+														<tr>
+															<th scope="col" class="sort" data-sort="name">Fecha</th>
+															<th scope="col" class="sort" data-sort="budget">Descripcion</th>
+															<th scope="col" class="sort" data-sort="status">Monto</th>
+														</tr>
+													</thead>
+													<tbody class="list">
+														<tr>
+															<th>15/12/2020</td>
+															<th>Tienda Mia</td>
+															<th>- $36.738</td>
+														</tr>
+														<tr>
+															<th>16/12/2020</td>
+															<th>Garbarino</td>
+															<th>- $30.738</td>
+														</tr>
+														<tr>
+															<td>17/12/2020</td>
+															<td>fravega</td>
+															<td>- $36.738</td>
+														</tr>
+														<tr>
+															<td>18/12/2020</td>
+															<td>Tienda Mia</td>
+															<td>- $36.738</td>
+														</tr>
+														<tr>
+															<td>15/12/2020</td>
+															<td>Tienda Mia</td>
+															<td>- $36.738</td>
+														</tr>
+
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+							</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Argon Scripts -->
+	<!-- Core -->
+	<script src="assets/vendor/jquery/dist/jquery.min.js"></script>
+	<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/vendor/js-cookie/js.cookie.js"></script>
+	<script src="assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+	<script
+		src="assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+	<!-- Optional JS -->
+	<script src="assets/vendor/chart.js/dist/Chart.min.js"></script>
+	<script src="assets/vendor/chart.js/dist/Chart.extension.js"></script>
+	<!-- Argon JS -->
+	<script src="assets/js/argon.js?v=1.2.0"></script>
 </body>
 
 </html>

@@ -97,7 +97,6 @@
 			<div class="container-fluid">
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<!-- Search form -->
-
 					<!-- Navbar links -->
 					<ul class="navbar-nav align-items-center  ml-md-auto ">
 						<li class="nav-item d-xl-none">
@@ -158,7 +157,7 @@
 											class="fas fa-home"></i></a></li>
 									<li class="breadcrumb-item"><a href="#">ABML</a></li>
 									<li class="breadcrumb-item active" aria-current="page">Alta
-										de cliente</li>
+										de cuenta</li>
 								</ol>
 							</nav>
 						</div>
@@ -173,10 +172,9 @@
 				<div class=" col ">
 					<div class="card">
 						<div class="card-header bg-transparent">
-							<h3 class="mb-0">Cliente</h3>
+							<h3 class="mb-0">Cuentas</h3>
 						</div>
-						
-						<div class="row">
+									<div class="row">
 						<div class="card-body">
 							<div class="row icon-examples">
                 					<div class="col-xl-12">
@@ -184,7 +182,7 @@
 										<div class="card-header">
 											<div class="row align-items-center">
                 								<div class="col-xl-12">
-													<h3 class="mb-0">Alta de cliente</h3>
+													<h3 class="mb-0">Alta de cuenta</h3>
 												</div>
 											</div>
 										</div>
@@ -196,26 +194,30 @@
 													<div class="row">
 														<div class="col-lg-6">
 															<div class="form-group">
-																<label class="form-control-label" for="input-email">DNI</label>
-																<input type="email" id="input-email" 
-																	class="form-control"  placeholder="DNI"
-																	>
+																<label class="form-control-label" for="input-username">Cliente</label>
+																<select class="form-control" id="sel1">
+																	<option selected="true" disabled="disabled">Seleccione
+																		un cliente</option>
+																	<option>11223344455</option>
+																	<option>22222222222</option>
+																	<option>33333333333</option>
+																</select>
 															</div>
 														</div>
-																												<div class="col-lg-6">
+														<div class="col-lg-6">
 															<div class="form-group">
-																<label class="form-control-label" for="input-email">Profesion</label>
-																<input type="email" id="input-email"  placeholder="Profesion"
-																	class="form-control" 
-																	>
+																<label class="form-control-label" for="input-email">DNI</label>
+																<input type="email" id="input-email" disabled="disabled"
+																	class="form-control" placeholder="31.222.333"
+																	value="31.222.333">
 															</div>
 														</div>
 													</div>
 													<div class="row">
 														<div class="col-lg-6">
 															<div class="form-group">
-																<label class="form-control-label" for="input-first-name">Nombre</label>
-																<input type="text" 
+																<label class="form-control-label" for="input-first-name">Nombres</label>
+																<input type="text" disabled="disabled"
 																	id="input-first-name" class="form-control"
 																	placeholder="Nombres" value="Gabriel Brandon">
 															</div>
@@ -224,19 +226,63 @@
 															<div class="form-group">
 																<label class="form-control-label" for="input-last-name">Apellido</label>
 																<input type="text" id="input-last-name"
-																	class="form-control"
+																	disabled="disabled" class="form-control"
 																	placeholder="Apellido" value="Dilacio">
 															</div>
 														</div>
 													</div>
 												</div>
+												<hr class="my-4" />
 												<!-- Address -->
+												<h6 class="heading-small text-muted mb-4">Informacion
+													de cuenta</h6>
+												<div class="pl-lg-4">
+													<div class="row">
+														<div class="col-md-12">
+															<div class="form-group">
+																<label class="form-control-label" for="input-address">Tipo
+																	de cuenta</label> <select class="form-control" id="sel1">
+																	<option selected="true" disabled="disabled">Seleccione
+																		un tipo de Cuenta</option>
+																	<option>Caja de ahorro en pesos</option>
+																	<option>Caja de ahorro en dolares</option>
+																	<option>Cuenta Comitente</option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-lg-4">
+															<div class="form-group">
+																<label class="form-control-label" for="input-city">CBU</label>
+																<input type="text" id="input-city" class="form-control"
+																	placeholder="CBU" disabled="disabled"
+																	value="22334455667788">
+															</div>
+														</div>
+														<div class="col-lg-4">
+															<div class="form-group">
+																<label class="form-control-label" for="input-country">N°
+																	de cuenta</label> <input type="text" id="input-country"
+																	class="form-control" placeholder="N° de cuenta"
+																	disabled="disabled" value="123-44556-123">
+															</div>
+														</div>
+														<div class="col-lg-4">
+															<div class="form-group">
+																<label class="form-control-label" for="input-country">Alias</label>
+																<input type="number" id="input-postal-code"
+																	class="form-control" disabled="disabled"
+																	placeholder="Alias">
+															</div>
+														</div>
+													</div>
+												</div>
 												<hr class="my-12" />
 													<div class="form-group">
 														  <div class="col-12 text-center">
-										                  	<a href="#!" class="btn btn-sm btn-primary" style="width: 250px;">Crear</a>
-										                	<a href="#!" class="btn btn-sm btn-primary" style="width: 250px;">Modificar</a>
-										                
+										                  	<a href="#!" class="btn btn-sm btn-primary" style="width: 250px;">Alta</a>
+										                  	<a href="#!" class="btn btn-sm btn-primary" style="width: 250px;">Modificación</a>
 										                </div>
 													</div>
 											</form>

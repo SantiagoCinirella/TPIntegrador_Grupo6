@@ -176,58 +176,62 @@
             <div class="card-header bg-transparent">
               <h3 class="mb-0">Cuentas</h3>
             </div>
-            <div class="card-body">
-              <div class="row icon-examples">
-              <table id="example" class="display" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                 <th>Numero de cuenta</th>
-                <th>Cliente</th>
-                <th>DNI</th>
-                <th>Tipo cuenta</th>
-                <th>Fecha de inicio</th>
-                <th>Dinero</th>
-                <th>Modificar</th>
-                <th>Eliminar</th>      
-            </tr>
-        </thead>
- 
-        <tbody>
-            <tr>
-                <td>304050</td>
-                <td>Pedro Tonello</td>
-                <td>40391972</td>
-                <td>Caja de ahorro en dolares</td>
-                <td>2011/04/25</td>
-                <td>$320,800</td>
-                <td><a href="#" class="btn btn-sm btn-neutral">Modificar</a></td>
-                <td><a href="#" class="btn btn-sm btn-neutral">Eliminar</a>  </td>         
-            </tr>
-            <tr>
-                 <td>403050</td>
-                <td>Gabriel Dilacio</td>
-                <td>40392912</td>
-                <td>Caja de ahorra en pesos</td>
-                <td>2011/07/25</td>
-                <td>$170,750</td>
-                <td><a href="#" class="btn btn-sm btn-neutral">Modificar</a></td>
-                <td><a href="#" class="btn btn-sm btn-neutral">Eliminar</a> </td>
-            </tr>
-            <tr>
-                <td>503040</td>         
-                <td>Santiago Cinirella</td>
-                <td>40391971</td>
-                <td>Caja de ahorro en pesos</td>
-                <td>2009/01/12</td>
-                <td>$86,000</td>
-                <td><a href="#" class="btn btn-sm btn-neutral">Modificar</a></td>
-                <td><a href="#" class="btn btn-sm btn-neutral">Eliminar</a> </td>
-            </tr>        
-        </tbody>        
-    </table>
-                          
-              </div>
-            </div>
+            				<br>
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card bg-default">
+            <div class="card-header bg-transparent">
+              <div class="row align-items-center">
+                <div class="col-xl-12">
+											</div>
+											<div class="table-responsive">
+											              <table id="example" class="table align-items-center table-dark table-flush display" cellspacing="0" width="100%">
+
+													<thead class="thead-dark" id="example" >
+														<tr>
+															<th scope="col" class="sort" data-sort="name">Nombre</th>
+															<th scope="col" class="sort" data-sort="budget">Apellido</th>
+															<th scope="col" class="sort" data-sort="status">DNI</th>
+															<th scope="col" class="sort" data-sort="status">NumeroCuenta</th>
+															<th scope="col" class="sort" data-sort="status">Modificar</th>
+															<th scope="col" class="sort" data-sort="status">Eliminar</th>
+															
+														</tr>
+													</thead>
+													<tbody class="list">
+														<tr>
+															<td>Pedro</td>
+															<td>Tonello</td>
+															<td>40391972</td>
+															<td>1111111</td>
+															<td><a href="#" class="btn btn-sm btn-neutral">Modificar</a></td>
+															<td><a href="#" class="btn btn-sm btn-neutral">Eliminar</a></td>
+														</tr>
+														<tr>
+															<td>Gabriel</td>
+															<td>Dilacio</td>
+															<td>40391921</td>
+															<td>2222222</td>
+															<td><a href="#" class="btn btn-sm btn-neutral">Modificar</a></td>
+															<td><a href="#" class="btn btn-sm btn-neutral">Eliminar</a></td>
+														</tr>
+														<tr>
+															<td>Santiago</td>
+															<td>Cinirella</td>
+															<td>40391982</td>
+															<td>33333333</td>
+															<td><a href="#" class="btn btn-sm btn-neutral">Modificar</a></td>
+															<td><a href="#" class="btn btn-sm btn-neutral">Eliminar</a></td>
+														</tr>
+
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
           </div>
         </div>
       </div>
