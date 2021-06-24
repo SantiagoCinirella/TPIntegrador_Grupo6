@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class UsuarioLogin {
 
 	@Id
-	private int id;
+	private int dni;
 	private String usuario;
 	private String password;
 	
@@ -29,6 +29,14 @@ public class UsuarioLogin {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public int getDni() {
+		return dni;
+	}
+
+	public void setDni(int dni) {
+		this.dni = dni;
 	}
 
 }
