@@ -13,6 +13,7 @@ public class UsuarioLogin {
 	private int id;
 	private String usuario;
 	private String password;
+	
 
 	public String getUsuario() {
 		return usuario;

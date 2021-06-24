@@ -18,8 +18,7 @@ public class ControladorLogin {
 		ModelAndView MV = new ModelAndView();
 		boolean verificarUsuario = false;
 		try {
-			//TODO descomentar esto cuando se haya implementado la funcionalidad correctamente
-			verificarUsuario = true;//new LoginNegocio().verificarUsuario(txtUsuario, txtPassword) ? true : false;
+			verificarUsuario = new LoginNegocio().verificarUsuario(txtUsuario, txtPassword) ? true : false;
 			if (verificarUsuario) {
 				MV.setViewName("AltaUsuarios");
 			} else {

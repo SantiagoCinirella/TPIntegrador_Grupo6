@@ -6,20 +6,25 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import frgp.utn.edu.ar.entidad.Cuenta;
+import frgp.utn.edu.ar.entidad.UsuarioLogin;
 
 @Repository("loginDao")
 public class LoginDao {
 
 	@Autowired
-	private Conexion conexion;
+	private Conexion conexion = new Conexion();
 
 	public boolean verificarUsuario(String usuario, String password) {
-		Session session = conexion.abrirConexion();
-		List<Cuenta> list = session.createCriteria(Cuenta.class).list();
-		session.beginTransaction();
+		Session session = null;
+		Boolean esUsuario = false;
+		session = conexion.abrirConexion();
+		List<UsuarioLogin> usuarioLogin = session.createCriteria(UsuarioLogin.class).list();
+		for (UsuarioLogin user : usuarioLogin) {
+			if (user.getPassword().equalsIgnoreCase(usuario) && user.getUsuario().equalsIgnoreCase(usuario))
+				esUsuario = true;
+		}
 		session.close();
-		return false;
+		return esUsuario;
 	}
 
 }
