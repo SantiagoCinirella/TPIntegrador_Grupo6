@@ -12,5 +12,6 @@
         <property name="hbm2ddl.auto">update</property>
         <property name="show_sql">true</property>
         <mapping class="frgp.utn.edu.ar.entidad.UsuarioLogin"/>
+        <mapping class="frgp.utn.edu.ar.entidad.Persona"/>
     </session-factory>
 </hibernate-configuration>

@@ -13,6 +13,7 @@ public class Persona {
 	private int dni;
 	private String nombre;
 	private String apellido;
+	private String email;
 	
 	public String getNombre() {
 		return nombre;
@@ -35,6 +36,12 @@ public class Persona {
 	@Override
 	public String toString() {
 		return "Persona [nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + "]";
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 }

@@ -17,24 +17,30 @@ public class ControladorCliente {
 	private NegPersona negocioPersona;
 	@Autowired
 	private Persona persona;
-	
-	
-	@RequestMapping("agregarPersona.html")
-	public ModelAndView eventoRedireccionarPag1(Integer txtDni,String txtNombre, String txtApellido)
-	{
+
+	@RequestMapping("agregarCliente.html")
+	public ModelAndView eventoRedireccionarPag1(String txtEmail, Integer txtDNI, String txtNombre, String txtApellido,
+			String btnCrear) {
 		ModelAndView MV = new ModelAndView();
 		persona.setApellido(txtApellido);
-		persona.setDni(txtDni);
+		persona.setDni(txtDNI);
 		persona.setNombre(txtNombre);
-		
-		boolean estado= negocioPersona.agregarPersona(persona);
-		String cartel="No se pudo agregar la persona";
-		if(estado)
-		{
-			cartel="La persona ha sido agregada exitosamente";
+		persona.setEmail(txtEmail);
+		boolean agregarModificar = false;
+
+		try {
+			if (btnCrear != null) {
+				agregarModificar = negocioPersona.agregarPersona(persona);
+			} else {
+				agregarModificar = negocioPersona.editarPersona(persona);
+			}
+			MV.addObject("agregadoExitoso", agregarModificar);
+			MV.addObject("esBotonCrear", btnCrear);
+			MV.setViewName("AltaUsuarios");
+		} catch (Exception e) {
+			MV.setViewName("AltaUsuarios");
+			return MV;
 		}
-		MV.addObject("estadoAgregarPersona",cartel);
-		MV.setViewName("Inicio");
 		return MV;
 	}
 }

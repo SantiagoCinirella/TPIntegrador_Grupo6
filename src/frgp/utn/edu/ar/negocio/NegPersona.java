@@ -22,4 +22,8 @@ public class NegPersona {
 		return daoPersona.agregarPersona(p);
 	}
 
+	public boolean editarPersona(Persona persona) {
+		return daoPersona.editarPersona(persona);
+		
+	}
 }
