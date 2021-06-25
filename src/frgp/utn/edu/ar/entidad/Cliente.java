@@ -1,5 +1,7 @@
 package frgp.utn.edu.ar.entidad;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -7,43 +9,55 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-public class Cliente {
+public class Cliente implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	@Id
-	private int IDCliente;
-	private int DNI;
-	private String Nombre;
-	private String Apellido;
-	public int getIDCliente() {
-		return IDCliente;
+	private int idCliente;
+	private int dni;
+	private String nombre;
+	private String apellido;
+	
+	
+	public Cliente() {}
+	
+	
+	public int getIdCliente() {
+		return idCliente;
 	}
-	public void setIDCliente(int iDCliente) {
-		IDCliente = iDCliente;
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
 	}
-	public int getDNI() {
-		return DNI;
+	public int getDni() {
+		return dni;
 	}
-	public void setDNI(int dNI) {
-		DNI = dNI;
+	public void setDni(int dni2) {
+		this.dni = dni2;
 	}
 	public String getNombre() {
-		return Nombre;
+		return nombre;
 	}
 	public void setNombre(String nombre) {
-		Nombre = nombre;
+		this.nombre = nombre;
 	}
 	public String getApellido() {
-		return Apellido;
+		return apellido;
 	}
 	public void setApellido(String apellido) {
-		Apellido = apellido;
+		this.apellido = apellido;
 	}
+
+
 	@Override
 	public String toString() {
-		return "Cliente [IDCliente=" + IDCliente + ", DNI=" + DNI + ", Nombre=" + Nombre + ", Apellido=" + Apellido
+		return "Cliente [idCliente=" + idCliente + ", dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido
 				+ "]";
 	}
-	
-	
 
+
+	
 }
