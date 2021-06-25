@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.hibernate.Query;
 
+import frgp.utn.edu.ar.dao.queries.PersonaQueries;
 import frgp.utn.edu.ar.entidad.Persona;
 
 @Repository("daoPersona")
@@ -98,7 +99,7 @@ public class DaoPersona {
 			aux = false;
 			tx.rollback();
 		}
-		conexion.cerrarSession();
+		session.close();
 		return aux;
 	}
 
@@ -106,8 +107,7 @@ public class DaoPersona {
 		Session session = conexion.abrirConexion();
 		Transaction tx = session.beginTransaction();
 		try {
-			String queryUpdate = "UPDATE Persona p SET p.apellido = ?, p.nombre = ?, p.email = ? WHERE p.dni = ?";
-			Query update = session.createQuery(queryUpdate);
+			Query update = session.createQuery(PersonaQueries.UPDATE_USUARIO_SQL.getQuery());
 			update.setParameter(0, persona.getApellido());
 			update.setParameter(1, persona.getNombre());
 			update.setParameter(2, persona.getEmail());
