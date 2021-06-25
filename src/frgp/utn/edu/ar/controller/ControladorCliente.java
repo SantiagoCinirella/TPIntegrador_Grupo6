@@ -1,5 +1,7 @@
 package frgp.utn.edu.ar.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -50,4 +52,73 @@ public class ControladorCliente {
 		}
 		return MV;
 	}
+	
+	@RequestMapping("agregarPersona.html")
+	public ModelAndView eventoRedireccionarPag1(Integer txtDni,String txtNombre, String txtApellido)
+	{
+		ModelAndView MV = new ModelAndView();
+		persona.setApellido(txtApellido);
+		persona.setDni(txtDni);
+		persona.setNombre(txtNombre);
+		
+		boolean estado= negocioPersona.agregarPersona(persona);
+		String cartel="No se pudo agregar la persona";
+		if(estado)
+		{
+			cartel="La persona ha sido agregada exitosamente";
+		}
+		MV.addObject("estadoAgregarPersona",cartel);
+		MV.setViewName("Inicio");
+		return MV;
+	}
+	
+	@RequestMapping("abmlClientes.html")
+	public ModelAndView eventoRedireccionarPag1()
+	{
+		ModelAndView MV = new ModelAndView();
+
+		ArrayList<Persona> listaPersona = new ArrayList<>();
+		
+		listaPersona = (ArrayList<Persona>) negocioPersona.listarPersonasBajaLogica();
+		
+		MV.addObject("listaPersona",listaPersona);
+		MV.setViewName("ABMLClientes");
+		return MV;
+
+	}
+	
+	
+	@RequestMapping("eliminacion.html")
+	public ModelAndView eliminar(Integer dni)
+	{
+		negocioPersona.bajaLogica(dni);	
+		ModelAndView MV = new ModelAndView();
+
+		ArrayList<Persona> listaPersona = new ArrayList<>();
+		
+		listaPersona = (ArrayList<Persona>) negocioPersona.listarPersonasBajaLogica();
+		
+		MV.addObject("listaPersona",listaPersona);
+		MV.setViewName("ABMLClientes");
+		return MV;	
+		
+}
+	@RequestMapping("ModificarCliente.html")
+	public ModelAndView modificar(int dni, String nombre, String apellido, String email)
+	{
+		Persona persona = new Persona();
+		persona.setApellido(apellido);
+		persona.setDni(dni);
+		persona.setNombre(nombre);
+		persona.setEmail(email);
+		ArrayList<Persona> listaPersona = new ArrayList<>();
+		listaPersona.add(persona);
+		ModelAndView MV = new ModelAndView();
+		MV.addObject("listaPersona", listaPersona);
+		MV.setViewName("AltaUsuarios");
+		return MV;	
+		
+}
+	
+	
 }

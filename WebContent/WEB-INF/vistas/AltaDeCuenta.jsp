@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,11 +77,11 @@
 					<!-- Nav items -->
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link active"
-							href="ABMLCuentas.jsp"> <i class="ni ni-tv-2 text-primary"></i>
+							href="abmlCuentas.html"> <i class="ni ni-tv-2 text-primary"></i>
 								<span class="nav-link-text">ABML Cuentas</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="ABMLClientes.jsp"> <i
+							href="abmlClientes.jsp"> <i
 								class="ni ni-single-02 text-yellow"></i> <span
 								class="nav-link-text">ABML Clientes</span>
 						</a></li>
@@ -98,23 +99,6 @@
 			<div class="container-fluid">
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<!-- Search form -->
-					<form class="navbar-search navbar-search-light form-inline mr-sm-3"
-						id="navbar-search-main">
-						<div class="form-group mb-0">
-							<div
-								class="input-group input-group-alternative input-group-merge">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fas fa-search"></i></span>
-								</div>
-								<input class="form-control" placeholder="Buscar" type="text"
-									onkeyup=Filtrar(this)>
-							</div>
-						</div>
-						<button type="button" class="close" data-action="search-close"
-							data-target="#navbar-search-main" aria-label="Close">
-							<span aria-hidden="true">Ã</span>
-						</button>
-					</form>
 					<!-- Navbar links -->
 					<ul class="navbar-nav align-items-center  ml-md-auto ">
 						<li class="nav-item d-xl-none">
@@ -153,7 +137,7 @@
 									class="ni ni-settings-gear-65"></i> <span>Configuracion</span>
 								</a>
 								<div class="dropdown-divider"></div>
-								<a href="Login.jsp" class="dropdown-item"> <i
+								<a href="index.html" class="dropdown-item"> <i
 									class="ni ni-user-run"></i> <span>Salir</span>
 								</a>
 							</div></li>
@@ -161,60 +145,59 @@
 				</div>
 			</div>
 		</nav>
-	</div>
-	<!-- Header -->
-	<!-- Header -->
-	<div class="header bg-primary pb-6">
-		<div class="container-fluid">
-			<div class="header-body">
-				<div class="row align-items-center py-4">
-					<div class="col-lg-6 col-7">
-						<nav aria-label="breadcrumb"
-							class="d-none d-md-inline-block ml-md-4">
-							<ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-								<li class="breadcrumb-item"><a href="#"><i
-										class="fas fa-home"></i></a></li>
-								<li class="breadcrumb-item"><a href="#">ABML</a></li>
-								<li class="breadcrumb-item active" aria-current="page">Alta
-									de cuenta</li>
-							</ol>
-						</nav>
-					</div>
+		<!-- Header -->
+		<!-- Header -->
+		<div class="header bg-primary pb-6">
+			<div class="container-fluid">
+				<div class="header-body">
+					<div class="row align-items-center py-4">
+						<div class="col-lg-6 col-7">
+							<nav aria-label="breadcrumb"
+								class="d-none d-md-inline-block ml-md-4">
+								<ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+									<li class="breadcrumb-item"><a href="#"><i
+											class="fas fa-home"></i></a></li>
+									<li class="breadcrumb-item"><a href="#">ABML</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Alta
+										de cuenta</li>
+								</ol>
+							</nav>
+						</div>
 
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- Page content -->
-	<div class="container-fluid mt--6">
-		<div class="row justify-content-center">
-			<div class=" col ">
-				<div class="card">
-					<div class="card-header bg-transparent">
-						<h3 class="mb-0">Cuentas</h3>
-					</div>
-					<div class="row">
+		<!-- Page content -->
+		<div class="container-fluid mt--6">
+			<div class="row justify-content-center">
+				<div class=" col ">
+					<div class="card">
+						<div class="card-header bg-transparent">
+							<h3 class="mb-0">Cuentas</h3>
+						</div>
+									<div class="row">
 						<div class="card-body">
 							<div class="row icon-examples">
-								<div class="col-xl-12">
+                					<div class="col-xl-12">
 									<div class="card">
 										<div class="card-header">
 											<div class="row align-items-center">
-												<div class="col-xl-12">
+                								<div class="col-xl-12">
 													<h3 class="mb-0">Alta de cuenta</h3>
 												</div>
 											</div>
 										</div>
 										<div class="card-body">
-											<form action="agregarCuenta.html" method="get">
-												<h6 class="heading-small text-muted mb-4">Información
+											<form>
+												<h6 class="heading-small text-muted mb-4">Informaci�n
 													de cliente</h6>
 												<div class="pl-lg-4">
 													<div class="row">
 														<div class="col-lg-6">
 															<div class="form-group">
-																<label class="form-control-label" for="input-username">Username</label>
-																<select class="form-control" name="DropDownCliente">
+																<label class="form-control-label" for="input-username">Cliente</label>
+																<select class="form-control" id="sel1">
 																	<option selected="true" disabled="disabled">Seleccione
 																		un cliente</option>
 																	<option>11223344455</option>
@@ -253,6 +236,8 @@
 												</div>
 												<hr class="my-4" />
 												<!-- Address -->
+												<c:forEach items="${listaPersona}" var="item">
+												
 												<h6 class="heading-small text-muted mb-4">Informacion
 													de cuenta</h6>
 												<div class="pl-lg-4">
@@ -260,9 +245,9 @@
 														<div class="col-md-12">
 															<div class="form-group">
 																<label class="form-control-label" for="input-address">Tipo
-																	de cuenta</label> <select class="form-control"
-																	name="txtTipoCuenta">
-																	<option selected="true" disabled="disabled">Seleccione
+																	de cuenta</label> <select class="form-control" id="sel1">
+																	<option selected="true" >${item.tipoCuenta}</option>
+																	<option disabled="disabled">Seleccione
 																		un tipo de Cuenta</option>
 																	<option>Caja de ahorro en pesos</option>
 																	<option>Caja de ahorro en dolares</option>
@@ -275,35 +260,38 @@
 														<div class="col-lg-4">
 															<div class="form-group">
 																<label class="form-control-label" for="input-city">CBU</label>
-																<input type="text" name="txtCBU" class="form-control"
-																	placeholder="CBU" value="23">
+																<input type="text" id="input-city" class="form-control"
+																	disabled="disabled"
+																	value="${item.cbu}">
 															</div>
 														</div>
 														<div class="col-lg-4">
 															<div class="form-group">
-																<label class="form-control-label" for="input-country">N°
-																	de cuenta</label> <input type="text" name="txtNumCuenta"
-																	class="form-control" placeholder="N° de cuenta"
-																	value="123-44556-123">
+																<label class="form-control-label" for="input-country">Numero
+																	de cuenta</label> <input type="text" id="input-country"
+																	class="form-control" placeholder="Numero de cuenta"
+																	disabled="disabled" value="${item.nroCuenta}">
 															</div>
 														</div>
 														<div class="col-lg-4">
 															<div class="form-group">
 																<label class="form-control-label" for="input-country">Alias</label>
-																<input type="number" name="txtAlias"
-																	class="form-control" placeholder="Alias">
+																<input type="text" id="input-postal-code"
+																	class="form-control" disabled="disabled"
+																	value="${item.alias}">
 															</div>
 														</div>
 													</div>
 												</div>
+																										</c:forEach>
+												
 												<hr class="my-12" />
-												<div class="form-group">
-													<div class="col-12 text-center">
-														<input type="submit" name="btnAgregarPersona"
-															value="Agregar"> <a href="#!"
-															class="btn btn-sm btn-primary" style="width: 250px;">Modificación</a>
+													<div class="form-group">
+														  <div class="col-12 text-center">
+										                  	<a href="#!" class="btn btn-sm btn-primary" style="width: 250px;">Alta</a>
+										                  	<a href="#!" class="btn btn-sm btn-primary" style="width: 250px;">Modificaci�n</a>
+										                </div>
 													</div>
-												</div>
 											</form>
 										</div>
 									</div>
@@ -313,46 +301,9 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
-	-->
-
-
-
-	<a href="recargaGrillaCuentas.html">Recargar Grillas</a>
-
-
-	<h2>Listado de Usuarios</h2>
-
-
-
-	<table border="1px">
-		<thead>
-			<tr>
-				<th>cbu</th>
-				<th>Nro Cuenta</th>
-				<th>Alias</th>
-				<th>tipo de cuenta</th>
-			</tr>
-		</thead>
-
-		<c:forEach items="${listaCuentas}" var="item">
-
-			<tr>
-
-				<td>${item.cbu}</td>
-				<td>${item.nroCuenta}</td>
-				<td>${item.alias}</td>
-				<td>${item.tipoCuenta}</td>
-			</tr>
-
-		</c:forEach>
-
-	</table>
-
-
 	<!-- Argon Scripts -->
 	<!-- Core -->
 	<script src="assets/vendor/jquery/dist/jquery.min.js"></script>

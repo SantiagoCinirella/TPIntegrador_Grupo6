@@ -20,7 +20,8 @@ public class ControladorLogin {
 		try {
 			verificarUsuario = new LoginNegocio().verificarUsuario(txtUsuario, txtPassword) ? true : false;
 			if (verificarUsuario) {
-				MV.setViewName("AltaUsuarios");
+				ControladorCuenta ControladorCuenta = new ControladorCuenta();
+				return ControladorCuenta.eventoRedireccionarPag1();
 			} else {
 				MV.setViewName("Login");
 			}

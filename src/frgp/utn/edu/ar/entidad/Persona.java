@@ -17,6 +17,7 @@ public class Persona {
 	private String nombre;
 	private String apellido;
 	private String email;
+	private boolean estado;
 
 	@OneToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "dni")
@@ -67,4 +68,13 @@ public class Persona {
 		this.email = email;
 	}
 
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
+	
 }

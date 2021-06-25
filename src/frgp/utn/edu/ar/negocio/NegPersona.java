@@ -12,7 +12,7 @@ import frgp.utn.edu.ar.entidad.Persona;
 public class NegPersona {
 
 	@Autowired
-	private DaoPersona daoPersona;
+	private DaoPersona daoPersona = new DaoPersona();
 	
 	public List<Persona> listarPersonas() {
 		return daoPersona.listarPersonas();
@@ -24,6 +24,20 @@ public class NegPersona {
 
 	public boolean editarPersona(Persona persona) {
 		return daoPersona.editarPersona(persona);
+		
+	}
+	
+	public List<Persona> listarPersonasBajaLogica() {
+		return daoPersona.listarPersonasBajaLogica();
+	}
+	
+	public boolean eliminarPersona(int dni) {
+		return daoPersona.eliminarUsuario(dni);
+		
+	}
+	
+	public boolean bajaLogica(int dni) {
+		return daoPersona.bajaLogica(dni);
 		
 	}
 }

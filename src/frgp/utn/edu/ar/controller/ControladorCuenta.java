@@ -22,10 +22,10 @@ public class ControladorCuenta {
 	
 	
 	@RequestMapping("agregarCuenta.html")
-	public ModelAndView eventoRedireccionarPag2( String txtTipoCuenta,String txtCBU ,String txtNumCuenta, String txtAlias )
+	public ModelAndView eventoRedireccionarPag2( String txtTipoCuenta,int txtCBU ,int txtNumCuenta, String txtAlias )
 	{
 		ModelAndView MV = new ModelAndView();
-		cuenta.setCBU(txtCBU);
+		cuenta.setCbu(txtCBU);
 		cuenta.setTipoCuenta(txtTipoCuenta);
 		cuenta.setAlias(txtAlias);
 		cuenta.setNroCuenta(txtNumCuenta);
@@ -57,5 +57,54 @@ public class ControladorCuenta {
 		MV.setViewName("AltaDeCuenta");
 		return MV;
 	}
+	
+	@RequestMapping("abmlCuentas.html")
+	public ModelAndView eventoRedireccionarPag1()
+	{
+		NegCuenta negocioCuenta = new NegCuenta();
+		ModelAndView MV = new ModelAndView();
+		
+		ArrayList<Cuenta> listaPersona = new ArrayList<>();
+		
+		listaPersona = (ArrayList<Cuenta>) negocioCuenta.listarCuentasBajaLogica();
+		
+		MV.addObject("listaPersona",listaPersona);
+		MV.setViewName("ABMLCuentas");
+		return MV;
+
+	}
+	
+	@RequestMapping("eliminacionCuenta.html")
+	public ModelAndView eliminar(int numeroCuenta)
+	{
+		negocioCuenta.bajaLogica(numeroCuenta);	
+		ModelAndView MV = new ModelAndView();
+
+		ArrayList<Cuenta> listaPersona = new ArrayList<>();
+		
+		listaPersona = (ArrayList<Cuenta>) negocioCuenta.listarCuentasBajaLogica();
+		
+		MV.addObject("listaPersona", listaPersona);
+		MV.setViewName("ABMLCuentas");
+		return MV;	
+		
+}
+
+	@RequestMapping("ModificarCuenta.html")
+	public ModelAndView modificar(int numeroCuenta, int cbu, String alias, String tipoCuenta)
+	{
+		Cuenta Cuenta = new Cuenta();
+		Cuenta.setAlias(alias);
+		Cuenta.setCbu(cbu);
+		Cuenta.setNroCuenta(numeroCuenta);
+		Cuenta.setTipoCuenta(tipoCuenta);
+		ArrayList<Cuenta> listaPersona = new ArrayList<>();
+		listaPersona.add(Cuenta);
+		ModelAndView MV = new ModelAndView();
+		MV.addObject("listaPersona", listaPersona);
+		MV.setViewName("AltaDeCuenta");
+		return MV;	
+		
+}
 	
 }

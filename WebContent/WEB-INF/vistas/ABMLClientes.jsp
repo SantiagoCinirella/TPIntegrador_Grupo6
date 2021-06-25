@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,12 +98,12 @@
 				<div class="collapse navbar-collapse" id="sidenav-collapse-main">
 					<!-- Nav items -->
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link"
-							href="ABMLCuentas.jsp"> <i class="ni ni-tv-2 text-primary"></i>
-								<span class="nav-link-text">ABML Cuentas</span>
+						<li class="nav-item"><a class="nav-link" href="abmlCuentas.html">
+								<i class="ni ni-tv-2 text-primary"></i> <span
+								class="nav-link-text">ABML Cuentas</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link active"
-							href="ABMLClientes.jsp"> <i
+							href="abmlClientes.html"> <i
 								class="ni ni-single-02 text-yellow"></i> <span
 								class="nav-link-text">ABML Clientes</span>
 						</a></li>
@@ -175,7 +176,7 @@
 									class="ni ni-settings-gear-65"></i> <span>Configuracion</span>
 								</a>
 								<div class="dropdown-divider"></div>
-								<a href="Login.jsp" class="dropdown-item"> <i
+								<a href="index.html" class="dropdown-item"> <i
 									class="ni ni-user-run"></i> <span>Salir</span>
 								</a>
 							</div></li>
@@ -201,7 +202,7 @@
 							</nav>
 						</div>
 						<div class="col-lg-6 col-5 text-right">
-							<a href="AltaUsuarios.jsp" class="btn btn-sm btn-neutral">Nuevo
+							<a href="#" class="btn btn-sm btn-neutral">Nuevo
 								cliente</a>
 						</div>
 					</div>
@@ -214,7 +215,7 @@
 				<div class=" col ">
 					<div class="card">
 						<div class="card-header bg-transparent">
-							<h3 class="mb-0">Clientes</h3>
+							<h3 class="mb-0">Clientes</h3>							
 						</div>
 						<br>
 						<div class="row">
@@ -230,38 +231,50 @@
 
 													<thead class="thead-dark" id="example">
 														<tr>
-															<th scope="col" class="sort" data-sort="name">Nombre</th>
-															<th scope="col" class="sort" data-sort="budget">Apellido</th>
-															<th scope="col" class="sort" data-sort="status">DNI</th>
-															<th scope="col" class="sort" data-sort="status">Modificar</th>
-															<th scope="col" class="sort" data-sort="status">Eliminar</th>
+															<th scope="col" class="sort" data-sort="DNI">DNI</th>
+															<th scope="col" class="sort" data-sort="Apellido">Apellido</th>
+															<th scope="col" class="sort" data-sort="Nombre">Nombre</th>
+															<th scope="col" class="sort" data-sort="Nombre">Email</th>
+															<th scope="col" class="sort" data-sort="Modificar">Modificar</th>
+															<th scope="col" class="sort" data-sort="Eliminar">Eliminar</th>
 														</tr>
 													</thead>
 													<tbody class="list">
-														<tr>
-															<td>Pedro</td>
-															<td>Tonello</td>
-															<td>40391972</td>
-															<td><a href="#" class="btn btn-sm btn-neutral">Modificar</a></td>
-															<td><a href="#" class="btn btn-sm btn-neutral">Eliminar</a></td>
+														<c:forEach items="${listaPersona}" var="item">
+															<tr>
+																<td>${item.dni}</td>
+																<td>${item.apellido}</td>
+																<td>${item.nombre}</td>
+																<td>${item.email}</td>
+																
+																<td>
+																	<form method="post" action="ModificarCliente.html">
+																		<input type=submit value="Modificar"
+																			class="btn btn-sm btn-neutral" name="btndni" id="dni"
+																			OnClick="return confirm('Estas seguro de modificar a ${item.apellido}, ${item.nombre}?')">
+																		<input type="hidden" value="${item.dni}"
+																			class="myButton" name="dni" id="dni">
+																			<input type="hidden" value="${item.apellido}"
+																			class="myButton" name="apellido" id="dni"><input type="hidden" value="${item.nombre}"
+																			class="myButton" name="nombre" id="dni">
+																			<input type="hidden" value="${item.email}"
+																			class="myButton" name="email" id="dni">
+																			
+																	</form>
+																</td>
 
-														</tr>
-														<tr>
-															<td>Gabriel</td>
-															<td>Dilacio</td>
-															<td>40391921</td>
-															<td><a href="#" class="btn btn-sm btn-neutral">Modificar</a></td>
-															<td><a href="#" class="btn btn-sm btn-neutral">Eliminar</a></td>
 
-														</tr>
-														<tr>
-															<td>Santiago</td>
-															<td>Cinirella</td>
-															<td>40391982</td>
-															<td><a href="#" class="btn btn-sm btn-neutral">Modificar</a></td>
-															<td><a href="#" class="btn btn-sm btn-neutral">Eliminar</a></td>
-														</tr>
-
+																<td>
+																	<form method="post" action="eliminacion.html">
+																		<input type=submit value="Eliminar"
+																			class="btn btn-sm btn-neutral" name="btndni" id="dni"
+																			OnClick="return confirm('Estas seguro de eliminar a ${item.apellido}, ${item.nombre}?')">
+																		<input type="hidden" value="${item.dni}"
+																			class="myButton" name="dni" id="dni">
+																	</form>
+																</td>
+															</tr>
+														</c:forEach>
 													</tbody>
 												</table>
 											</div>
@@ -275,8 +288,6 @@
 			</div>
 		</div>
 	</div>
-
-
 	<!-- Argon Scripts -->
 	<!-- Core -->
 	<script src="assets/vendor/jquery/dist/jquery.min.js"></script>

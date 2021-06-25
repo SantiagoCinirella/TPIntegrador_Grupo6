@@ -10,40 +10,67 @@ import org.springframework.stereotype.Component;
 @Entity
 public class Cuenta {
 	
-	@Id
-	private String CBU;
-	private String NroCuenta;
-	private String TipoCuenta;
-	private String Alias;
+	@Id	
+	private int cbu;
+	private int nroCuenta;
+	private String tipoCuenta;
+	private String alias;
+	private boolean estado;
 	
-	public String getCBU() {
-		return CBU;
+	
+	public Cuenta()
+	{
+		
 	}
-	public void setCBU(String txtCBU) {
-		CBU = txtCBU;
+
+
+	public int getCbu() {
+		return cbu;
 	}
-	public String getNroCuenta() {
-		return NroCuenta;
+
+
+	public void setCbu(int cbu) {
+		this.cbu = cbu;
 	}
-	public void setNroCuenta(String nroCuenta) {
-		NroCuenta = nroCuenta;
+
+
+	public int getNroCuenta() {
+		return nroCuenta;
 	}
+
+
+	public void setNroCuenta(int nroCuenta) {
+		this.nroCuenta = nroCuenta;
+	}
+
+
 	public String getTipoCuenta() {
-		return TipoCuenta;
+		return tipoCuenta;
 	}
+
+
 	public void setTipoCuenta(String tipoCuenta) {
-		TipoCuenta = tipoCuenta;
+		this.tipoCuenta = tipoCuenta;
 	}
+
+
 	public String getAlias() {
-		return Alias;
+		return alias;
 	}
+
+
 	public void setAlias(String alias) {
-		Alias = alias;
+		this.alias = alias;
 	}
-	@Override
-	public String toString() {
-		return "Cuenta [CBU=" + CBU + ", NroCuenta=" + NroCuenta + ", TipoCuenta=" + TipoCuenta + ", Alias=" + Alias
-				+ "]";
+
+
+	public boolean isEstado() {
+		return estado;
 	}
-	
+
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
 }

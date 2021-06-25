@@ -62,7 +62,7 @@ https://templatemo.com/tm-545-finance-business
                 <a class="nav-link" href="#QuienesSomos">Quienes somos</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="Login.jsp">Login</a>
+                <a class="nav-link" href="index.html">Login</a>
               </li>
             </ul>
           </div>
@@ -81,7 +81,7 @@ https://templatemo.com/tm-545-finance-business
                   <h4>SOMOS BANCO <br> UTN FRGP</h4>
                   <p>Tu Banco Digital, siempre
                     con vos,<br> estes donde estes.</p>
-                  <a href="Login.jsp" class="filled-button">Contactanos</a>
+                  <a href="index.html" class="filled-button">Contactanos</a>
                 </div>
             </div>
           </div>
@@ -93,7 +93,7 @@ https://templatemo.com/tm-545-finance-business
                   <h6></h6>
                   <h4>Hacete cliente de <br> BANCO UTN FRGP</h4>
                   <p>Enterate de nuestros beneficios <br> haciendote cliente nuestro.</p>
-                  <a href="Login.jsp" class="filled-button">Empeza ya</a>
+                  <a href="index.html" class="filled-button">Empeza ya</a>
                 </div>
             </div>
           </div>
@@ -116,7 +116,7 @@ https://templatemo.com/tm-545-finance-business
               <div class="down-content">
                 <h4>SacA tu tarjeta de credito</h4>
                 <p>Saca tu tarjeta de credito gratis por 1 a�o, pedila en 5 minutos y accede a descuentos en viajes, preventas y mucho mas.</p>
-                <a href="Login.jsp" class="filled-button">Empeza ya</a>
+                <a href="index.html" class="filled-button">Empeza ya</a>
               </div>
             </div>
           </div>
@@ -126,7 +126,7 @@ https://templatemo.com/tm-545-finance-business
               <div class="down-content">
                 <h4>Cobra tu sueldo</h4>
                 <p>Disfruta de tu cuenta 100% bonificada, tasas exclusivas en prestamos personales , descuentos en seguros y mucho mas.</p>
-                <a href="Login.jsp" class="filled-button">Empeza ya</a>
+                <a href="index.html" class="filled-button">Empeza ya</a>
               </div>
             </div>
           </div>
@@ -136,7 +136,7 @@ https://templatemo.com/tm-545-finance-business
               <div class="down-content">
                 <h4>Acredita tus ventas</h4>
                 <p>Te apoyamos en tu comercio, acredita tus ventas con tarjetas de credito y debito en una cuenta y tene beneficios para vos y tus clientes. </p>
-                <a href="Login.jsp" class="filled-button">Empeza ya</a>
+                <a href="index.html" class="filled-button">Empeza ya</a>
               </div>
             </div>
           </div>
@@ -152,7 +152,7 @@ https://templatemo.com/tm-545-finance-business
               <h2><em>BANCO UTN FRGP</em></h2>
               <p>Somos uno de los bancos lideres en medios de pago, en comercio exterior, servicios transaccionales y cash management.
               <br><br> Y tambien uno de los principales protagonistas en los mercados bursatiles, de titulos publicos y cambiarios. </p>
-              <a href="Login.jsp" class="filled-button">Empeza ya</a>
+              <a href="index.html" class="filled-button">Empeza ya</a>
             </div>
           </div>
           <div class="col-md-6 align-self-center">
@@ -206,7 +206,7 @@ https://templatemo.com/tm-545-finance-business
                       El crecimiento del Banco se potencia a partir de su expansion al sector financiero minorista y ocupo un rol importante en la recuperacion de la actividad financiera argentina luego de la crisis 2001-2002.
                         <br>  
                         <br>                                      
-                    <a href="Login.jsp" class="filled-button">Empeza ya </a>
+                    <a href="index.html" class="filled-button">Empeza ya </a>
                   </div>
                 </div>
               </div>

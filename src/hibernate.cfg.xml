@@ -5,7 +5,7 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.password">system</property>
      	<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/BDHibernate?createDatabaseIfNotExist=true</property>        
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
@@ -13,5 +13,8 @@
         <property name="show_sql">true</property>
         <mapping class="frgp.utn.edu.ar.entidad.UsuarioLogin"/>
         <mapping class="frgp.utn.edu.ar.entidad.Persona"/>
+        <mapping class="frgp.utn.edu.ar.entidad.Cuenta"/>
+        <mapping class="frgp.utn.edu.ar.entidad.Cliente"/>
+        
     </session-factory>
 </hibernate-configuration>

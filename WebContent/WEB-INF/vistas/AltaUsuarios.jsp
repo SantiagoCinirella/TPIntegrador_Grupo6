@@ -1,6 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,13 +33,15 @@
 <!-- Argon CSS -->
 <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0"
 	type="text/css">
+</head>
+
 
 
 <script type="text/javascript">
 	function alertAgregarUsuario() {
 		alert("Usuario creado exitosamente");
 	}
-	
+
 	function alertModificarUsuario() {
 		alert("Usuario modificado exitosamente");
 	}
@@ -69,10 +72,6 @@
 				}
 			}
 		</script>
-
-
-
-		<!-- Sidenav -->
 		<nav
 			class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white"
 			id="sidenav-main">
@@ -90,11 +89,11 @@
 						<!-- Nav items -->
 						<ul class="navbar-nav">
 							<li class="nav-item"><a class="nav-link active"
-								href="ABMLCuentas.jsp"> <i class="ni ni-tv-2 text-primary"></i>
+								href="abmlCuentas.html"> <i class="ni ni-tv-2 text-primary"></i>
 									<span class="nav-link-text">ABML Cuentas</span>
 							</a></li>
 							<li class="nav-item"><a class="nav-link"
-								href="ABMLClientes.jsp"> <i
+								href="abmlClientes.html"> <i
 									class="ni ni-single-02 text-yellow"></i> <span
 									class="nav-link-text">ABML Clientes</span>
 							</a></li>
@@ -151,7 +150,7 @@
 										class="ni ni-settings-gear-65"></i> <span>Configuracion</span>
 									</a>
 									<div class="dropdown-divider"></div>
-									<a href="Login.jsp" class="dropdown-item"> <i
+									<a href="index.html" class="dropdown-item"> <i
 										class="ni ni-user-run"></i> <span>Salir</span>
 									</a>
 								</div></li>
@@ -204,59 +203,62 @@
 													</div>
 												</div>
 												<div class="card-body">
-													<h6 class="heading-small text-muted mb-4">Información
-														de cliente</h6>
-													<div class="pl-lg-4">
-														<div class="row">
-															<div class="col-lg-6">
-																<div class="form-group">
-																	<label class="form-control-label" for="input-email">Email</label>
-																	<input type="email" id="input-email"
-																		class="form-control" placeholder="email"
-																		name="txtEmail" required>
-																</div>
-															</div>
-															<div class="col-lg-6">
-																<div class="form-group">
-																	<label class="form-control-label" for="input-last-name">DNI</label>
-																	<input type="text" id="input-dni" class="form-control"
-																		placeholder="DNI" name="txtDNI" required>
-																</div>
-															</div>
-														</div>
-														<div class="row">
-															<div class="col-lg-6">
-																<div class="form-group">
-																	<label class="form-control-label"
-																		for="input-first-name">Nombre</label> <input
-																		type="text" id="input-first-name" class="form-control"
-																		placeholder="Nombres" value="Gabriel Brandon"
-																		name="txtNombre" required>
-																</div>
-															</div>
-															<div class="col-lg-6">
-																<div class="form-group">
-																	<label class="form-control-label" for="input-last-name">Apellido</label>
-																	<input type="text" id="input-last-name"
-																		class="form-control" placeholder="Apellido"
-																		value="Dilacio" name="txtApellido" required>
-																</div>
-															</div>
-														</div>
-													</div>
-													<!-- Address -->
-													<hr class="my-12" />
+													<form>
+														<c:forEach items="${listaPersona}" var="item">
 
-													<div class="form-group">
-														<div class="col-12 text-center">
-															<input class="btn btn-sm btn-primary"
-																style="width: 250px;" type="submit" value="Crear"
-																name="btnCrear"> <input
-																class="btn btn-sm btn-primary" style="width: 250px;"
-																type="submit" value="Modificar" name="btnModificar">
-														</div>
-													</div>
+															<h6 class="heading-small text-muted mb-4">Información
+																de cliente</h6>
+															<div class="pl-lg-4">
+																<div class="row">
+																	<div class="col-lg-6">
+																		<label class="form-control-label" for="input-email">Email</label>
+																		<input type="email" id="input-email"
+																			class="form-control" placeholder="email"
+																			name="txtEmail" value="${item.email}" required>
+																	</div>
+																	<div class="col-lg-6">
 
+																		<label class="form-control-label"
+																			for="input-last-name">DNI</label> <input type="text"
+																			id="input-dni" class="form-control" placeholder="DNI"
+																			name="txtDNI" value="${item.dni}" required>
+																	</div>
+																</div>
+																<br>
+																<div class="row">
+																	<div class="col-lg-6">
+																		<div class="form-group">
+																			<label class="form-control-label"
+																				for="input-first-name">Nombre</label> <input
+																				type="text" id="input-first-name"
+																				class="form-control" value="${item.nombre}">
+
+																		</div>
+																	</div>
+																	<div class="col-lg-6">
+																		<div class="form-group">
+																			<label class="form-control-label"
+																				for="input-last-name">Apellido</label> <input
+																				type="text" id="input-last-name"
+																				class="form-control" value="${item.apellido}">
+
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<!-- Address -->
+															<hr class="my-12" />
+															<div class="form-group">
+																<div class="col-12 text-center">
+																	<a href="#!" class="btn btn-sm btn-primary"
+																		style="width: 250px;">Crear</a> <a href="#!"
+																		class="btn btn-sm btn-primary" style="width: 250px;">Modificar</a>
+
+																</div>
+															</div>
+														</c:forEach>
+
+													</form>
 												</div>
 											</div>
 										</div>
