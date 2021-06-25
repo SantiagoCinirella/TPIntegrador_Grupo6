@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import frgp.utn.edu.ar.dao.queries.PersonaQueries;
 import frgp.utn.edu.ar.entidad.Cuenta;
 
 @Repository("daoCuenta")
@@ -27,10 +28,10 @@ public class DaoCuenta {
 		List results = query.list();*/
 		
 		ArrayList<Cuenta> listaCuentas = (ArrayList<Cuenta>) session.createCriteria(Cuenta.class).list();
-		
+		 
 		//cuenta = (Cuenta) session.get(Cuenta.class,"ID");
 		tx = session.getTransaction();
-		
+		conexion.cerrarSession();
 		return listaCuentas;
 		
 	}
@@ -81,14 +82,16 @@ public List<Cuenta> listarCuentasBajaLogica() {
 		try
 		{
 			session.save(c); 
-			tx = session.getTransaction();
+			
 			tx.commit();
 		}
 		catch (Exception e) {
 			aux=false;
 			tx.rollback();
 		}
-		conexion.cerrarSession();
+		//conexion.cerrarSession();
+		session.close();
+		
 		return aux;
 	}
 	
@@ -102,6 +105,24 @@ public List<Cuenta> listarCuentasBajaLogica() {
 			int executeUpdate = update.executeUpdate();
 			tx.commit();
 			return executeUpdate != 0;
+		} catch (Exception e) {
+			tx.rollback();
+			return false;
+		} finally {
+			session.close();
+		}
+	}
+
+	public boolean update(Cuenta cuenta) {
+		Session session = conexion.abrirConexion();
+		Transaction tx = session.beginTransaction();
+		try {
+
+			session.update(cuenta);
+	        session.getTransaction().commit();       
+			
+	        return true;
+			
 		} catch (Exception e) {
 			tx.rollback();
 			return false;

@@ -1,28 +1,51 @@
 package frgp.utn.edu.ar.entidad;
 
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import org.springframework.stereotype.Component;
 
 
 @Component
 @Entity
-public class Cuenta {
+public class Cuenta implements Serializable {
 	
-	@Id	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
 	private int cbu;
 	private int nroCuenta;
 	private String tipoCuenta;
 	private String alias;
 	private boolean estado;
 	
+	@OneToOne(cascade= {CascadeType.ALL})
+	@JoinColumn (name="idCliente")
+	private Cliente cliente;
 	
 	public Cuenta()
 	{
-		
 	}
 
+	
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 
 	public int getCbu() {
 		return cbu;

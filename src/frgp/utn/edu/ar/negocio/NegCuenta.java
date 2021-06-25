@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import frgp.utn.edu.ar.dao.DaoCuenta;
+import frgp.utn.edu.ar.dao.DaoPersona;
 import frgp.utn.edu.ar.entidad.Cuenta;
+import frgp.utn.edu.ar.entidad.Persona;
 
 @Service("servicioCuenta")
 public class NegCuenta {
@@ -36,6 +38,10 @@ public class NegCuenta {
 	public boolean bajaLogica(int numeroCuenta) {
 		return daoCuenta.bajaLogica(numeroCuenta);
 		
+	}
+
+	public boolean update(Cuenta cuenta) {
+		return daoCuenta.update(cuenta);
 	}
 
 }
