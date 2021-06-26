@@ -322,40 +322,7 @@
 	</div>
 	 -->
 	
-	
-	
-<a href="recargaGrillaCuentas.html">Recargar Grillas</a>
 
-
-<h2> Listado de Usuarios</h2>
-
-
-
-	<table border="1px">
-		<thead>
-			<tr>
-				<th>cbu</th>
-				<th>Nro Cuenta</th>
-				<th>Alias</th>
-				<th>tipo de cuenta</th>
-			</tr>
-		</thead>
-		
-			<c:forEach items="${listaCuentas}" var="item">
-				
-				<tr>
-			
-				<td> ${item.cbu} </td>
-				<td>${item.nroCuenta}</td>
-				<td>${item.alias}</td>
-				<td>${item.tipoCuenta}</td>
-				</tr>
-				
-			</c:forEach>
-	
-	</table>
-
-				
 	<!-- Argon Scripts -->
 	<!-- Core -->
 	<script src="assets/vendor/jquery/dist/jquery.min.js"></script>
