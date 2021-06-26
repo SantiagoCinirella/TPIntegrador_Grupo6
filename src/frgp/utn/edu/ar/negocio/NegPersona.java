@@ -40,4 +40,8 @@ public class NegPersona {
 		return daoPersona.bajaLogica(dni);
 		
 	}
+public Persona obtenerPersona(int dni) {
+		
+		return daoPersona.obtenerPersona(dni);
+	}
 }

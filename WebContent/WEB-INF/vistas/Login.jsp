@@ -32,7 +32,7 @@
 <body
 	background="https://images.pexels.com/photos/259200/pexels-photo-259200.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
 <body translate="no">
-	<form class="login" method="get" action="altaDeUsuarios.html">
+	<form class="login" method="post" action="altaDeUsuarios.html">
 		<input type="text" placeholder="Usuario" name="txtUsuario" required>
 		<input type="password" placeholder="Contraseña" name="txtPassword"
 			required> <input type="submit" value="Login" name="btnLogin">

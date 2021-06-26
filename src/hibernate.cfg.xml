@@ -14,7 +14,7 @@
         <mapping class="frgp.utn.edu.ar.entidad.UsuarioLogin"/>
         <mapping class="frgp.utn.edu.ar.entidad.Persona"/>
         <mapping class="frgp.utn.edu.ar.entidad.Cuenta"/>
-        <mapping class="frgp.utn.edu.ar.entidad.Cliente"/>
+        <mapping class="frgp.utn.edu.ar.entidad.Movimiento"/>
         
     </session-factory>
 </hibernate-configuration>

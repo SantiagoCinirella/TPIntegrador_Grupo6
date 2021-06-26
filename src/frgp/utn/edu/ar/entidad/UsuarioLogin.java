@@ -13,7 +13,8 @@ public class UsuarioLogin {
 	private int dni;
 	private String usuario;
 	private String password;
-	
+	private Boolean estado;
+	private Boolean tipoUsuario;
 
 	public String getUsuario() {
 		return usuario;
@@ -38,5 +39,22 @@ public class UsuarioLogin {
 	public void setDni(int dni) {
 		this.dni = dni;
 	}
+
+	public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
+
+	public Boolean getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+	public void setTipoUsuario(Boolean tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
+	}
+	
 
 }

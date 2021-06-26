@@ -10,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import frgp.utn.edu.ar.entidad.Persona;
 import frgp.utn.edu.ar.entidad.UsuarioLogin;
-import frgp.utn.edu.ar.negocio.NegCliente;
 import frgp.utn.edu.ar.negocio.NegPersona;
 
 @Controller

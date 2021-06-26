@@ -8,8 +8,11 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import frgp.utn.edu.ar.dao.queries.ClienteQueries;
+import frgp.utn.edu.ar.dao.queries.CuentaQueries;
 import frgp.utn.edu.ar.dao.queries.PersonaQueries;
 import frgp.utn.edu.ar.entidad.Cuenta;
+import frgp.utn.edu.ar.entidad.Persona;
 
 @Repository("daoCuenta")
 public class DaoCuenta {
@@ -126,6 +129,26 @@ public List<Cuenta> listarCuentasBajaLogica() {
 		} catch (Exception e) {
 			tx.rollback();
 			return false;
+		} finally {
+			session.close();
+		}
+	}
+
+	public Cuenta obtenerCuentaMax(int dni) {
+
+		Cuenta cuenta = new Cuenta();
+		
+		Session session = conexion.abrirConexion();
+		try {
+
+			Query busqueda = session.createQuery(CuentaQueries.BUSCA_MAX_CUENTA_SQL.getQuery());
+			cuenta = (Cuenta)busqueda.setParameter(0, dni).uniqueResult();
+			
+			
+			//List results = busqueda.list();			
+			return cuenta;
+		} catch (Exception e) {
+			return cuenta;
 		} finally {
 			session.close();
 		}
