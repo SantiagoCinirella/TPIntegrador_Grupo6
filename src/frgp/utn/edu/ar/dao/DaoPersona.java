@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.hibernate.Query;
 
+import frgp.utn.edu.ar.dao.queries.ClienteQueries;
 import frgp.utn.edu.ar.dao.queries.PersonaQueries;
 import frgp.utn.edu.ar.entidad.Persona;
 
@@ -122,4 +123,35 @@ public class DaoPersona {
 			session.close();
 		}
 	}
+
+	public Persona obtenerPersona(int dni) {
+
+		Persona persona = new Persona() ;
+		
+		Session session = conexion.abrirConexion();
+		try {
+			
+			
+			Query busqueda = session.createQuery(ClienteQueries.BUSCA_CLIENTE_SQL.getQuery());
+			persona = (Persona)busqueda.setParameter(0, dni).uniqueResult();
+			
+			
+			//List results = busqueda.list();			
+			return persona;
+		} catch (Exception e) {
+			return persona;
+		} finally {
+			session.close();
+		}
+		
+	}
+	
+	
+
+	
+	
+	
+	
+	
+	
 }

@@ -77,11 +77,11 @@
 					<!-- Nav items -->
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link active"
-							href="abmlCuentas.html"> <i class="ni ni-tv-2 text-primary"></i>
+							href="ABMLCuentas.jsp"> <i class="ni ni-tv-2 text-primary"></i>
 								<span class="nav-link-text">ABML Cuentas</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="abmlClientes.html"> <i
+							href="ABMLClientes.jsp"> <i
 								class="ni ni-single-02 text-yellow"></i> <span
 								class="nav-link-text">ABML Clientes</span>
 						</a></li>
@@ -201,7 +201,7 @@
 										<div class="card-header">
 											<div class="row align-items-center">
 												<div class="col-8">
-													<h3 class="mb-0">Alta de cuenta</h3>
+													<h3 class="mb-0">Modificacion de cuenta</h3>
 												</div>
 											</div>
 										</div>
@@ -215,22 +215,15 @@
 															<div class="form-group">
 																<label class="form-control-label" for="input-username">Nro Cliente</label>
 																<input type="number" id="input-email" readonly="readonly" class="form-control" placeholder="123"
-																	value="${clienteObtenido.dni}" name="txtIdCliente">
+																	value="${clienteObtenido.idCliente}" name="txtIdCliente">
 																
 															</div>
 														</div>
 														<div class="col-lg-4">
 															<div class="form-group">
 																<label class="form-control-label" for="input-email">DNI</label>
-																<input type="number" id="input-email" class="form-control" placeholder="31222333"
+																<input type="number" id="input-email" class="form-control" readonly="readonly"  placeholder="31222333"
 																	value="${clienteObtenido.dni}" name="txtDni">
-															</div>
-														</div>
-														<div class="col-lg-3">
-															<div class="form-group">
-																<input type="submit" name="btnAgregarPersona"  class="btn btn-sm btn-primary" value="Buscar" formaction="buscarCliente.html"  style="width: 100%;">
-														
-															<p style="color: red"> ${mensajeCliente} </p>
 															</div>
 														</div>
 													</div>
@@ -300,9 +293,8 @@
 												<hr class="my-12" />
 													<div class="form-group">
 														  <div class="col-12 text-center">
-										                  	<input type="submit" name="btnAgregarPersona" class="btn btn-sm btn-primary" value="Agregar">
-										                  	<p style="color: blue"> ${estadoAgregarCuenta} </p>
-										                  	
+										                  	<input type="submit" name="btnModificarCuenta"  class="btn btn-sm btn-primary" value="modificar" formaction="ModificarCuenta_AltaDecuenta.html"  style="width: 100%;">
+										                  	<p style="color: blue"> ${mesajeActualizacion} </p>
 										                </div>
 													</div>
 											</form>

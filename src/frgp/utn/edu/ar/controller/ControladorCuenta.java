@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import frgp.utn.edu.ar.entidad.Cliente;
 import frgp.utn.edu.ar.entidad.Cuenta;
 import frgp.utn.edu.ar.entidad.Persona;
-import frgp.utn.edu.ar.negocio.NegCliente;
 import frgp.utn.edu.ar.negocio.NegCuenta;
 import frgp.utn.edu.ar.negocio.NegPersona;
 
@@ -22,10 +20,10 @@ public class ControladorCuenta {
 	@Autowired
 	@Qualifier("servicioCuenta")
 	private NegCuenta negocioCuenta;
-	private NegCliente negocioCliente;
+	private NegPersona negocioPersona;
 	@Autowired
 	private Cuenta cuenta;
-	private Cliente cliente;
+	private Persona persona;
 	String cartel = null;
 	
 	@RequestMapping(value ="/buscarCliente.html" , method= { RequestMethod.GET, RequestMethod.POST})
@@ -33,19 +31,28 @@ public class ControladorCuenta {
 	{
 		ModelAndView MV = new ModelAndView();
 		String mensajeCliente = null;
-		int dni;
+		int dni, cbu, nroCuenta;
 		
 		dni = Integer.parseInt(txtDni);
-		negocioCliente = new NegCliente();
-		cliente = (Cliente) negocioCliente.obtenerCliente(dni);
+		negocioPersona = new NegPersona();
+		persona = (Persona) negocioPersona.obtenerPersona(dni);
 		
-		if(cliente == null) {
-			mensajeCliente = "El usuario no existe";
+		if(persona == null) {
+			mensajeCliente = "El usuario no existe o esta dado de baja";
+			
+		}
+		else
+		{
+			
+			cuenta = (Cuenta) negocioCuenta.obtenerCuentaMax(dni);
+			cbu = cuenta.getNroCuenta() + 1;
 			
 		}
 		
+		
+		
 		MV.addObject("mensajeCliente",mensajeCliente);
-		MV.addObject("clienteObtenido",cliente);
+		MV.addObject("clienteObtenido",persona);
 		MV.setViewName("AltaDeCuenta");
 		return MV;
 	}
@@ -66,15 +73,15 @@ public class ControladorCuenta {
 		cuenta.setAlias(txtAlias);
 		cuenta.setNroCuenta(numCuenta);
 		
-		cliente = new Cliente();
+		persona = new Persona();
 		
-		cliente.setIdCliente(idCliente);
+	
 		dni = Integer.parseInt(txtDni);  
-		cliente.setDni(dni);
-		cliente.setNombre(txtNombre);
-		cliente.setApellido(txtApellido);
-		
-		cuenta.setCliente(cliente);
+		persona.setDni(dni);
+		persona.setNombre(txtNombre);
+		persona.setApellido(txtApellido);
+	
+		cuenta.setPersona(persona);
 		
 		boolean estado= negocioCuenta.agregarCuenta(cuenta);
 		
@@ -83,6 +90,7 @@ public class ControladorCuenta {
 		{
 			cartel="La cuenta ha sido agregada exitosamente";
 		}
+		
 		MV.addObject("estadoAgregarCuenta",cartel);
 		MV.setViewName("AltaDeCuenta");
 		return MV;
@@ -147,7 +155,7 @@ public class ControladorCuenta {
 		
 		ModelAndView MV = new ModelAndView();
 		MV.addObject("CuentaModificar", Cuenta);
-		MV.setViewName("AltaDeCuenta");
+		MV.setViewName("ModificacionDeCuenta");
 		return MV;	
 		
 }

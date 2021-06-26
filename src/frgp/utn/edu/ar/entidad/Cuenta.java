@@ -26,26 +26,49 @@ public class Cuenta implements Serializable {
 	private String tipoCuenta;
 	private String alias;
 	private boolean estado;
+	private String fechaCreacion;
+	private Double saldo;
 	
+
 	@OneToOne(cascade= {CascadeType.ALL})
-	@JoinColumn (name="idCliente")
-	private Cliente cliente;
+	@JoinColumn (name="dni")
+	private Persona persona;
+	
 	
 	public Cuenta()
 	{
 	}
 
 	
-
-	public Cliente getCliente() {
-		return cliente;
+	
+	public String getFechaCreacion() {
+		return fechaCreacion;
 	}
 
 
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setFechaCreacion(String fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
 	}
+
+
+	public Double getSaldo() {
+		return saldo;
+	}
+
+
+	public void setSaldo(Double saldo) {
+		this.saldo = saldo;
+	}
+
+
+	public Persona getPersona() {
+		return persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	}
+
 
 	public int getCbu() {
 		return cbu;
