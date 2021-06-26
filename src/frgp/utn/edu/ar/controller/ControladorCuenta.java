@@ -160,7 +160,8 @@ public class ControladorCuenta {
 		Cuenta.setNroCuenta(numeroCuenta);
 		Cuenta.setTipoCuenta(tipoCuenta);
 		
-		boolean estado= negocioCuenta.update(cuenta);
+
+		boolean estado= negocioCuenta.update(Cuenta);
 		String mesajeActualizacion = "Cuenta Modificada correctamente";
 		if(!estado)
 		{
@@ -180,5 +181,4 @@ public class ControladorCuenta {
 		MV.setViewName("AltaDeCuenta");
 		return MV;	
 	}
-	
 }
