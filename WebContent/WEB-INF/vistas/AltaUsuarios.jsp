@@ -250,14 +250,25 @@
 															<hr class="my-12" />
 															<div class="form-group">
 																<div class="col-12 text-center">
-																	<a href="#!" class="btn btn-sm btn-primary"
-																		style="width: 250px;">Crear</a> <a href="#!"
-																		class="btn btn-sm btn-primary" style="width: 250px;">Modificar</a>
+																	<c:choose>
+																		<c:when test="${esNuevoCliente==true}">
+																			<input class="btn btn-sm btn-primary"
+																				style="width: 250px;" type="submit" value="Crear"
+																				name="btnCrear">
+																			<br />
+																		</c:when>
+																		<c:otherwise>
+																			<input class="btn btn-sm btn-primary"
+																				style="width: 250px;" type="submit"
+																				value="Modificar" name="btnModificar">
+																			<br />
+																		</c:otherwise>
+																	</c:choose>
+
 
 																</div>
 															</div>
 														</c:forEach>
-
 													</form>
 												</div>
 											</div>
