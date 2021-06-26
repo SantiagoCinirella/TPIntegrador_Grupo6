@@ -2,6 +2,8 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="frgp.utn.edu.ar.entidad.Persona"%>
+<%@page import="frgp.utn.edu.ar.entidad.Cuenta"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,7 +90,7 @@
               <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
                 <!-- Dropdown header -->
                 <div class="px-3 py-3">
-                  <h6 class="text-sm text-muted m-0">Tenes <strong class="text-primary">13</strong> nuevas notificationes.</h6>
+                  <h6 class="text-sm text-muted m-0">Tenes <strong class="text-primary">3</strong> nuevas notificationes.</h6>
                 </div>
                 <!-- List group -->
                 <div class="list-group list-group-flush">
@@ -158,7 +160,10 @@
 	HttpSession misession= (HttpSession) request.getSession();
 	 
 	Persona Persona = (Persona) misession.getAttribute("Usuario");
-	%>  
+
+%>
+	
+	
           
           <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
             <li class="nav-item dropdown">
@@ -168,7 +173,7 @@
                     <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold"><%=Persona.getNombre()%>,<%=Persona.getApellido()%></span>
+                    <span class="mb-0 text-sm  font-weight-bold"><%=Persona.getNombre()%>, <%=Persona.getApellido()%></span>
                   </div>
                 </div>
               </a>
@@ -215,14 +220,20 @@
           </div>
           <!-- Card stats -->
           <div class="row">
+            <c:forEach items="${listaCuenta}" var="item">
+
             <div class="col-xl-3 col-md-6">
               <div class="card card-stats">
                 <!-- Card body -->
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Caja de ahorro pesos</h5>
-                      <span class="h2 font-weight-bold mb-0">$3500,89</span>
+                      <h5 class="card-title text-uppercase text-muted mb-0">${item.tipoCuenta}</h5>
+                     <span class="h4 font-weight-bold mb-0">CBU: ${item.cbu}</span>
+                     <br>
+                     <span class="h4 font-weight-bold mb-0">Nro: ${item.nroCuenta}</span> 
+                     <br> 
+                      <span class="h2 font-weight-bold mb-0">$${item.saldo}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-blue text-white rounded-circle shadow">
@@ -238,75 +249,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Caja de ahorro dolares</h5>
-                      <span class="h2 font-weight-bold mb-0">$2,3</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
-                        <i class="ni ni-chart-pie-35"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Desde el mes anterior</span>
-                  </p>
-                  <a href="#" class="btn btn-sm btn-neutral">Ver historial</a>         
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Caja de ahorro pesos</h5>
-                      <span class="h2 font-weight-bold mb-0">$5310,89</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                        <i class="ni ni-chart-pie-35"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 1.48%</span>
-                    <span class="text-nowrap">Desde el mes anterior</span>
-                  </p>
-                  <a href="#" class="btn btn-sm btn-neutral">Ver historial</a>    
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Caja de ahorro dolares</h5>
-                      <span class="h2 font-weight-bold mb-0">$500,3</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                        <i class="ni ni-chart-pie-35"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 0.48%</span>
-                    <span class="text-nowrap">Desde el mes anterior</span>
-                  </p>
-                  <a href="#" class="btn btn-sm btn-neutral">Ver historial</a>         
-                </div>
-              </div>
-            </div>
+                        </c:forEach>
             
           </div>
         </div>

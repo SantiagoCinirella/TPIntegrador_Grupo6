@@ -144,7 +144,7 @@
 										alt="Image placeholder" src="assets/img/theme/team-1.jpg">
 									</span>
 									<div class="media-body  ml-2  d-none d-lg-block">
-										<span class="mb-0 text-sm  font-weight-bold"><%=Persona.getNombre()%>,<%=Persona.getApellido()%></span>
+										<span class="mb-0 text-sm  font-weight-bold"><%=Persona.getNombre()%>, <%=Persona.getApellido()%></span>
 									</div>
 								</div>
 						</a>

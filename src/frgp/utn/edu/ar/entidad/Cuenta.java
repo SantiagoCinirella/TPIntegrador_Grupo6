@@ -30,7 +30,6 @@ public class Cuenta implements Serializable {
 	private Double saldo;
 	private int dni;
 	
-
 	@OneToOne(cascade= {CascadeType.ALL})
 	@JoinColumn (name="dni" ,insertable = false, updatable = false)
 	private Persona persona;
@@ -55,6 +54,32 @@ public class Cuenta implements Serializable {
 		return serialVersionUID;
 	}
 	
+	public Persona getPersona() {
+		return persona;
+	}
+
+
+
+	public int getDni() {
+		return dni;
+	}
+
+	public void setDni(int dni) {
+		this.dni = dni;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	}
+
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+
 	public String getFechaCreacion() {
 		return fechaCreacion;
 	}
@@ -74,14 +99,6 @@ public class Cuenta implements Serializable {
 		this.saldo = saldo;
 	}
 
-
-	public Persona getPersona() {
-		return persona;
-	}
-
-	public void setPersona(Persona persona) {
-		this.persona = persona;
-	}
 
 
 	public int getCbu() {

@@ -36,12 +36,20 @@ public class Persona implements Serializable {
 	@JoinColumn(name = "dni")
 	private UsuarioLogin usuario;
 
-	public Persona() {
-		
+	@OneToOne(cascade = { CascadeType.ALL })
+	@JoinColumn(name = "dni")
+	private UsuarioLogin usuario;
+
+	
+	
+	public UsuarioLogin getUsuario() {
+		return usuario;
 	}
-	
-	
-	
+
+	public void setUsuario(UsuarioLogin usuario) {
+		this.usuario = usuario;
+	}
+
 	public String getSexo() {
 		return sexo;
 	}
@@ -90,15 +98,7 @@ public class Persona implements Serializable {
 		this.provincia = provincia;
 	}
 
-	
 
-	public UsuarioLogin getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(UsuarioLogin usuario) {
-		this.usuario = usuario;
-	}
 
 	public String getNombre() {
 		return nombre;
