@@ -3,6 +3,8 @@ package frgp.utn.edu.ar.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.ParseConversionEvent;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -130,22 +132,42 @@ public class DaoCuenta {
 		}
 	}
 
-	public Cuenta obtenerCuentaMax(int dni) {
+	public int obtenerCuentaMax() {
 
-		Cuenta cuenta = new Cuenta();
+		int maximaCuenta = 0;
 
 		Session session = conexion.abrirConexion();
 		try {
 
 			Query busqueda = session.createQuery(CuentaQueries.BUSCA_MAX_CUENTA_SQL.getQuery());
-			cuenta = (Cuenta) busqueda.setParameter(0, dni).uniqueResult();
+			maximaCuenta = (int) busqueda.uniqueResult();
 
 			// List results = busqueda.list();
-			return cuenta;
+			return maximaCuenta;
 		} catch (Exception e) {
-			return cuenta;
+			return maximaCuenta;
 		} finally {
 			session.close();
 		}
+	}
+
+	public int obtenerCbuMax() {
+
+		int maximaCbu = 0;
+
+		Session session = conexion.abrirConexion();
+		try {
+
+			Query busqueda = session.createQuery(CuentaQueries.BUSCA_MAX_CBU_SQL.getQuery());
+			maximaCbu = (int) busqueda.uniqueResult();
+
+			// List results = busqueda.list();
+			return maximaCbu;
+		} catch (Exception e) {
+			return maximaCbu;
+		} finally {
+			session.close();
+		}
+
 	}
 }

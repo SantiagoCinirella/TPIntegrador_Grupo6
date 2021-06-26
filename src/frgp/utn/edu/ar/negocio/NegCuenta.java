@@ -44,8 +44,12 @@ public class NegCuenta {
 		return daoCuenta.update(cuenta);
 	}
 
-	public Cuenta obtenerCuentaMax(int dni) {
-		return daoCuenta.obtenerCuentaMax(dni);
+	public int obtenerCuentaMax() {
+		return daoCuenta.obtenerCuentaMax();
+	}
+	
+	public int obtenerCbuMax() {
+		return daoCuenta.obtenerCbuMax();
 	}
 
 }

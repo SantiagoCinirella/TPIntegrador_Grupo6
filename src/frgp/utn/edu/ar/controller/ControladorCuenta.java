@@ -1,5 +1,6 @@
 package frgp.utn.edu.ar.controller;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class ControladorCuenta {
 	{
 		ModelAndView MV = new ModelAndView();
 		String mensajeCliente = null;
-		int dni, cbu, nroCuenta;
+		int dni, cbu, nroCuenta, maxCuenta,maxCbu;
 		
 		dni = Integer.parseInt(txtDni);
 		negocioPersona = new NegPersona();
@@ -44,45 +45,61 @@ public class ControladorCuenta {
 		else
 		{
 			
-			cuenta = (Cuenta) negocioCuenta.obtenerCuentaMax(dni);
-			cbu = cuenta.getNroCuenta() + 1;
+			maxCuenta = negocioCuenta.obtenerCuentaMax();
+			maxCbu = negocioCuenta.obtenerCbuMax();
+			
+			if(maxCuenta == 0 && maxCbu == 0)
+			{
+				cuenta = new Cuenta();
+				cbu = 1000000;
+				nroCuenta = 5000000;
+				cuenta.setCbu(cbu);
+				cuenta.setNroCuenta(nroCuenta);
+			}
+			else
+			{
+				cbu = maxCbu + 1;
+				nroCuenta = maxCuenta + 1;
+				cuenta.setCbu(cbu);
+				cuenta.setNroCuenta(nroCuenta);
+			}
+	
 			
 		}
 		
 		
-		
+		MV.addObject("CuentaParcial",cuenta);
 		MV.addObject("mensajeCliente",mensajeCliente);
 		MV.addObject("clienteObtenido",persona);
 		MV.setViewName("AltaDeCuenta");
 		return MV;
 	}
 	
-	
-	@RequestMapping("agregarCuenta.html")
-	public ModelAndView eventoRedireccionarPag2( String txtTipoCuenta,String txtCBU ,String txtNumCuenta, String txtAlias , String txtIdCliente,String txtDni ,String txtNombre ,String txtApellido)
+	@RequestMapping(value ="/agregarCuenta.html" , method= { RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView eventoRedireccionarPag2( String tipoCuenta,String cbu ,String numeroCuenta, String alias , String txtDni ,String txtNombre ,String txtApellido)
 	{
-		int idCliente , cbu, numCuenta,dni;
+		int idCliente , cbuint, numCuentaint,dniInt;
 		ModelAndView MV = new ModelAndView();
 		
-		cbu = Integer.parseInt(txtCBU);
-		numCuenta = Integer.parseInt(txtNumCuenta);
-		idCliente = Integer.valueOf(txtIdCliente);  
+		cbuint = Integer.parseInt(cbu);
+		numCuentaint = Integer.parseInt(numeroCuenta);
+		dniInt = Integer.parseInt(txtDni);
 		
-		cuenta.setCbu(cbu);
-		cuenta.setTipoCuenta(txtTipoCuenta);
-		cuenta.setAlias(txtAlias);
-		cuenta.setNroCuenta(numCuenta);
-		
+		cuenta.setCbu(cbuint);
+		cuenta.setTipoCuenta(tipoCuenta);
+		cuenta.setAlias(alias);
+		cuenta.setNroCuenta(numCuentaint);
+		cuenta.setDni(dniInt);
 		persona = new Persona();
 		
-	
-		dni = Integer.parseInt(txtDni);  
-		persona.setDni(dni);
+		persona.setDni(dniInt);
 		persona.setNombre(txtNombre);
 		persona.setApellido(txtApellido);
 	
 		cuenta.setPersona(persona);
-		
+		cuenta.setSaldo(10000.00);
+		cuenta.setFechaCreacion(LocalDateTime.now().toString() );
+	
 		boolean estado= negocioCuenta.agregarCuenta(cuenta);
 		
 		cartel="No se pudo agregar la cuenta";

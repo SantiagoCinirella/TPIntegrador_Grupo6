@@ -1,5 +1,7 @@
 package frgp.utn.edu.ar.entidad;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -7,8 +9,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-public class UsuarioLogin {
+public class UsuarioLogin implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	private int dni;
 	private String usuario;
@@ -16,6 +22,10 @@ public class UsuarioLogin {
 	private Boolean estado;
 	private Boolean tipoUsuario;
 
+	public UsuarioLogin() {
+		
+	}
+	
 	public String getUsuario() {
 		return usuario;
 	}

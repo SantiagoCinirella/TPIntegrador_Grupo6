@@ -34,10 +34,13 @@ public class Cuenta implements Serializable {
 	@JoinColumn (name="dni" ,insertable = false, updatable = false)
 	private Persona persona;
 	
+	
+
 	public Cuenta()
 	{
 	}
-	
+
+
 	public Persona getPersona() {
 		return persona;
 	}
@@ -133,5 +136,15 @@ public class Cuenta implements Serializable {
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Cuenta [cbu=" + cbu + ", nroCuenta=" + nroCuenta + ", tipoCuenta=" + tipoCuenta + ", alias=" + alias
+				+ ", estado=" + estado + ", fechaCreacion=" + fechaCreacion + ", saldo=" + saldo + ", dni=" + dni
+				+ ", persona=" + persona + "]";
+	}
+	
+	
 
 }
