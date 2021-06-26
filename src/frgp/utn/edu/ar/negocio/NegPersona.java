@@ -14,6 +14,7 @@ public class NegPersona {
 	@Autowired
 	private DaoPersona daoPersona = new DaoPersona();
 	
+	
 	public List<Persona> listarPersonas() {
 		return daoPersona.listarPersonas();
 	}

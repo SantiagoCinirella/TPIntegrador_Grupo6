@@ -28,18 +28,32 @@ public class Cuenta implements Serializable {
 	private boolean estado;
 	private String fechaCreacion;
 	private Double saldo;
+	private int dni;
 	
 
 	@OneToOne(cascade= {CascadeType.ALL})
-	@JoinColumn (name="dni")
+	@JoinColumn (name="dni" ,insertable = false, updatable = false)
 	private Persona persona;
 	
 	
+	public int getDni() {
+		return dni;
+	}
+
+
+	public void setDni(int dni) {
+		this.dni = dni;
+	}
+
+
 	public Cuenta()
 	{
 	}
 
-	
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 	public String getFechaCreacion() {
 		return fechaCreacion;
@@ -118,5 +132,15 @@ public class Cuenta implements Serializable {
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Cuenta [cbu=" + cbu + ", nroCuenta=" + nroCuenta + ", tipoCuenta=" + tipoCuenta + ", alias=" + alias
+				+ ", estado=" + estado + ", fechaCreacion=" + fechaCreacion + ", saldo=" + saldo + ", dni=" + dni
+				+ ", persona=" + persona + "]";
+	}
+	
+	
 
 }

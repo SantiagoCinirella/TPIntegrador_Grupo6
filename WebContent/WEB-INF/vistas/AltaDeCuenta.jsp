@@ -211,24 +211,24 @@
 													de cliente</h6>
 												<div class="pl-lg-4">
 													<div class="row">
-														<div class="col-lg-5">
-															<div class="form-group">
-																<label class="form-control-label" for="input-username">Nro Cliente</label>
-																<input type="number" id="input-email" readonly="readonly" class="form-control" placeholder="123"
-																	value="${clienteObtenido.dni}" name="txtIdCliente">
-																
-															</div>
-														</div>
-														<div class="col-lg-4">
+														
+														<div class="col-lg-6">
 															<div class="form-group">
 																<label class="form-control-label" for="input-email">DNI</label>
 																<input type="number" id="input-email" class="form-control" placeholder="31222333"
 																	value="${clienteObtenido.dni}" name="txtDni">
 															</div>
 														</div>
-														<div class="col-lg-3">
+														
+														
+														<div class="col-lg-1" style="margin-top: 40px;">
 															<div class="form-group">
-																<input type="submit" name="btnAgregarPersona"  class="btn btn-sm btn-primary" value="Buscar" formaction="buscarCliente.html"  style="width: 100%;">
+																
+															</div>
+														</div>
+														<div class="col-lg-4" style="margin-top: 40px;">
+															<div class="form-group">
+																<input type="submit" name="btnAgregarPersona"  class="btn btn-sm btn-primary" value="Buscar" formaction="buscarCliente.html" style="width: 100%;">
 														
 															<p style="color: red"> ${mensajeCliente} </p>
 															</div>
@@ -275,9 +275,8 @@
 														<div class="col-lg-4">
 															<div class="form-group">
 																<label class="form-control-label" for="input-city">CBU</label>
-																<input type="text" name="cbu" class="form-control"
-																	placeholder="CBU"  readonly="readonly"
-																	value="${CuentaModificar.cbu}">
+																<input type="text" name="cbu" class="form-control" placeholder="CBU"  readonly="readonly"
+																	value="${CuentaParcial.cbu}">
 															</div>
 														</div>
 														<div class="col-lg-4">
@@ -286,13 +285,15 @@
 																	de cuenta</label> 
 																	<input type="text" name="numeroCuenta"
 																	class="form-control" placeholder="11111" readonly="readonly"
-																	 value="${CuentaModificar.nroCuenta}">
+																	 value="${CuentaParcial.nroCuenta}">
 															</div>
 														</div>
 														<div class="col-lg-4">
 															<div class="form-group">
 																<label class="form-control-label" for="input-country">Alias</label>
-																<input type="text" name="alias"	class="form-control" value="${CuentaModificar.alias}"	placehlder="Alias">
+																<input type="text" name="alias"	class="form-control" value="${CuentaParcial.alias}"	placehlder="Alias">
+																
+				
 															</div>
 														</div>
 													</div>
@@ -300,7 +301,8 @@
 												<hr class="my-12" />
 													<div class="form-group">
 														  <div class="col-12 text-center">
-										                  	<input type="submit" name="btnAgregarPersona" class="btn btn-sm btn-primary" value="Agregar">
+										                  	<input type="submit" name="btnAgregarPersona" class="btn btn-sm btn-primary" value="Agregar" style="width: 70%;">
+										                  
 										                  	<p style="color: blue"> ${estadoAgregarCuenta} </p>
 										                  	
 										                </div>

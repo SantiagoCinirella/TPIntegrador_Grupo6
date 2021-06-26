@@ -1,5 +1,6 @@
 package frgp.utn.edu.ar.entidad;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.CascadeType;
@@ -12,8 +13,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-public class Persona {
+public class Persona implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	private int dni;
 	private String nombre;
@@ -26,7 +31,17 @@ public class Persona {
 	private String direccion;
 	private String localidad;
 	private String provincia;
+	
+	@OneToOne(cascade = { CascadeType.ALL })
+	@JoinColumn(name = "dni")
+	private UsuarioLogin usuario;
 
+	public Persona() {
+		
+	}
+	
+	
+	
 	public String getSexo() {
 		return sexo;
 	}
@@ -75,9 +90,7 @@ public class Persona {
 		this.provincia = provincia;
 	}
 
-	@OneToOne(cascade = { CascadeType.ALL })
-	@JoinColumn(name = "dni")
-	private UsuarioLogin usuario;
+	
 
 	public UsuarioLogin getUsuario() {
 		return usuario;
