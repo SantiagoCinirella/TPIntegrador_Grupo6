@@ -35,25 +35,12 @@ public class Cuenta implements Serializable {
 	private Persona persona;
 	
 	
-	public int getDni() {
-		return dni;
-	}
-
-
-	public void setDni(int dni) {
-		this.dni = dni;
-	}
-
 
 	public Cuenta()
 	{
 	}
 
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
 	public Persona getPersona() {
 		return persona;
 	}

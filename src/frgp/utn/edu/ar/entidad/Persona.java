@@ -35,12 +35,6 @@ public class Persona implements Serializable {
 	@OneToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "dni")
 	private UsuarioLogin usuario;
-
-	@OneToOne(cascade = { CascadeType.ALL })
-	@JoinColumn(name = "dni")
-	private UsuarioLogin usuario;
-
-	
 	
 	public UsuarioLogin getUsuario() {
 		return usuario;
