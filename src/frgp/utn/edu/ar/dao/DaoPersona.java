@@ -11,6 +11,7 @@ import org.hibernate.Query;
 
 import frgp.utn.edu.ar.dao.queries.ClienteQueries;
 import frgp.utn.edu.ar.dao.queries.PersonaQueries;
+import frgp.utn.edu.ar.entidad.Cuenta;
 import frgp.utn.edu.ar.entidad.Persona;
 
 @Repository("daoPersona")
@@ -196,6 +197,19 @@ public class DaoPersona {
 	}
 	
 	
+	public List<Cuenta> obtenerCuenta(int dni) {
+		try {
+			Session session = conexion.abrirConexion();
+			Query buscarCuenta = session.createQuery("SELECT p FROM Cuenta p WHERE p.dni = ? and p.estado = 0");
+			buscarCuenta.setParameter(0, dni);
+			ArrayList<Cuenta> listaCbu = (ArrayList<Cuenta>) buscarCuenta.list();
+			session.close();
+			return listaCbu;
+		} catch (Exception ex) {
+			throw ex;
+		}
+
+	}
 	
 	
 	
