@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import frgp.utn.edu.ar.entidad.Cuenta;
 import frgp.utn.edu.ar.entidad.Persona;
 import frgp.utn.edu.ar.entidad.UsuarioLogin;
 import frgp.utn.edu.ar.negocio.NegPersona;
@@ -92,6 +93,12 @@ public class ControladorCliente {
 	public ModelAndView eliminar(Integer dni)
 	{
 		negocioPersona.bajaLogica(dni);	
+		negocioPersona.bajaLogicabajaLogicaUsuarioLogin(dni);
+		ArrayList<Integer> listaCuenta = (ArrayList<Integer>) negocioPersona.obtenerCuentaxCliente(dni);
+		for (Integer cbu : listaCuenta) {
+			negocioPersona.bajaLogicaCuenta(cbu);
+		}
+
 		ModelAndView MV = new ModelAndView();
 
 		ArrayList<Persona> listaPersona = new ArrayList<>();

@@ -87,7 +87,41 @@ public class DaoPersona {
 			session.close();
 		}
 	}
-
+	public boolean bajaLogicaCuenta(int dni) {
+		Session session = conexion.abrirConexion();
+		Transaction tx = session.beginTransaction();
+		try {
+			String queryUpdate = "UPDATE Cuenta p SET p.estado = 1 WHERE p.cbu = ?";
+			Query update = session.createQuery(queryUpdate);
+			update.setParameter(0, dni);
+			int executeUpdate = update.executeUpdate();
+			tx.commit();
+			return executeUpdate != 0;
+		} catch (Exception e) {
+			tx.rollback();
+			return false;
+		} finally {
+			session.close();
+		}
+	}
+	public boolean bajaLogicaUsuarioLogin(int dni) {
+		Session session = conexion.abrirConexion();
+		Transaction tx = session.beginTransaction();
+		try {
+			String queryUpdate = "UPDATE UsuarioLogin p SET p.estado = 1 WHERE p.dni = ?";
+			Query update = session.createQuery(queryUpdate);
+			update.setParameter(0, dni);
+			int executeUpdate = update.executeUpdate();
+			tx.commit();
+			return executeUpdate != 0;
+		} catch (Exception e) {
+			tx.rollback();
+			return false;
+		} finally {
+			session.close();
+		}
+	}
+	
 	public boolean agregarPersona(Persona p) {
 		Session session = conexion.abrirConexion();
 		Transaction tx = session.beginTransaction();
@@ -147,7 +181,19 @@ public class DaoPersona {
 	}
 	
 	
+	public List<Integer> obtenerCuentaxCliente(int dni) {
+		try {
+			Session session = conexion.abrirConexion();
+			Query buscarCBU = session.createQuery("SELECT p.cbu FROM Cuenta p WHERE p.dni = ? and p.estado = 0");
+			buscarCBU.setParameter(0, dni);
+			ArrayList<Integer> listaCbu = (ArrayList<Integer>) buscarCBU.list();
+			session.close();
+			return listaCbu;
+		} catch (Exception ex) {
+			throw ex;
+		}
 
+	}
 	
 	
 	

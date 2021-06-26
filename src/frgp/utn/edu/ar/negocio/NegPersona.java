@@ -40,8 +40,21 @@ public class NegPersona {
 		return daoPersona.bajaLogica(dni);
 		
 	}
+	public boolean bajaLogicaCuenta(int dni) {
+		return daoPersona.bajaLogicaCuenta(dni);
+		
+	}
+	public boolean bajaLogicabajaLogicaUsuarioLogin(int dni) {
+		return daoPersona.bajaLogicaUsuarioLogin(dni);
+		
+	}
+	
 public Persona obtenerPersona(int dni) {
 		
 		return daoPersona.obtenerPersona(dni);
 	}
+public List<Integer> obtenerCuentaxCliente(int dni) {
+	
+	return daoPersona.obtenerCuentaxCliente(dni);
+}
 }

@@ -27,6 +27,20 @@ public class Persona {
 	private String localidad;
 	private String provincia;
 
+	@OneToOne(cascade = { CascadeType.ALL })
+	@JoinColumn(name = "dni")
+	private UsuarioLogin usuario;
+
+	
+	
+	public UsuarioLogin getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(UsuarioLogin usuario) {
+		this.usuario = usuario;
+	}
+
 	public String getSexo() {
 		return sexo;
 	}
@@ -75,17 +89,7 @@ public class Persona {
 		this.provincia = provincia;
 	}
 
-	@OneToOne(cascade = { CascadeType.ALL })
-	@JoinColumn(name = "dni")
-	private UsuarioLogin usuario;
 
-	public UsuarioLogin getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(UsuarioLogin usuario) {
-		this.usuario = usuario;
-	}
 
 	public String getNombre() {
 		return nombre;
