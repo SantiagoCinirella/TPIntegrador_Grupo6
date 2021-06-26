@@ -2,7 +2,7 @@ package frgp.utn.edu.ar.dao.queries;
 
 public enum UsuarioLoginQueries {
 
-	VERIFICAR_USUARIO_SQL("SELECT p.usuario FROM UsuarioLogin p WHERE p.password = ? and p.usuario = ?");
+	VERIFICAR_USUARIO_SQL("SELECT p.usuario FROM UsuarioLogin p WHERE p.password = ? and p.usuario = ? and p.estado = 0");
 
 	private String query;
 

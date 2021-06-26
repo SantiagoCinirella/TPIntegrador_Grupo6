@@ -1,13 +1,17 @@
 package frgp.utn.edu.ar.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import frgp.utn.edu.ar.dao.queries.UsuarioLoginQueries;
+import frgp.utn.edu.ar.entidad.Persona;
+import frgp.utn.edu.ar.entidad.UsuarioLogin;
 
 @Repository("loginDao")
 public class LoginDao {
@@ -29,5 +33,25 @@ public class LoginDao {
 		}finally {
 			session.close();
 		}
+	}
+	public UsuarioLogin buscarRol(String usuario, String password) {
+		Session session = conexion.abrirConexion();
+		Query buscarRol = session
+				.createQuery("SELECT p.tipoUsuario FROM UsuarioLogin p WHERE p.password = ? and p.usuario = ? and p.estado = 0");
+		buscarRol.setParameter(0, password);
+		buscarRol.setParameter(1, usuario);
+		boolean tipoRol = (boolean) buscarRol.uniqueResult();
+		UsuarioLogin UsuarioLogin = new UsuarioLogin();
+		UsuarioLogin.setTipoUsuario(tipoRol);
+		session.close();
+		session = conexion.abrirConexion();
+		Query buscardni = session
+				.createQuery("SELECT p.dni FROM UsuarioLogin p WHERE p.password = ? and p.usuario = ? and p.estado = 0");
+		buscardni.setParameter(0, password);
+		buscardni.setParameter(1, usuario);
+		int dni = (int) buscardni.uniqueResult();
+		UsuarioLogin.setDni(dni);
+		session.close();
+		return UsuarioLogin;
 	}
 }

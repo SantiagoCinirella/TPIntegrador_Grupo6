@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import frgp.utn.edu.ar.dao.LoginDao;
+import frgp.utn.edu.ar.entidad.UsuarioLogin;
 
 @Service("loginNegocio")
 public class LoginNegocio {
@@ -14,5 +15,7 @@ public class LoginNegocio {
 	public boolean verificarUsuario(String usuario, String password) {
 		return loginDao.verificarUsuario(usuario, password);
 	}
-
+	public UsuarioLogin buscarRol(String usuario, String password) {
+		return loginDao.buscarRol(usuario, password);
+	}
 }
