@@ -66,9 +66,13 @@ public class NegPersona {
 
 		return daoPersona.obtenerCuentaxCliente(dni);
 	}
-	
+
 	public List<Cuenta> obtenerCuenta(int dni) {
 
 		return daoPersona.obtenerCuenta(dni);
+	}
+
+	public boolean verificarDniExistente(Integer dni) throws Exception {
+		return daoPersona.verificarDniExistente(dni);
 	}
 }

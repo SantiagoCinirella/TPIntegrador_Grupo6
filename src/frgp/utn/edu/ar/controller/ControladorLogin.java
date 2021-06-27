@@ -15,7 +15,6 @@ import frgp.utn.edu.ar.entidad.Cuenta;
 import frgp.utn.edu.ar.entidad.Persona;
 import frgp.utn.edu.ar.entidad.UsuarioLogin;
 import frgp.utn.edu.ar.negocio.LoginNegocio;
-import frgp.utn.edu.ar.negocio.NegCuenta;
 import frgp.utn.edu.ar.negocio.NegPersona;
 
 @Controller
@@ -25,25 +24,25 @@ public class ControladorLogin {
 	private NegPersona negocioPersona = new NegPersona();
 
 	@RequestMapping("altaDeUsuarios.html")
-	public ModelAndView eventoRedirectLogin(String txtUsuario, String txtPassword,HttpServletRequest request, HttpServletResponse response) {
-		boolean verificarUsuario= false;
+	public ModelAndView eventoRedirectLogin(String txtUsuario, String txtPassword, HttpServletRequest request,
+			HttpServletResponse response) {
+		boolean verificarUsuario = false;
 		ModelAndView MV = new ModelAndView();
 		try {
+			Persona Persona = new Persona();
 			verificarUsuario = new LoginNegocio().verificarUsuario(txtUsuario, txtPassword) ? true : false;
 			if (verificarUsuario) {
 				UsuarioLogin UsuarioLogin = new LoginNegocio().buscarRol(txtUsuario, txtPassword);
 				if(UsuarioLogin.getTipoUsuario() == false)
 				{
-					Persona Persona = new Persona();
 					Persona = (Persona) negocioPersona.obtenerPersonaParaLogin(UsuarioLogin.getDni());
 					HttpSession misession = request.getSession(true);
-					misession.setAttribute("Usuario",Persona);
+					misession.setAttribute("Usuario", Persona);
 					ControladorCuenta ControladorCuenta = new ControladorCuenta();
 					return ControladorCuenta.eventoRedireccionarPag1();
 				}
 				else
 				{
-					Persona Persona = new Persona();
 					Persona = (Persona) negocioPersona.obtenerPersonaParaLogin(UsuarioLogin.getDni());			
 					HttpSession misession = request.getSession(true);
 					misession.setAttribute("Usuario",Persona);
