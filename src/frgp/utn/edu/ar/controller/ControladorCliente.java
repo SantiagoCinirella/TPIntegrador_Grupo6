@@ -1,6 +1,7 @@
 package frgp.utn.edu.ar.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import frgp.utn.edu.ar.entidad.Cuenta;
 import frgp.utn.edu.ar.entidad.Persona;
 import frgp.utn.edu.ar.entidad.UsuarioLogin;
+import frgp.utn.edu.ar.entidad.enumDatos.Provincias;
+import frgp.utn.edu.ar.entidad.enumDatos.Sexo;
 import frgp.utn.edu.ar.negocio.NegPersona;
 
 @Controller
@@ -24,31 +27,39 @@ public class ControladorCliente {
 
 	@RequestMapping("agregarCliente.html")
 	public ModelAndView eventoRedireccionarPag1(String txtEmail, Integer txtDNI, String txtNombre, String txtApellido,
-			String btnCrear) {
+			String provincia, String localidad, String sexo, String direccion, String btnCrear) {
 		ModelAndView MV = new ModelAndView();
 		persona.setApellido(txtApellido);
 		persona.setDni(txtDNI);
 		persona.setNombre(txtNombre);
 		persona.setEmail(txtEmail);
+		persona.setProvincia(provincia);
+		persona.setLocalidad(localidad);
+		persona.setSexo(sexo);
+		persona.setDireccion(direccion);
+		persona.setNacionalidad("Argentina");
 
 		UsuarioLogin usuario = new UsuarioLogin();
 		usuario.setPassword(txtDNI.toString());
 		usuario.setUsuario(txtDNI.toString());
 		usuario.setDni(txtDNI);
+		usuario.setTipoUsuario(true);
+		usuario.setEstado(true);
 		persona.setUsuario(usuario);
 		boolean agregarModificar = false;
 
 		try {
-			if (btnCrear != null) {
+			if (btnCrear != null && negocioPersona.verificarDniExistente(txtDNI)) {
 				agregarModificar = negocioPersona.agregarPersona(persona);
 			} else {
 				agregarModificar = negocioPersona.editarPersona(persona);
 			}
 			MV.addObject("agregadoExitoso", agregarModificar);
 			MV.addObject("esBotonCrear", btnCrear);
-			MV.setViewName("AltaUsuarios");
+			MV.setViewName("ABMLClientes");
 		} catch (Exception e) {
-			MV.setViewName("AltaUsuarios");
+			MV.addObject("agregadoExitoso", false);
+			MV.setViewName("ABMLClientes");
 			return MV;
 		}
 		return MV;
@@ -103,15 +114,13 @@ public class ControladorCliente {
 
 	@RequestMapping("ModificarCliente.html")
 	public ModelAndView modificar(int dni, String nombre, String apellido, String email) {
-		Persona persona = new Persona();
-		persona.setApellido(apellido);
-		persona.setDni(dni);
-		persona.setNombre(nombre);
-		persona.setEmail(email);
+		Persona persona = negocioPersona.obtenerPersona(dni);
 		ArrayList<Persona> listaPersona = new ArrayList<>();
 		listaPersona.add(persona);
 		ModelAndView MV = new ModelAndView();
 		MV.addObject("listaPersona", listaPersona);
+		MV.addObject("listaProvincias", new ArrayList<Provincias>(Arrays.asList(Provincias.values())));
+		MV.addObject("listaSexo", new ArrayList<Sexo>(Arrays.asList(Sexo.values())));
 		MV.setViewName("AltaUsuarios");
 		return MV;
 	}
@@ -122,6 +131,8 @@ public class ControladorCliente {
 		ArrayList<Persona> listaPersona = new ArrayList<>();
 		Persona persona = new Persona();
 		listaPersona.add(persona);
+		MV.addObject("listaProvincias", new ArrayList<Provincias>(Arrays.asList(Provincias.values())));
+		MV.addObject("listaSexo", new ArrayList<Sexo>(Arrays.asList(Sexo.values())));
 		MV.addObject("esNuevoCliente", true);
 		MV.addObject("listaPersona", listaPersona);
 		MV.setViewName("AltaUsuarios");

@@ -217,11 +217,26 @@
 																			name="txtEmail" value="${item.email}" required>
 																	</div>
 																	<div class="col-lg-6">
+																		<c:choose>
+																			<c:when test="${esNuevoCliente==true}">
+																				<label class="form-control-label"
+																					for="input-last-name">DNI</label>
+																				<input type="text" id="input-dni"
+																					class="form-control" placeholder="DNI"
+																					name="txtDNI" value="${item.dni}" required
+																					oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+																				<br />
+																			</c:when>
+																			<c:otherwise>
+																				<label class="form-control-label"
+																					for="input-last-name">DNI</label>
+																				<input type="text" id="input-dni"
+																					class="form-control" placeholder="DNI"
+																					name="txtDNI" value="${item.dni}" required
+																					readonly="readonly">
+																			</c:otherwise>
+																		</c:choose>
 
-																		<label class="form-control-label"
-																			for="input-last-name">DNI</label> <input type="text"
-																			id="input-dni" class="form-control" placeholder="DNI"
-																			name="txtDNI" value="${item.dni}" required>
 																	</div>
 																</div>
 																<br>
@@ -231,7 +246,8 @@
 																			<label class="form-control-label"
 																				for="input-first-name">Nombre</label> <input
 																				type="text" id="input-first-name"
-																				class="form-control" value="${item.nombre}">
+																				class="form-control" value="${item.nombre}"
+																				name="txtNombre" required>
 
 																		</div>
 																	</div>
@@ -240,11 +256,61 @@
 																			<label class="form-control-label"
 																				for="input-last-name">Apellido</label> <input
 																				type="text" id="input-last-name"
-																				class="form-control" value="${item.apellido}">
+																				class="form-control" value="${item.apellido}"
+																				name="txtApellido" required>
 
 																		</div>
 																	</div>
 																</div>
+																<div class="row">
+																	<div class="col-lg-6">
+																		<div class="form-group">
+																			<label class="form-control-label" for="input-address">Provincia</label>
+																			<select class="form-control" name="provincia"
+																				required>
+																				<option selected="true" disabled="disabled">Seleccione
+																					una provincia</option>
+																				<c:forEach items="${listaProvincias}"
+																					var="provincia">
+																					<option selected="${provincia.provincia}">${provincia.provincia}</option>
+																				</c:forEach>
+																			</select>
+																		</div>
+																	</div>
+																	<div class="col-lg-6">
+																		<div class="form-group">
+																			<label class="form-control-label"
+																				for="input-last-name">Localidad</label> <input
+																				type="text" id="input-last-name"
+																				class="form-control" value="${item.localidad}"
+																				name="localidad" required>
+																		</div>
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="col-lg-6">
+																		<div class="form-group">
+																			<label class="form-control-label"
+																				for="input-last-name">Direccion</label> <input
+																				type="text" id="input-last-name"
+																				class="form-control" value="${item.direccion}"
+																				name="direccion" required>
+																		</div>
+																	</div>
+																	<div class="col-lg-6">
+																		<div class="form-group">
+																			<label class="form-control-label" for="input-address">Sexo</label>
+																			<select class="form-control" name="sexo" required>
+																				<option selected="true" disabled="disabled">Seleccione
+																					un sexo</option>
+																				<c:forEach items="${listaSexo}" var="item">
+																					<option value="${item.sexo}">${item.sexo}</option>
+																				</c:forEach>
+																			</select>
+																		</div>
+																	</div>
+																</div>
+																<div class="row"></div>
 															</div>
 															<!-- Address -->
 															<hr class="my-12" />
@@ -264,8 +330,6 @@
 																			<br />
 																		</c:otherwise>
 																	</c:choose>
-
-
 																</div>
 															</div>
 														</c:forEach>

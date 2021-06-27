@@ -263,8 +263,17 @@
 																				type="hidden" value="${item.nombre}"
 																				class="myButton" name="nombre" id="dni"> <input
 																				type="hidden" value="${item.email}" class="myButton"
-																				name="email" id="dni">
+																				name="email" id="dni"> <input type="hidden"
+																				value="${item.provincia}" class="myButton"
+																				name="provincia" id="provincia"> <input
+																				type="hidden" value="${item.localidad}"
+																				class="myButton" name="localidad" id="localidad">
 
+																			<input type="hidden" value="${item.direccion}"
+																				class="myButton" name="direccion" id="direccion">
+
+																			<input type="hidden" value="${item.sexo}"
+																				class="myButton" name="sexo" id="sexo">
 																		</form>
 																	</td>
 

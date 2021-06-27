@@ -44,56 +44,6 @@ public class Persona implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public String getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
-
-	public String getNacionalidad() {
-		return nacionalidad;
-	}
-
-	public void setNacionalidad(String nacionalidad) {
-		this.nacionalidad = nacionalidad;
-	}
-
-	public String getFechaNacimiento() {
-		return fechaNacimiento;
-	}
-
-	public void setFechaNacimiento(String fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
-
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-
-	public String getLocalidad() {
-		return localidad;
-	}
-
-	public void setLocalidad(String localidad) {
-		this.localidad = localidad;
-	}
-
-	public String getProvincia() {
-		return provincia;
-	}
-
-	public void setProvincia(String provincia) {
-		this.provincia = provincia;
-	}
-
-
-
 	public String getNombre() {
 		return nombre;
 	}
