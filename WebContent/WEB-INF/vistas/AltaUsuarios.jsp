@@ -270,7 +270,7 @@
 																					una provincia</option>
 																				<c:forEach items="${listaProvincias}"
 																					var="provincia">
-																					<option selected="${provincia.provincia}">${provincia.provincia}</option>
+																					<option>${provincia.provincia}</option>
 																				</c:forEach>
 																			</select>
 																		</div>
@@ -298,10 +298,10 @@
 																	<div class="col-lg-6">
 																		<div class="form-group">
 																			<label class="form-control-label" for="input-address">Sexo</label>
-																			<select class="form-control" name="sexo" required>
+																			<select class="form-control" required name="sexo">
 																				<option selected="true" disabled="disabled">Seleccione
 																					un sexo</option>
-																				<c:forEach items="${listaSexo}" var="item">
+																				<c:forEach items="${listaSexo}" var="item" >
 																					<option value="${item.sexo}">${item.sexo}</option>
 																				</c:forEach>
 																			</select>
