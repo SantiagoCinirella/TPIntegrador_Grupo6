@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="frgp.utn.edu.ar.entidad.Persona"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +25,11 @@
 </head>
 
 <body>
- 
+ 					    <% 
+	HttpSession misession= (HttpSession) request.getSession();
+	 
+	Persona Persona = (Persona) misession.getAttribute("Usuario");
+	%>  
   <!-- Sidenav -->
   <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
     <div class="scrollbar-inner">
@@ -39,10 +45,13 @@
           <!-- Nav items -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" href="Cliente.jsp">
-                <i class="ni ni-tv-2 text-primary"></i>
-                <span class="nav-link-text">Cuentas</span>
-              </a>
+         <center>
+            <form method="post" action="homeCliente.html">
+            <i class="ni ni-tv-2 text-primary"></i>			
+			<input type=submit value="Cuentas"class="btn btn-primary btn-sm" name="btn" id="btn">
+			<input type="hidden" value="<%=Persona.getDni()%>"class="myButton" name="Usuario" id="Usuario">
+			</form>
+			</center>
             </li>
           </ul>
           <!-- Divider -->
@@ -86,7 +95,7 @@
               <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
                 <!-- Dropdown header -->
                 <div class="px-3 py-3">
-                  <h6 class="text-sm text-muted m-0">Tenes <strong class="text-primary">13</strong> nuevas notificationes.</h6>
+                  <h6 class="text-sm text-muted m-0">Tenes <strong class="text-primary">3</strong> nuevas notificationes.</h6>
                 </div>
                 <!-- List group -->
                 <div class="list-group list-group-flush">
@@ -160,7 +169,7 @@
                     <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">Susana Gimenez</span>
+                    <span class="mb-0 text-sm  font-weight-bold"><%=Persona.getNombre()%>, <%=Persona.getApellido()%></span>
                   </div>
                 </div>
               </a>
@@ -177,7 +186,7 @@
                   <span>Configuracion</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="Login.jsp" class="dropdown-item">
+                <a href="index.html" class="dropdown-item">
                   <i class="ni ni-user-run"></i>
                   <span>Salir</span>
                 </a>

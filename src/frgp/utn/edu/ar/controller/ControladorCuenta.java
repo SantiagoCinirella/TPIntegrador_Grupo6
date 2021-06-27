@@ -154,6 +154,16 @@ public class ControladorCuenta {
 
 	}
 	
+	@RequestMapping("Transferencia.html")
+	public ModelAndView eventoRedireccionarTransferencia()
+	{
+
+		ModelAndView MV = new ModelAndView();
+		MV.setViewName("Transferencia");
+		return MV;
+
+	}
+	
 	@RequestMapping("abmlCuentas.html")
 	public ModelAndView eventoRedireccionarPag1() {
 		NegCuenta negocioCuenta = new NegCuenta();

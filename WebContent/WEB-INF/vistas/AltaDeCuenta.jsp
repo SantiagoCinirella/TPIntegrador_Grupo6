@@ -160,7 +160,7 @@
 									class="ni ni-settings-gear-65"></i> <span>Configuracion</span>
 								</a>
 								<div class="dropdown-divider"></div>
-								<a href="Login.jsp" class="dropdown-item"> <i
+								<a href="index.html" class="dropdown-item"> <i
 									class="ni ni-user-run"></i> <span>Salir</span>
 								</a>
 							</div></li>
