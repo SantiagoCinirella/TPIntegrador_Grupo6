@@ -105,7 +105,7 @@ public class ControladorCuenta {
 				cartel="No se pudo agregar la cuenta";
 				if(estado)
 				{
-					cartel="La cuenta ha sido agregada exitosamente";
+					cartel="La cuenta ha sido agregada exitosamente";					
 				}
 			}
 			else
