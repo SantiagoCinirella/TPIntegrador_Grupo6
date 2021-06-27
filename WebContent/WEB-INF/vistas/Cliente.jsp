@@ -27,7 +27,12 @@
 </head>
 
 <body>
- 
+    <% 
+	HttpSession misession= (HttpSession) request.getSession();
+	 
+	Persona Persona = (Persona) misession.getAttribute("Usuario");
+
+%>
   <!-- Sidenav -->
   <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
     <div class="scrollbar-inner">
@@ -43,10 +48,13 @@
           <!-- Nav items -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" href="Cliente.jsp">
-                <i class="ni ni-tv-2 text-primary"></i>
-                <span class="nav-link-text">Cuentas</span>
-              </a>
+         <center>
+            <form method="post" action="homeCliente.html">
+            <i class="ni ni-tv-2 text-primary"></i>			
+			<input type=submit value="Cuentas"class="btn btn-primary btn-sm" name="btn" id="btn">
+			<input type="hidden" value="<%=Persona.getDni()%>"class="myButton" name="Usuario" id="Usuario">
+			</form>
+			</center>
             </li>
           </ul>
           <!-- Divider -->
@@ -156,12 +164,7 @@
               </div>
             </li>
           </ul>
-    <% 
-	HttpSession misession= (HttpSession) request.getSession();
-	 
-	Persona Persona = (Persona) misession.getAttribute("Usuario");
-
-%>
+ 
 	
 	
           
@@ -215,7 +218,7 @@
               </nav>
             </div>
                         <div class="col-lg-6 col-5 text-right">
-              <a href="Transferencia.jsp" class="btn btn-sm btn-neutral">Nueva transferencia</a>
+              <a href="Transferencia.html" class="btn btn-sm btn-neutral">Nueva transferencia</a>
             </div>
           </div>
           <!-- Card stats -->
@@ -245,7 +248,13 @@
                     <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
                     <span class="text-nowrap">Desde el mes anterior</span>
                   </p>
-                  <a href="#" class="btn btn-sm btn-neutral">Ver historial</a>    
+                  <form method="post" action="Movimientos.html">
+					<input type=submit value="Ver historial"
+					class="btn btn-sm btn-neutral" name="btnnumeroCuenta" id="numeroCuenta"
+					OnClick="return confirm('Estas seguro de ver los movimientos del CBU ${item.cbu}?')">
+					<input type="hidden" value="${item.cbu}"
+					class="myButton" name="cbu" id="numeroCuenta">
+					</form>
                 </div>
               </div>
             </div>

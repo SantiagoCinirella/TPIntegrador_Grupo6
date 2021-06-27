@@ -217,11 +217,24 @@
 																			name="txtEmail" value="${item.email}" required>
 																	</div>
 																	<div class="col-lg-6">
-
 																		<label class="form-control-label"
-																			for="input-last-name">DNI</label> <input type="text"
-																			id="input-dni" class="form-control" placeholder="DNI"
-																			name="txtDNI" value="${item.dni}" required>
+																			for="input-last-name">DNI</label>
+																		<c:choose>
+																			<c:when test="${esNuevoCliente==true}">
+																				<input type="text" id="input-dni"
+																					class="form-control" placeholder="DNI"
+																					name="txtDNI" value="${item.dni}" required
+																					oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+																				<br />
+																			</c:when>
+																			<c:otherwise>
+																				<input type="text" id="input-dni"
+																					class="form-control" placeholder="DNI"
+																					name="txtDNI" value="${item.dni}" required
+																					readonly="readonly">
+																			</c:otherwise>
+																		</c:choose>
+
 																	</div>
 																</div>
 																<br>
@@ -231,7 +244,8 @@
 																			<label class="form-control-label"
 																				for="input-first-name">Nombre</label> <input
 																				type="text" id="input-first-name"
-																				class="form-control" value="${item.nombre}">
+																				class="form-control" value="${item.nombre}"
+																				name="txtNombre" placeholder="nombre" required>
 
 																		</div>
 																	</div>
@@ -240,24 +254,99 @@
 																			<label class="form-control-label"
 																				for="input-last-name">Apellido</label> <input
 																				type="text" id="input-last-name"
-																				class="form-control" value="${item.apellido}">
+																				class="form-control" value="${item.apellido}"
+																				name="txtApellido" placeholder="apellido" required>
 
 																		</div>
 																	</div>
 																</div>
+																<div class="row">
+																	<div class="col-lg-6">
+																		<div class="form-group">
+																			<label class="form-control-label" for="input-address">Provincia</label>
+																			<select class="form-control" name="provincia"
+																				required>
+																				<option selected="true" disabled="disabled">Seleccione
+																					una provincia</option>
+																				<c:forEach items="${listaProvincias}"
+																					var="provincia">
+																					<option>${provincia.provincia}</option>
+																				</c:forEach>
+																			</select>
+																		</div>
+																	</div>
+																	<div class="col-lg-6">
+																		<div class="form-group">
+																			<label class="form-control-label"
+																				for="input-last-name">Localidad</label> <input
+																				type="text" id="input-last-name"
+																				class="form-control" value="${item.localidad}"
+																				name="localidad" placeholder="localidad" required>
+																		</div>
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="col-lg-6">
+																		<div class="form-group">
+																			<label class="form-control-label"
+																				for="input-last-name">Direccion</label> <input
+																				type="text" id="input-last-name"
+																				class="form-control" value="${item.direccion}"
+																				name="direccion" placeholder="direccion" required>
+																		</div>
+																	</div>
+																	<div class="col-lg-6">
+																		<div class="form-group">
+																			<label class="form-control-label" for="input-address">Sexo</label>
+																			<select class="form-control" required name="sexo">
+																				<option selected="true" disabled="disabled">Seleccione
+																					un sexo</option>
+																				<c:forEach items="${listaSexo}" var="item" >
+																					<option value="${item.sexo}">${item.sexo}</option>
+																				</c:forEach>
+																			</select>
+																		</div>
+																	</div>
+																</div>
+																<div class="row"></div>
 															</div>
 															<!-- Address -->
 															<hr class="my-12" />
 															<div class="form-group">
 																<div class="col-12 text-center">
-																	<a href="#!" class="btn btn-sm btn-primary"
-																		style="width: 250px;">Crear</a> <a href="#!"
-																		class="btn btn-sm btn-primary" style="width: 250px;">Modificar</a>
+																	<c:choose>
+																		<c:when test="${mensaje.numeroMensaje == 1}">
+																			<div class="alert alert-success" role="alert">
+																				${mensaje.mensaje}</div>
+																		</c:when>
+																		<c:when test="${mensaje.numeroMensaje == 2}">
+																			<div class="alert alert-success" role="alert">
+																				${mensaje.mensaje}</div>
+																		</c:when>
+																		<c:when test="${mensaje.numeroMensaje == 3}">
+																			<div class="alert alert-danger" role="alert">
+																				${mensaje.mensaje}</div>
+																		</c:when>
+																	</c:choose>
 
+
+																	<c:choose>
+																		<c:when test="${esNuevoCliente==true}">
+																			<input class="btn btn-sm btn-primary"
+																				style="width: 250px;" type="submit" value="Crear"
+																				name="btnCrear">
+																			<br />
+																		</c:when>
+																		<c:otherwise>
+																			<input class="btn btn-sm btn-primary"
+																				style="width: 250px;" type="submit"
+																				value="Modificar" name="btnModificar">
+																			<br />
+																		</c:otherwise>
+																	</c:choose>
 																</div>
 															</div>
 														</c:forEach>
-
 													</form>
 												</div>
 											</div>
@@ -284,20 +373,6 @@
 			<!-- Argon JS -->
 			<script src="assets/js/argon.js?v=1.2.0"></script>
 	</form>
-	<c:choose>
-		<c:when test="${agregadoExitoso == true && esBotonCrear == 'Crear'}">
-			<script type="text/javascript">
-				window.onload = alertAgregarUsuario;
-			</script>
-			<br />
-		</c:when>
-		<c:when test="${agregadoExitoso == true && esBotonCrear == null}">
-			<script type="text/javascript">
-				window.onload = alertModificarUsuario;
-			</script>
-			<br />
-		</c:when>
-	</c:choose>
 </body>
 
 </html>

@@ -3,19 +3,15 @@ package frgp.utn.edu.ar.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.ParseConversionEvent;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import frgp.utn.edu.ar.dao.queries.ClienteQueries;
 import frgp.utn.edu.ar.dao.queries.CuentaQueries;
-import frgp.utn.edu.ar.dao.queries.PersonaQueries;
 import frgp.utn.edu.ar.entidad.Cuenta;
-import frgp.utn.edu.ar.entidad.Persona;
+import frgp.utn.edu.ar.entidad.Movimiento;
 
 @Repository("daoCuenta")
 public class DaoCuenta {
@@ -57,6 +53,22 @@ public class DaoCuenta {
 		}
 
 	}
+	
+	public List<Movimiento> listarMovimientos(int cbu) {
+		try {
+			ArrayList<Movimiento> listaMov = new ArrayList<Movimiento>();
+			Session session = conexion.abrirConexion();
+			Query buscarCBU = session.createQuery("SELECT p FROM Movimiento p WHERE p.cbuDestino = ? or p.cbuOrigen = ? ORDER BY p.fecha DESC");
+			buscarCBU.setParameter(0, cbu);
+			buscarCBU.setParameter(1, cbu);
+			listaMov = (ArrayList<Movimiento>) buscarCBU.list();
+			session.close();
+			return listaMov;
+		} catch (Exception ex) {
+			throw ex;
+		}
+
+	}
 
 	public boolean eliminarCuenta(int NumeroCuenta) {
 		Session session = conexion.abrirConexion();
@@ -84,15 +96,12 @@ public class DaoCuenta {
 		boolean aux = true;
 		try {
 			session.save(c);
-
 			tx.commit();
 		} catch (Exception e) {
 			aux = false;
 			tx.rollback();
 		}
-		// conexion.cerrarSession();
 		session.close();
-
 		return aux;
 	}
 
@@ -118,13 +127,9 @@ public class DaoCuenta {
 		Session session = conexion.abrirConexion();
 		Transaction tx = session.beginTransaction();
 		try {
-			String queryUpdate = "UPDATE Cuenta c SET c.alias = ? WHERE c.cbu = ?";
-			Query update = session.createQuery(queryUpdate);
-			update.setParameter(0, cuenta.getAlias());
-			update.setParameter(1, cuenta.getCbu());
-			int executeUpdate = update.executeUpdate();
-			tx.commit();
-			return executeUpdate != 0;
+			session.update(cuenta);
+			session.getTransaction().commit();
+			return true;
 		} catch (Exception e) {
 			tx.rollback();
 			return false;
@@ -137,13 +142,12 @@ public class DaoCuenta {
 
 		int maximaCuenta = 0;
 
+		Cuenta cuenta = new Cuenta();
+
 		Session session = conexion.abrirConexion();
 		try {
-
 			Query busqueda = session.createQuery(CuentaQueries.BUSCA_MAX_CUENTA_SQL.getQuery());
 			maximaCuenta = (int) busqueda.uniqueResult();
-
-			// List results = busqueda.list();
 			return maximaCuenta;
 		} catch (Exception e) {
 			return maximaCuenta;

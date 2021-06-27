@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="frgp.utn.edu.ar.entidad.Persona"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,10 +34,15 @@
 <!-- Argon CSS -->
 <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0"
 	type="text/css">
-	
+
 </head>
 
 <body>
+	<%
+	HttpSession misession = (HttpSession) request.getSession();
+
+	Persona Persona = (Persona) misession.getAttribute("Usuario");
+	%>
 	<script type="text/javascript">
                     function Filtrar(strKey) {
                         var strData = strKey.value.toLowerCase().split(" ");
@@ -77,11 +84,11 @@
 					<!-- Nav items -->
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link active"
-							href="ABMLCuentas.jsp"> <i class="ni ni-tv-2 text-primary"></i>
+							href="abmlCuentas.html"> <i class="ni ni-tv-2 text-primary"></i>
 								<span class="nav-link-text">ABML Cuentas</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="ABMLClientes.jsp"> <i
+							href="abmlClientes.html"> <i
 								class="ni ni-single-02 text-yellow"></i> <span
 								class="nav-link-text">ABML Clientes</span>
 						</a></li>
@@ -139,8 +146,8 @@
 										alt="Image placeholder" src="assets/img/theme/team-1.jpg">
 									</span>
 									<div class="media-body  ml-2  d-none d-lg-block">
-										<span class="mb-0 text-sm  font-weight-bold">Cacho
-											Castania</span>
+										<span class="mb-0 text-sm  font-weight-bold"><%=Persona.getNombre()%>,
+											<%=Persona.getApellido()%></span>
 									</div>
 								</div>
 						</a>
@@ -175,8 +182,8 @@
 									<li class="breadcrumb-item"><a href="#"><i
 											class="fas fa-home"></i></a></li>
 									<li class="breadcrumb-item"><a href="#">ABML</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Alta
-										de cuenta</li>
+									<li class="breadcrumb-item active" aria-current="page">
+										Modificacion de cuenta</li>
 								</ol>
 							</nav>
 						</div>
@@ -206,16 +213,18 @@
 											</div>
 										</div>
 										<div class="card-body">
-											<form action="ModificarCuenta_AltaDecuenta.html" method="post">
+											<form action="ModificarCuenta_AltaDecuenta.html"
+												method="post">
 												<h6 class="heading-small text-muted mb-4">Informacion
 													de cuenta</h6>
 												<div class="pl-lg-4">
 													<div class="row">
 														<div class="col-md-12">
 															<div class="form-group">
-																<label class="form-control-label" for="input-city">Tipo de Cuenta</label>
-																<input type="text" name="tipoCuenta" class="form-control"
-																	placeholder="CBU"  readonly="readonly"
+																<label class="form-control-label" for="input-city">Tipo
+																	de Cuenta</label> <input type="text" name="tipoCuenta"
+																	class="form-control" placeholder="CBU"
+																	readonly="readonly"
 																	value="${CuentaModificar.tipoCuenta}">
 															</div>
 														</div>
@@ -225,34 +234,38 @@
 															<div class="form-group">
 																<label class="form-control-label" for="input-city">CBU</label>
 																<input type="text" name="cbu" class="form-control"
-																	placeholder="CBU"  readonly="readonly"
+																	placeholder="CBU" readonly="readonly"
 																	value="${CuentaModificar.cbu}">
 															</div>
 														</div>
 														<div class="col-lg-4">
 															<div class="form-group">
 																<label class="form-control-label" for="input-country">Nro
-																	de cuenta</label> 
-																	<input type="text" name="numeroCuenta"
-																	class="form-control" placeholder="11111" readonly="readonly"
-																	 value="${CuentaModificar.nroCuenta}">
+																	de cuenta</label> <input type="text" name="numeroCuenta"
+																	class="form-control" placeholder="11111"
+																	readonly="readonly"
+																	value="${CuentaModificar.nroCuenta}">
 															</div>
 														</div>
 														<div class="col-lg-4">
 															<div class="form-group">
 																<label class="form-control-label" for="input-country">Alias</label>
-																<input type="text" name="alias" required="required"	class="form-control" value="${CuentaModificar.alias}"	placehlder="Alias">
+																<input type="text" name="alias" required="required"
+																	class="form-control" value="${CuentaModificar.alias}"
+																	placehlder="Alias">
 															</div>
 														</div>
 													</div>
 												</div>
 												<hr class="my-12" />
-													<div class="form-group">
-														  <div class="col-12 text-center">
-										                  	<input type="submit" name="btnAgregarPersona" class="btn btn-sm btn-primary" value="Modificar"  style="width: 70%;">
-										                  	<p style="color: blue"> ${mesajeActualizacion} </p>
-										                </div>
+												<div class="form-group">
+													<div class="col-12 text-center">
+														<input type="submit" name="btnAgregarPersona"
+															class="btn btn-sm btn-primary" value="Modificar"
+															style="width: 70%;">
+														<p style="color: blue">${mesajeActualizacion}</p>
 													</div>
+												</div>
 											</form>
 										</div>
 									</div>

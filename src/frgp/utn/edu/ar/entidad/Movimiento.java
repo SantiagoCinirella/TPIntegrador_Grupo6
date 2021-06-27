@@ -12,11 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 public class Movimiento implements Serializable {
-	
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	
 	@Id
