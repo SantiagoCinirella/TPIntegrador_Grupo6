@@ -56,4 +56,8 @@ public class NegCuenta {
 		return daoCuenta.obtenerCbuMax();
 	}
 
+	public int getCantidadCuentas(int dni) {
+		return daoCuenta.getCantidadCuentas(dni);
+	}
+
 }
