@@ -20,8 +20,20 @@ public class DaoMovimiento {
 	private Conexion conexion = new Conexion();
 
 	public Boolean agregarMovimiento(Movimiento mov) {
-		// TODO Auto-generated method stub
-		return null;
+		
+			Session session = conexion.abrirConexion();
+			Transaction tx = session.beginTransaction();
+			boolean aux = true;
+			try {
+				session.save(mov);
+				tx.commit();
+			} catch (Exception e) {
+				aux = false;
+				tx.rollback();
+			}
+			session.close();
+			return aux;
+		
 	}
 
 	

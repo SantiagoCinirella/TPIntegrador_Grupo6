@@ -3,6 +3,7 @@ package frgp.utn.edu.ar.controller;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import org.eclipse.jdt.internal.compiler.parser.ParserBasicInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import frgp.utn.edu.ar.entidad.Cuenta;
 import frgp.utn.edu.ar.entidad.Movimiento;
 import frgp.utn.edu.ar.entidad.Persona;
 import frgp.utn.edu.ar.negocio.NegCuenta;
+import frgp.utn.edu.ar.negocio.NegMovimiento;
 import frgp.utn.edu.ar.negocio.NegPersona;
 
 @Controller
@@ -23,6 +25,7 @@ public class ControladorCuenta {
 	@Qualifier("servicioCuenta")
 	private NegCuenta negocioCuenta;
 	private NegPersona negocioPersona;
+	private NegMovimiento negocioMovimiento;
 	@Autowired
 	private Cuenta cuenta;
 	private Persona persona;
@@ -80,7 +83,7 @@ public class ControladorCuenta {
 			cbuint = Integer.parseInt(cbu);
 			numCuentaint = Integer.parseInt(numeroCuenta);
 			dniInt = Integer.parseInt(txtDni);
-			boolean estado;
+			boolean estado = false, estadoAgregarMovimiento = false;
 			int cantidadCuentas;
 			cuenta.setCbu(cbuint);
 			cuenta.setTipoCuenta(tipoCuenta);
@@ -105,7 +108,15 @@ public class ControladorCuenta {
 				cartel="No se pudo agregar la cuenta";
 				if(estado)
 				{
-					cartel="La cuenta ha sido agregada exitosamente";					
+					cartel="La cuenta ha sido agregada exitosamente";
+					negocioMovimiento = new NegMovimiento();
+					Movimiento movimiento = new Movimiento() ;
+					movimiento.setCbuDestino(cuenta.getCbu());
+					movimiento.setDetalle("Saldo Inicial");
+					movimiento.setFecha(LocalDateTime.now().toString());
+					movimiento.setSaldo(10000.00);
+					estadoAgregarMovimiento = negocioMovimiento.agregarMovimiento(movimiento);
+					
 				}
 			}
 			else
