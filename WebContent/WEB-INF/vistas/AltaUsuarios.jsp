@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="frgp.utn.edu.ar.entidad.Persona"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -51,6 +52,11 @@
 </head>
 
 <body>
+	<%
+	HttpSession misession = (HttpSession) request.getSession();
+
+	Persona Persona = (Persona) misession.getAttribute("Usuario");
+	%>
 	<form method="post" action="agregarCliente.html">
 		<script type="text/javascript">
 			function Filtrar(strKey) {
@@ -135,8 +141,8 @@
 											alt="Image placeholder" src="assets/img/theme/team-1.jpg">
 										</span>
 										<div class="media-body  ml-2  d-none d-lg-block">
-											<span class="mb-0 text-sm  font-weight-bold">Cacho
-												Castania</span>
+											<span class="mb-0 text-sm  font-weight-bold"><%=Persona.getNombre()%>,
+											<%=Persona.getApellido()%></span>
 										</div>
 									</div>
 							</a>
