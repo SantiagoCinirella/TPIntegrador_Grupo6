@@ -44,15 +44,12 @@ public class ControladorLogin {
 				else
 				{
 					Persona Persona = new Persona();
-					Persona = (Persona) negocioPersona.obtenerPersona(UsuarioLogin.getDni());
-					ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(UsuarioLogin.getDni());
-					
+					Persona = (Persona) negocioPersona.obtenerPersona(UsuarioLogin.getDni());			
 					HttpSession misession = request.getSession(true);
 					misession.setAttribute("Usuario",Persona);
-					//misession.setAttribute("listaCuenta", listaCuenta);
-					MV.addObject("listaCuenta", listaCuenta);
-					MV.setViewName("Cliente");
-					return MV;
+					ControladorCuenta ControladorCuenta = new ControladorCuenta();
+					return ControladorCuenta.eventoRedireccionarPagCliente(UsuarioLogin.getDni());
+					
 				}
 
 			} else {
