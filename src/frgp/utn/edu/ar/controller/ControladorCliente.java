@@ -14,6 +14,7 @@ import frgp.utn.edu.ar.entidad.Persona;
 import frgp.utn.edu.ar.entidad.UsuarioLogin;
 import frgp.utn.edu.ar.entidad.enumDatos.Provincias;
 import frgp.utn.edu.ar.entidad.enumDatos.Sexo;
+import frgp.utn.edu.ar.entidad.enumMensajes.enumMensajes;
 import frgp.utn.edu.ar.negocio.NegPersona;
 
 @Controller
@@ -28,7 +29,7 @@ public class ControladorCliente {
 	@RequestMapping("agregarCliente.html")
 	public ModelAndView eventoRedireccionarPag1(String txtEmail, Integer txtDNI, String txtNombre, String txtApellido,
 			String provincia, String localidad, String sexo, String direccion, String btnCrear) {
-		ModelAndView MV = new ModelAndView();
+
 		persona.setApellido(txtApellido);
 		persona.setDni(txtDNI);
 		persona.setNombre(txtNombre);
@@ -46,20 +47,41 @@ public class ControladorCliente {
 		usuario.setTipoUsuario(true);
 		usuario.setEstado(true);
 		persona.setUsuario(usuario);
-		boolean agregarModificar = false;
 
+		return eventoAltaModificacionCliente(btnCrear, persona);
+	}
+
+	private ModelAndView eventoAltaModificacionCliente(String btnCrear, Persona persona) {
+		
+		ModelAndView MV = new ModelAndView();
+		boolean agregarModificar = false;
+		ArrayList<Persona> listaPersona = new ArrayList<>();
 		try {
-			if (btnCrear != null && negocioPersona.verificarDniExistente(txtDNI)) {
-				agregarModificar = negocioPersona.agregarPersona(persona);
+			if (btnCrear != null) {
+				if (negocioPersona.verificarDniExistente(persona.getDni())) {
+					agregarModificar = negocioPersona.agregarPersona(persona);
+					listaPersona.add(new Persona());
+					MV.addObject("mensaje", enumMensajes.ALTA_EXITOSA);
+				} else {
+					MV.addObject("mensaje", enumMensajes.DNI_EXISTENTE);
+					listaPersona.add(persona);
+				}
+				MV.addObject("esNuevoCliente", true);
 			} else {
 				agregarModificar = negocioPersona.editarPersona(persona);
+				MV.addObject("mensaje", enumMensajes.MODIFICACION_EXITOSA);
+				listaPersona.add(persona);
 			}
+
 			MV.addObject("agregadoExitoso", agregarModificar);
 			MV.addObject("esBotonCrear", btnCrear);
-			MV.setViewName("ABMLClientes");
+			MV.addObject("listaPersona", listaPersona);
+			MV.addObject("listaProvincias", new ArrayList<Provincias>(Arrays.asList(Provincias.values())));
+			MV.addObject("listaSexo", new ArrayList<Sexo>(Arrays.asList(Sexo.values())));
+			MV.setViewName("AltaUsuarios");
 		} catch (Exception e) {
 			MV.addObject("agregadoExitoso", false);
-			MV.setViewName("ABMLClientes");
+			MV.setViewName("AltaUsuarios");
 			return MV;
 		}
 		return MV;
@@ -67,6 +89,7 @@ public class ControladorCliente {
 
 	@RequestMapping("agregarPersona.html")
 	public ModelAndView eventoRedireccionarPag1(Integer txtDni, String txtNombre, String txtApellido) {
+		
 		ModelAndView MV = new ModelAndView();
 		persona.setApellido(txtApellido);
 		persona.setDni(txtDni);
@@ -84,12 +107,10 @@ public class ControladorCliente {
 
 	@RequestMapping("abmlClientes.html")
 	public ModelAndView eventoRedireccionarPag1() {
+		
 		ModelAndView MV = new ModelAndView();
-
 		ArrayList<Persona> listaPersona = new ArrayList<>();
-
 		listaPersona = (ArrayList<Persona>) negocioPersona.listarPersonasBajaLogica();
-
 		MV.addObject("listaPersona", listaPersona);
 		MV.setViewName("ABMLClientes");
 		return MV;
@@ -114,6 +135,7 @@ public class ControladorCliente {
 
 	@RequestMapping("ModificarCliente.html")
 	public ModelAndView modificar(int dni, String nombre, String apellido, String email) {
+		
 		Persona persona = negocioPersona.obtenerPersona(dni);
 		ArrayList<Persona> listaPersona = new ArrayList<>();
 		listaPersona.add(persona);
@@ -127,6 +149,7 @@ public class ControladorCliente {
 
 	@RequestMapping("RedireccionNuevoCliente.html")
 	public ModelAndView eventoRedireccionNuevoCliente() {
+		
 		ModelAndView MV = new ModelAndView();
 		ArrayList<Persona> listaPersona = new ArrayList<>();
 		Persona persona = new Persona();

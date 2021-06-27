@@ -217,10 +217,10 @@
 																			name="txtEmail" value="${item.email}" required>
 																	</div>
 																	<div class="col-lg-6">
+																		<label class="form-control-label"
+																			for="input-last-name">DNI</label>
 																		<c:choose>
 																			<c:when test="${esNuevoCliente==true}">
-																				<label class="form-control-label"
-																					for="input-last-name">DNI</label>
 																				<input type="text" id="input-dni"
 																					class="form-control" placeholder="DNI"
 																					name="txtDNI" value="${item.dni}" required
@@ -228,8 +228,6 @@
 																				<br />
 																			</c:when>
 																			<c:otherwise>
-																				<label class="form-control-label"
-																					for="input-last-name">DNI</label>
 																				<input type="text" id="input-dni"
 																					class="form-control" placeholder="DNI"
 																					name="txtDNI" value="${item.dni}" required
@@ -247,7 +245,7 @@
 																				for="input-first-name">Nombre</label> <input
 																				type="text" id="input-first-name"
 																				class="form-control" value="${item.nombre}"
-																				name="txtNombre" required>
+																				name="txtNombre" placeholder="nombre" required>
 
 																		</div>
 																	</div>
@@ -257,7 +255,7 @@
 																				for="input-last-name">Apellido</label> <input
 																				type="text" id="input-last-name"
 																				class="form-control" value="${item.apellido}"
-																				name="txtApellido" required>
+																				name="txtApellido" placeholder="apellido" required>
 
 																		</div>
 																	</div>
@@ -283,7 +281,7 @@
 																				for="input-last-name">Localidad</label> <input
 																				type="text" id="input-last-name"
 																				class="form-control" value="${item.localidad}"
-																				name="localidad" required>
+																				name="localidad" placeholder="localidad" required>
 																		</div>
 																	</div>
 																</div>
@@ -294,7 +292,7 @@
 																				for="input-last-name">Direccion</label> <input
 																				type="text" id="input-last-name"
 																				class="form-control" value="${item.direccion}"
-																				name="direccion" required>
+																				name="direccion" placeholder="direccion" required>
 																		</div>
 																	</div>
 																	<div class="col-lg-6">
@@ -316,6 +314,22 @@
 															<hr class="my-12" />
 															<div class="form-group">
 																<div class="col-12 text-center">
+																	<c:choose>
+																		<c:when test="${mensaje.numeroMensaje == 1}">
+																			<div class="alert alert-success" role="alert">
+																				${mensaje.mensaje}</div>
+																		</c:when>
+																		<c:when test="${mensaje.numeroMensaje == 2}">
+																			<div class="alert alert-success" role="alert">
+																				${mensaje.mensaje}</div>
+																		</c:when>
+																		<c:when test="${mensaje.numeroMensaje == 3}">
+																			<div class="alert alert-danger" role="alert">
+																				${mensaje.mensaje}</div>
+																		</c:when>
+																	</c:choose>
+
+
 																	<c:choose>
 																		<c:when test="${esNuevoCliente==true}">
 																			<input class="btn btn-sm btn-primary"
@@ -359,20 +373,6 @@
 			<!-- Argon JS -->
 			<script src="assets/js/argon.js?v=1.2.0"></script>
 	</form>
-	<c:choose>
-		<c:when test="${agregadoExitoso == true && esBotonCrear == 'Crear'}">
-			<script type="text/javascript">
-				window.onload = alertAgregarUsuario;
-			</script>
-			<br />
-		</c:when>
-		<c:when test="${agregadoExitoso == true && esBotonCrear == null}">
-			<script type="text/javascript">
-				window.onload = alertModificarUsuario;
-			</script>
-			<br />
-		</c:when>
-	</c:choose>
 </body>
 
 </html>
