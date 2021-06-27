@@ -262,7 +262,7 @@
 																<label class="form-control-label" for="input-address">Tipo
 																	de cuenta</label>
 																<select class="form-control"  name="tipoCuenta" >
-																	<option selected="true" >Seleccione
+																	<option selected="true"  >Seleccione
 																		un tipo de Cuenta</option>
 																	<option>Caja de ahorro en pesos</option>
 																	<option>Caja de ahorro en dolares</option>
