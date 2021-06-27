@@ -82,36 +82,43 @@ public class ControladorCuenta {
 		int idCliente , cbuint, numCuentaint,dniInt;
 		ModelAndView MV = new ModelAndView();
 		
-		cbuint = Integer.parseInt(cbu);
-		numCuentaint = Integer.parseInt(numeroCuenta);
-		dniInt = Integer.parseInt(txtDni);
-		
-		cuenta.setCbu(cbuint);
-		cuenta.setTipoCuenta(tipoCuenta);
-		cuenta.setAlias(alias);
-		cuenta.setNroCuenta(numCuentaint);
-		cuenta.setDni(dniInt);
-		persona = new Persona();
-		
-		persona.setDni(dniInt);
-		persona.setNombre(txtNombre);
-		persona.setApellido(txtApellido);
-	
-		cuenta.setPersona(persona);
-		cuenta.setSaldo(10000.00);
-		cuenta.setFechaCreacion(LocalDateTime.now().toString() );
-	
-		boolean estado= negocioCuenta.agregarCuenta(cuenta);
-		
-		cartel="No se pudo agregar la cuenta";
-		if(estado)
+		if(tipoCuenta !=  "" && cbu !=  "" &&  numeroCuenta  !=  "" &&  alias   !=  "" && txtDni    !=  "" && txtNombre   !=  "" && txtApellido  !=  "" )
 		{
-			cartel="La cuenta ha sido agregada exitosamente";
-		}
+			cbuint = Integer.parseInt(cbu);
+			numCuentaint = Integer.parseInt(numeroCuenta);
+			dniInt = Integer.parseInt(txtDni);
+			
+			cuenta.setCbu(cbuint);
+			cuenta.setTipoCuenta(tipoCuenta);
+			cuenta.setAlias(alias);
+			cuenta.setNroCuenta(numCuentaint);
+			cuenta.setDni(dniInt);
+			persona = new Persona();
+			
+			persona.setDni(dniInt);
+			persona.setNombre(txtNombre);
+			persona.setApellido(txtApellido);
 		
+			cuenta.setPersona(persona);
+			cuenta.setSaldo(10000.00);
+			cuenta.setFechaCreacion(LocalDateTime.now().toString() );
+		
+			boolean estado= negocioCuenta.agregarCuenta(cuenta);
+			
+			cartel="No se pudo agregar la cuenta";
+			if(estado)
+			{
+				cartel="La cuenta ha sido agregada exitosamente";
+			}
+		}
+		else 
+		{
+			cartel="Debe completar todos los campos";
+		}
 		MV.addObject("estadoAgregarCuenta",cartel);
 		MV.setViewName("AltaDeCuenta");
 		return MV;
+		
 		
 	}
 	@RequestMapping(value ="/recargaGrillaCuentas.html" , method= { RequestMethod.GET, RequestMethod.POST})
@@ -199,14 +206,14 @@ public class ControladorCuenta {
 		Cuenta.setNroCuenta(numeroCuenta);
 		Cuenta.setTipoCuenta(tipoCuenta);
 		
-		
 		ModelAndView MV = new ModelAndView();
 		MV.addObject("CuentaModificar", Cuenta);
 		MV.setViewName("ModificacionDeCuenta");
 		return MV;	
 		
 }
-	@RequestMapping(value ="/ModificarCuenta_AltaDecuenta.html" , method= { RequestMethod.GET, RequestMethod.POST})
+
+	@RequestMapping("ModificarCuenta_AltaDecuenta.html")
 	public ModelAndView modificarDesdeAlta(int numeroCuenta, int cbu, String alias, String tipoCuenta)
 	{
 		Cuenta Cuenta = new Cuenta();
@@ -215,16 +222,16 @@ public class ControladorCuenta {
 		Cuenta.setNroCuenta(numeroCuenta);
 		Cuenta.setTipoCuenta(tipoCuenta);
 		
-
 		boolean estado= negocioCuenta.update(Cuenta);
 		String mesajeActualizacion = "Cuenta Modificada correctamente";
 		if(!estado)
 		{
 			mesajeActualizacion = "No se pudo actualizar la cuenta";
 		}
+		
 		ModelAndView MV = new ModelAndView();
 		MV.addObject("mesajeActualizacion", mesajeActualizacion);
-		MV.setViewName("AltaDeCuenta");
+		MV.setViewName("ModificacionDeCuenta");
 		return MV;	
 		
 }

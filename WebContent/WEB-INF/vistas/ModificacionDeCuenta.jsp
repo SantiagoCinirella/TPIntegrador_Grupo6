@@ -206,61 +206,17 @@
 											</div>
 										</div>
 										<div class="card-body">
-											<form action="agregarCuenta.html" method="get">
-												<h6 class="heading-small text-muted mb-4">Informacion
-													de cliente</h6>
-												<div class="pl-lg-4">
-													<div class="row">
-														<div class="col-lg-5">
-															<div class="form-group">
-																<label class="form-control-label" for="input-username">Nro Cliente</label>
-																<input type="number" id="input-email" readonly="readonly" class="form-control" placeholder="123"
-																	value="${clienteObtenido.idCliente}" name="txtIdCliente">
-																
-															</div>
-														</div>
-														<div class="col-lg-4">
-															<div class="form-group">
-																<label class="form-control-label" for="input-email">DNI</label>
-																<input type="number" id="input-email" class="form-control" readonly="readonly"  placeholder="31222333"
-																	value="${clienteObtenido.dni}" name="txtDni">
-															</div>
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-lg-6">
-															<div class="form-group">
-																<label class="form-control-label" for="input-first-name">Nombres</label>
-																<input type="text" id="input-first-name" readonly="readonly" class="form-control"
-																	placeholder="Nombres" value="${clienteObtenido.nombre}" name="txtNombre">
-															</div>
-														</div>
-														<div class="col-lg-6">
-															<div class="form-group">
-																<label class="form-control-label" for="input-last-name">Apellido</label>
-																<input type="text" id="input-last-name" class="form-control" readonly="readonly"
-																	placeholder="Apellido" value="${clienteObtenido.apellido}"  name="txtApellido">
-															</div>
-														</div>
-													</div>
-												</div>
-												<hr class="my-4" />
-												<!-- Address -->
+											<form action="ModificarCuenta_AltaDecuenta.html" method="post">
 												<h6 class="heading-small text-muted mb-4">Informacion
 													de cuenta</h6>
 												<div class="pl-lg-4">
 													<div class="row">
 														<div class="col-md-12">
 															<div class="form-group">
-																<label class="form-control-label" for="input-address">Tipo
-																	de cuenta</label>
-																<select class="form-control"  name="tipoCuenta" >
-																	<option selected="true" >Seleccione
-																		un tipo de Cuenta</option>
-																	<option>Caja de ahorro en pesos</option>
-																	<option>Caja de ahorro en dolares</option>
-																	<option>Cuenta Comitente</option>
-																</select>
+																<label class="form-control-label" for="input-city">Tipo de Cuenta</label>
+																<input type="text" name="tipoCuenta" class="form-control"
+																	placeholder="CBU"  readonly="readonly"
+																	value="${CuentaModificar.tipoCuenta}">
 															</div>
 														</div>
 													</div>
@@ -285,7 +241,7 @@
 														<div class="col-lg-4">
 															<div class="form-group">
 																<label class="form-control-label" for="input-country">Alias</label>
-																<input type="text" name="alias"	class="form-control" value="${CuentaModificar.alias}"	placehlder="Alias">
+																<input type="text" name="alias" required="required"	class="form-control" value="${CuentaModificar.alias}"	placehlder="Alias">
 															</div>
 														</div>
 													</div>
@@ -293,7 +249,7 @@
 												<hr class="my-12" />
 													<div class="form-group">
 														  <div class="col-12 text-center">
-										                  	<input type="submit" name="btnModificarCuenta"  class="btn btn-sm btn-primary" value="modificar" formaction="ModificarCuenta_AltaDecuenta.html"  style="width: 100%;">
+										                  	<input type="submit" name="btnAgregarPersona" class="btn btn-sm btn-primary" value="Modificar"  style="width: 70%;">
 										                  	<p style="color: blue"> ${mesajeActualizacion} </p>
 										                </div>
 													</div>
@@ -310,8 +266,6 @@
 			</div>
 		</div>
 	</div>
-	 -->
-	
 
 	<!-- Argon Scripts -->
 	<!-- Core -->
