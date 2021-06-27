@@ -35,7 +35,7 @@ public class ControladorLogin {
 				if(UsuarioLogin.getTipoUsuario() == false)
 				{
 					Persona Persona = new Persona();
-					Persona = (Persona) negocioPersona.obtenerPersona(UsuarioLogin.getDni());
+					Persona = (Persona) negocioPersona.obtenerPersonaParaLogin(UsuarioLogin.getDni());
 					HttpSession misession = request.getSession(true);
 					misession.setAttribute("Usuario",Persona);
 					ControladorCuenta ControladorCuenta = new ControladorCuenta();
@@ -44,7 +44,7 @@ public class ControladorLogin {
 				else
 				{
 					Persona Persona = new Persona();
-					Persona = (Persona) negocioPersona.obtenerPersona(UsuarioLogin.getDni());			
+					Persona = (Persona) negocioPersona.obtenerPersonaParaLogin(UsuarioLogin.getDni());			
 					HttpSession misession = request.getSession(true);
 					misession.setAttribute("Usuario",Persona);
 					ControladorCuenta ControladorCuenta = new ControladorCuenta();

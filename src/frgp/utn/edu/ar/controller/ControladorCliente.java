@@ -2,6 +2,10 @@ package frgp.utn.edu.ar.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -123,8 +127,7 @@ public class ControladorCliente {
 		ModelAndView MV = new ModelAndView();
 		MV.addObject("listaPersona", listaPersona);
 		MV.setViewName("AltaUsuarios");
-		return MV;	
-		
+		return MV;		
 }
 	
 	

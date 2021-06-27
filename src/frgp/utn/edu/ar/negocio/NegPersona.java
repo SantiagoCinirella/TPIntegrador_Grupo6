@@ -56,6 +56,11 @@ public class NegPersona {
 
 		return daoPersona.obtenerPersona(dni);
 	}
+	
+	public Persona obtenerPersonaParaLogin(int dni) {
+
+		return daoPersona.obtenerPersonaParaLogin(dni);
+	}
 
 	public List<Integer> obtenerCuentaxCliente(int dni) {
 

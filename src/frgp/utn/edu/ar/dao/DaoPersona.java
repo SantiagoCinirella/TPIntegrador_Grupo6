@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.hibernate.Query;
 
 import frgp.utn.edu.ar.dao.queries.ClienteQueries;
+import frgp.utn.edu.ar.dao.queries.ClienteQueries2;
 import frgp.utn.edu.ar.dao.queries.PersonaQueries;
 import frgp.utn.edu.ar.entidad.Cuenta;
 import frgp.utn.edu.ar.entidad.Persona;
@@ -42,14 +43,19 @@ public class DaoPersona {
 	}
 
 	public List<Persona> listarPersonasBajaLogica() {
+		
+		try {
+			Session session = conexion.abrirConexion();
+			Transaction tx = session.beginTransaction();
+			ArrayList<Persona> listaPersonas = (ArrayList<Persona>) session
+					.createQuery("SELECT p FROM Persona p INNER JOIN p.usuario u WHERE p.estado=0 AND u.tipoUsuario = 1)").list();
+			session.close();
+			return listaPersonas;
 
-		Session session = conexion.abrirConexion();
-		Transaction tx = session.beginTransaction();
-		ArrayList<Persona> listaPersonas = (ArrayList<Persona>) session
-				.createQuery("SELECT p FROM Persona p WHERE p.estado=0)").list();
-		session.close();
-		return listaPersonas;
-
+		} catch (Exception e) {
+			throw e;
+		}
+		
 	}
 
 	public boolean eliminarUsuario(int idUsuario) {
@@ -167,7 +173,7 @@ public class DaoPersona {
 		try {
 			
 			
-			Query busqueda = session.createQuery(ClienteQueries.BUSCA_CLIENTE_SQL.getQuery());
+			Query busqueda = session.createQuery(ClienteQueries2.BUSCA_CLIENTE_SQL.getQuery());
 			persona = (Persona)busqueda.setParameter(0, dni).uniqueResult();
 			
 			
@@ -181,6 +187,28 @@ public class DaoPersona {
 		
 	}
 	
+	
+	public Persona obtenerPersonaParaLogin(int dni) {
+
+		Persona persona = new Persona() ;
+		
+		Session session = conexion.abrirConexion();
+		try {
+			
+			
+			Query busqueda = session.createQuery(ClienteQueries.BUSCA_CLIENTE_SQL.getQuery());
+			persona = (Persona)busqueda.setParameter(0, dni).uniqueResult();
+			
+			
+			//List results = busqueda.list();			
+			return persona;
+		} catch (Exception e) {
+			return persona;
+		} finally {
+			session.close();
+		}
+		
+	}
 	
 	public List<Integer> obtenerCuentaxCliente(int dni) {
 		try {
