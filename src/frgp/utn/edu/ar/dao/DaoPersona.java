@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import frgp.utn.edu.ar.dao.queries.ClienteQueries;
 import frgp.utn.edu.ar.entidad.Cuenta;
+import frgp.utn.edu.ar.entidad.Movimiento;
 import frgp.utn.edu.ar.entidad.Persona;
 
 @Repository("daoPersona")
