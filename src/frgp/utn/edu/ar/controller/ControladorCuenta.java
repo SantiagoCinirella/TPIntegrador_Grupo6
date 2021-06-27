@@ -27,55 +27,47 @@ public class ControladorCuenta {
 	private Cuenta cuenta;
 	private Persona persona;
 	String cartel = null;
-	
-	@RequestMapping(value ="/buscarCliente.html" , method= { RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView eventoRedireccionar(String txtDni)
-	{
+
+	@RequestMapping(value = "/buscarCliente.html", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView eventoRedireccionar(String txtDni) {
 		ModelAndView MV = new ModelAndView();
 		String mensajeCliente = null;
-		int dni, cbu, nroCuenta, maxCuenta,maxCbu;
-		
+		int dni, cbu, nroCuenta, maxCuenta, maxCbu;
+
 		dni = Integer.parseInt(txtDni);
 		negocioPersona = new NegPersona();
 		persona = (Persona) negocioPersona.obtenerPersona(dni);
-		
-		if(persona == null) {
+
+		if (persona == null) {
 			mensajeCliente = "El usuario no existe o esta dado de baja";
-			
-		}
-		else
-		{
-			
+
+		} else {
+
 			maxCuenta = negocioCuenta.obtenerCuentaMax();
 			maxCbu = negocioCuenta.obtenerCbuMax();
-			
-			if(maxCuenta == 0 && maxCbu == 0)
-			{
+
+			if (maxCuenta == 0 && maxCbu == 0) {
 				cuenta = new Cuenta();
 				cbu = 1000000;
 				nroCuenta = 5000000;
 				cuenta.setCbu(cbu);
 				cuenta.setNroCuenta(nroCuenta);
-			}
-			else
-			{
+			} else {
 				cbu = maxCbu + 1;
 				nroCuenta = maxCuenta + 1;
 				cuenta.setCbu(cbu);
 				cuenta.setNroCuenta(nroCuenta);
 			}
-	
-			
+
 		}
-		
-		
-		MV.addObject("CuentaParcial",cuenta);
-		MV.addObject("mensajeCliente",mensajeCliente);
-		MV.addObject("clienteObtenido",persona);
+
+		MV.addObject("CuentaParcial", cuenta);
+		MV.addObject("mensajeCliente", mensajeCliente);
+		MV.addObject("clienteObtenido", persona);
 		MV.setViewName("AltaDeCuenta");
 		return MV;
 	}
-	
+
 	@RequestMapping(value ="/agregarCuenta.html" , method= { RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView eventoRedireccionarPag2( String tipoCuenta,String cbu ,String numeroCuenta, String alias , String txtDni ,String txtNombre ,String txtApellido)
 	{
@@ -84,10 +76,12 @@ public class ControladorCuenta {
 		
 		if(tipoCuenta !=  "" && cbu !=  "" &&  numeroCuenta  !=  "" &&  alias   !=  "" && txtDni    !=  "" && txtNombre   !=  "" && txtApellido  !=  "" )
 		{
+			
 			cbuint = Integer.parseInt(cbu);
 			numCuentaint = Integer.parseInt(numeroCuenta);
 			dniInt = Integer.parseInt(txtDni);
-			
+			boolean estado;
+			int cantidadCuentas;
 			cuenta.setCbu(cbuint);
 			cuenta.setTipoCuenta(tipoCuenta);
 			cuenta.setAlias(alias);
@@ -102,14 +96,23 @@ public class ControladorCuenta {
 			cuenta.setPersona(persona);
 			cuenta.setSaldo(10000.00);
 			cuenta.setFechaCreacion(LocalDateTime.now().toString() );
-		
-			boolean estado= negocioCuenta.agregarCuenta(cuenta);
 			
-			cartel="No se pudo agregar la cuenta";
-			if(estado)
-			{
-				cartel="La cuenta ha sido agregada exitosamente";
+			cantidadCuentas = negocioCuenta.getCantidadCuentas(cuenta.getDni());
+			if(cantidadCuentas < 4 )
+				{
+				estado = negocioCuenta.agregarCuenta(cuenta);
+				
+				cartel="No se pudo agregar la cuenta";
+				if(estado)
+				{
+					cartel="La cuenta ha sido agregada exitosamente";
+				}
 			}
+			else
+			{
+				cartel="El cliente no puede tener mas de 4 cuentas";
+			}
+			
 		}
 		else 
 		{
@@ -121,23 +124,23 @@ public class ControladorCuenta {
 		
 		
 	}
-	@RequestMapping(value ="/recargaGrillaCuentas.html" , method= { RequestMethod.GET, RequestMethod.POST})
-	//@RequestMapping("recargaGrillaCuentas.html")
-	public ModelAndView eventoRedireccionarpage12( String txtTipoCuenta,String txtCBU ,String txtNumCuenta, String txtAlias )
-	{
-		
+
+	@RequestMapping(value = "/recargaGrillaCuentas.html", method = { RequestMethod.GET, RequestMethod.POST })
+	// @RequestMapping("recargaGrillaCuentas.html")
+	public ModelAndView eventoRedireccionarpage12(String txtTipoCuenta, String txtCBU, String txtNumCuenta,
+			String txtAlias) {
+
 		ModelAndView MV = new ModelAndView();
-		
+
 		ArrayList<Cuenta> listaCuenta = new ArrayList<>();
-		
+
 		listaCuenta = (ArrayList<Cuenta>) negocioCuenta.listarCuentas();
-		
-		MV.addObject("listaCuentas",listaCuenta);
+
+		MV.addObject("listaCuentas", listaCuenta);
 		MV.setViewName("AltaDeCuenta");
 		return MV;
 	}
-	
-	
+
 	@RequestMapping("homeCliente.html")
 	public ModelAndView eventoRedireccionarPagCliente(int Usuario)
 	{
@@ -152,20 +155,20 @@ public class ControladorCuenta {
 	}
 	
 	@RequestMapping("abmlCuentas.html")
-	public ModelAndView eventoRedireccionarPag1()
-	{
+	public ModelAndView eventoRedireccionarPag1() {
 		NegCuenta negocioCuenta = new NegCuenta();
 		ModelAndView MV = new ModelAndView();
-		
+
 		ArrayList<Cuenta> listaPersona = new ArrayList<>();
-		
+
 		listaPersona = (ArrayList<Cuenta>) negocioCuenta.listarCuentasBajaLogica();
-		
-		MV.addObject("listaPersona",listaPersona);
+
+		MV.addObject("listaPersona", listaPersona);
 		MV.setViewName("ABMLCuentas");
 		return MV;
 
 	}
+
 	@RequestMapping("Movimientos.html")
 	public ModelAndView movimientos(int cbu)
 	{
@@ -183,64 +186,61 @@ public class ControladorCuenta {
 	}
 	
 	@RequestMapping("eliminacionCuenta.html")
-	public ModelAndView eliminar(int numeroCuenta)
-	{
-		negocioCuenta.bajaLogica(numeroCuenta);	
+	public ModelAndView eliminar(int numeroCuenta) {
+		negocioCuenta.bajaLogica(numeroCuenta);
 		ModelAndView MV = new ModelAndView();
 
 		ArrayList<Cuenta> listaPersona = new ArrayList<>();
-		
+
 		listaPersona = (ArrayList<Cuenta>) negocioCuenta.listarCuentasBajaLogica();
-		
+
 		MV.addObject("listaPersona", listaPersona);
 		MV.setViewName("ABMLCuentas");
-		return MV;	
-		
-}
-	@RequestMapping(value ="/ModificarCuenta.html" , method= { RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView modificar(int numeroCuenta, int cbu, String alias, String tipoCuenta)
-	{
+		return MV;
+
+	}
+
+	@RequestMapping(value = "/ModificarCuenta.html", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView modificar(int numeroCuenta, int cbu, String alias, String tipoCuenta) {
 		Cuenta Cuenta = new Cuenta();
 		Cuenta.setAlias(alias);
 		Cuenta.setCbu(cbu);
 		Cuenta.setNroCuenta(numeroCuenta);
 		Cuenta.setTipoCuenta(tipoCuenta);
-		
+
 		ModelAndView MV = new ModelAndView();
 		MV.addObject("CuentaModificar", Cuenta);
 		MV.setViewName("ModificacionDeCuenta");
-		return MV;	
-		
-}
+		return MV;
+
+	}
 
 	@RequestMapping("ModificarCuenta_AltaDecuenta.html")
-	public ModelAndView modificarDesdeAlta(int numeroCuenta, int cbu, String alias, String tipoCuenta)
-	{
+	public ModelAndView modificarDesdeAlta(int numeroCuenta, int cbu, String alias, String tipoCuenta) {
 		Cuenta Cuenta = new Cuenta();
 		Cuenta.setAlias(alias);
 		Cuenta.setCbu(cbu);
 		Cuenta.setNroCuenta(numeroCuenta);
 		Cuenta.setTipoCuenta(tipoCuenta);
-		
-		boolean estado= negocioCuenta.update(Cuenta);
+
+		boolean estado = negocioCuenta.update(Cuenta);
 		String mesajeActualizacion = "Cuenta Modificada correctamente";
-		if(!estado)
-		{
+		if (!estado) {
 			mesajeActualizacion = "No se pudo actualizar la cuenta";
 		}
-		
+
 		ModelAndView MV = new ModelAndView();
 		MV.addObject("mesajeActualizacion", mesajeActualizacion);
 		MV.setViewName("ModificacionDeCuenta");
-		return MV;	
-		
-}
+		return MV;
+
+	}
+
 	@RequestMapping("RedireccionAltaDeCuenta.html")
-	public ModelAndView AltaDeCuentaRedireccion()
-	{
- 		ModelAndView MV = new ModelAndView();
-		
+	public ModelAndView AltaDeCuentaRedireccion() {
+		ModelAndView MV = new ModelAndView();
+
 		MV.setViewName("AltaDeCuenta");
-		return MV;	
+		return MV;
 	}
 }

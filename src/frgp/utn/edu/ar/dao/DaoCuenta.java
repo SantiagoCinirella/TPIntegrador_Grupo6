@@ -175,4 +175,23 @@ public class DaoCuenta {
 		}
 
 	}
+
+	public int getCantidadCuentas(int dni) {
+		
+		int cantidadCuenta = 0;
+
+		Session session = conexion.abrirConexion();
+		try {
+
+			Query busqueda = session.createQuery(CuentaQueries.CANT_CUENTAS_SQL.getQuery());
+			cantidadCuenta = ((Long) busqueda.setParameter(0, dni).uniqueResult()).intValue();
+			// List results = busqueda.list();
+			return cantidadCuenta;
+		} catch (Exception e) {
+			return cantidadCuenta;
+		} finally {
+			session.close();
+		}
+		
+	}
 }
