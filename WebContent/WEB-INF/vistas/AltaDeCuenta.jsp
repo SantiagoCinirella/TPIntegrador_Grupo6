@@ -272,7 +272,6 @@
 																		un tipo de Cuenta</option>
 																	<option>Caja de ahorro en pesos</option>
 																	<option>Caja de ahorro en dolares</option>
-																	<option>Cuenta Comitente</option>
 																</select>
 															</div>
 														</div>
