@@ -3,14 +3,13 @@ package frgp.utn.edu.ar.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.hibernate.Query;
 
 import frgp.utn.edu.ar.dao.queries.ClienteQueries;
-import frgp.utn.edu.ar.dao.queries.PersonaQueries;
 import frgp.utn.edu.ar.entidad.Cuenta;
 import frgp.utn.edu.ar.entidad.Persona;
 
@@ -24,27 +23,14 @@ public class DaoPersona {
 
 		Session session = conexion.abrirConexion();
 		Transaction tx = session.beginTransaction();
-		Persona Persona;
-
-		/*
-		 * String hql = "FROM Employee E"; Query query = session.createQuery(hql); List
-		 * results = query.list();
-		 */
-
 		ArrayList<Persona> listaPersonas = (ArrayList<Persona>) session.createCriteria(Persona.class).list();
-
-		// cuenta = (Cuenta) session.get(Cuenta.class,"ID");
 		tx = session.getTransaction();
-		// conexion.cerrarSession();
-
 		return listaPersonas;
-
 	}
 
 	public List<Persona> listarPersonasBajaLogica() {
 
 		Session session = conexion.abrirConexion();
-		Transaction tx = session.beginTransaction();
 		ArrayList<Persona> listaPersonas = (ArrayList<Persona>) session
 				.createQuery("SELECT p FROM Persona p WHERE p.estado=0)").list();
 		session.close();
@@ -66,7 +52,6 @@ public class DaoPersona {
 			aux = false;
 			tx.rollback();
 		}
-		// conexion.cerrarSession();
 		session.close();
 		return aux;
 	}
@@ -143,14 +128,9 @@ public class DaoPersona {
 		Session session = conexion.abrirConexion();
 		Transaction tx = session.beginTransaction();
 		try {
-			Query update = session.createQuery(PersonaQueries.UPDATE_USUARIO_SQL.getQuery());
-			update.setParameter(0, persona.getApellido());
-			update.setParameter(1, persona.getNombre());
-			update.setParameter(2, persona.getEmail());
-			update.setParameter(3, persona.getDni());
-			int executeUpdate = update.executeUpdate();
+			session.update(persona);
 			tx.commit();
-			return executeUpdate != 0;
+			return true;
 		} catch (Exception e) {
 			tx.rollback();
 			return false;
@@ -161,26 +141,18 @@ public class DaoPersona {
 
 	public Persona obtenerPersona(int dni) {
 
-		Persona persona = new Persona() ;
-		
+		Persona persona = new Persona();
 		Session session = conexion.abrirConexion();
 		try {
-			
-			
 			Query busqueda = session.createQuery(ClienteQueries.BUSCA_CLIENTE_SQL.getQuery());
-			persona = (Persona)busqueda.setParameter(0, dni).uniqueResult();
-			
-			
-			//List results = busqueda.list();			
+			persona = (Persona) busqueda.setParameter(0, dni).uniqueResult();
 			return persona;
 		} catch (Exception e) {
 			return persona;
 		} finally {
 			session.close();
 		}
-		
 	}
-	
 	
 	public List<Integer> obtenerCuentaxCliente(int dni) {
 		try {
@@ -210,8 +182,19 @@ public class DaoPersona {
 		}
 
 	}
-	
-	
-	
-	
+
+	public boolean verificarDniExistente(Integer dni) throws Exception {
+		Persona persona = new Persona();
+		Session session = conexion.abrirConexion();
+
+		try {
+			Query existeDni = session.createQuery(ClienteQueries.VERIFICAR_CLIENTE_EXISTENTE.getQuery());
+			existeDni.setParameter(0, dni);
+			return existeDni.uniqueResult() == null ? true : false;
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		} finally {
+			session.close();
+		}
+	}
 }

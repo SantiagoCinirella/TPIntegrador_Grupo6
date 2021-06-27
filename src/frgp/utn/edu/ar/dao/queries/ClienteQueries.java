@@ -2,7 +2,9 @@ package frgp.utn.edu.ar.dao.queries;
 
 public enum ClienteQueries {
 
-	BUSCA_CLIENTE_SQL("FROM Persona p WHERE p.dni= ? and estado <> 1 ");
+	BUSCA_CLIENTE_SQL("FROM Persona p WHERE p.dni= ? and estado <> 1 "),
+	VERIFICAR_CLIENTE_EXISTENTE("FROM Persona p WHERE p.dni= ?"),
+	;
 
 	private String query;
 
