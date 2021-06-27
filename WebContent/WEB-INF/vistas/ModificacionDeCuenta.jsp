@@ -77,11 +77,11 @@
 					<!-- Nav items -->
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link active"
-							href="ABMLCuentas.jsp"> <i class="ni ni-tv-2 text-primary"></i>
+							href="abmlCuentas.html"> <i class="ni ni-tv-2 text-primary"></i>
 								<span class="nav-link-text">ABML Cuentas</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="ABMLClientes.jsp"> <i
+							href="abmlClientes.html"> <i
 								class="ni ni-single-02 text-yellow"></i> <span
 								class="nav-link-text">ABML Clientes</span>
 						</a></li>

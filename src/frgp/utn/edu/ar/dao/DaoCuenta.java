@@ -3,8 +3,6 @@ package frgp.utn.edu.ar.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.ParseConversionEvent;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -13,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import frgp.utn.edu.ar.dao.queries.CuentaQueries;
 import frgp.utn.edu.ar.entidad.Cuenta;
+import frgp.utn.edu.ar.entidad.Movimiento;
 
 @Repository("daoCuenta")
 public class DaoCuenta {
@@ -49,6 +48,22 @@ public class DaoCuenta {
 					.createQuery("SELECT p FROM Cuenta p WHERE p.estado=0)").list();
 			session.close();
 			return listaPersonas;
+		} catch (Exception ex) {
+			throw ex;
+		}
+
+	}
+	
+	public List<Movimiento> listarMovimientos(int cbu) {
+		try {
+			ArrayList<Movimiento> listaMov = new ArrayList<Movimiento>();
+			Session session = conexion.abrirConexion();
+			Query buscarCBU = session.createQuery("SELECT p FROM Movimiento p WHERE p.cbuDestino = ? or p.cbuOrigen = ? ORDER BY p.fecha DESC");
+			buscarCBU.setParameter(0, cbu);
+			buscarCBU.setParameter(1, cbu);
+			listaMov = (ArrayList<Movimiento>) buscarCBU.list();
+			session.close();
+			return listaMov;
 		} catch (Exception ex) {
 			throw ex;
 		}

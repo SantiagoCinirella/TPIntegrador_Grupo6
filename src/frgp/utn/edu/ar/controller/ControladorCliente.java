@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import frgp.utn.edu.ar.entidad.Cuenta;
 import frgp.utn.edu.ar.entidad.Persona;
 import frgp.utn.edu.ar.entidad.UsuarioLogin;
 import frgp.utn.edu.ar.entidad.enumDatos.Provincias;
@@ -45,7 +44,7 @@ public class ControladorCliente {
 		usuario.setUsuario(txtDNI.toString());
 		usuario.setDni(txtDNI);
 		usuario.setTipoUsuario(true);
-		usuario.setEstado(true);
+		usuario.setEstado(false);
 		persona.setUsuario(usuario);
 
 		return eventoAltaModificacionCliente(btnCrear, persona);

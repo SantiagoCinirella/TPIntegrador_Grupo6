@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import frgp.utn.edu.ar.dao.DaoCuenta;
 import frgp.utn.edu.ar.dao.DaoPersona;
 import frgp.utn.edu.ar.entidad.Cuenta;
+import frgp.utn.edu.ar.entidad.Movimiento;
 import frgp.utn.edu.ar.entidad.Persona;
 
 @Service("servicioCuenta")
@@ -25,6 +26,9 @@ public class NegCuenta {
 		return daoCuenta.listarCuentasBajaLogica();
 	}
 
+	public List<Movimiento> listarMovimientos(int cbu) {
+		return daoCuenta.listarMovimientos(cbu);
+	}
 	
 	public boolean agregarCuenta(Cuenta p) {
 		return daoCuenta.agregarCuenta(p);
