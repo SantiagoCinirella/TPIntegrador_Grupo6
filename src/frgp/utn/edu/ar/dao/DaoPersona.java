@@ -196,7 +196,19 @@ public class DaoPersona {
 
 	}
 	
-	
+	public Cuenta obtenerCuentaxCbu(int dni) {
+		try {
+			Session session = conexion.abrirConexion();
+			Query buscarCuenta = session.createQuery("SELECT p FROM Cuenta p WHERE p.cbu = ? and p.estado = 0");
+			buscarCuenta.setParameter(0, dni);
+			Cuenta Cuenta = (Cuenta) buscarCuenta.uniqueResult();
+			session.close();
+			return Cuenta;
+		} catch (Exception ex) {
+			throw ex;
+		}
+
+	}
 	public List<Cuenta> obtenerCuenta(int dni) {
 		try {
 			Session session = conexion.abrirConexion();

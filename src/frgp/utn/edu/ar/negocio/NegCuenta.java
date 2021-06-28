@@ -26,6 +26,10 @@ public class NegCuenta {
 		return daoCuenta.listarCuentasBajaLogica();
 	}
 
+	public Cuenta buscarSaldo(int cbu) {
+		return daoCuenta.buscarSaldo(cbu);
+	}
+	
 	public List<Movimiento> listarMovimientos(int cbu) {
 		return daoCuenta.listarMovimientos(cbu);
 	}
@@ -46,6 +50,10 @@ public class NegCuenta {
 
 	public boolean update(Cuenta cuenta) {
 		return daoCuenta.update(cuenta);
+	}
+	
+	public boolean actualizarSaldo(Cuenta cuenta) {
+		return daoCuenta.actualizarSaldo(cuenta);
 	}
 
 	public int obtenerCuentaMax() {
