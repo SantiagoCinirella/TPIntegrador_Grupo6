@@ -30,7 +30,7 @@ public class ControladorMovimiento {
 	private NegMovimiento negocioMovimiento;
 
 	@RequestMapping(value = "buscarSaldo.html", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView eventoRedireccionar(int cuentas, int CBU, int SaldoTransferir, HttpServletRequest request,
+	public ModelAndView eventoRedireccionar(int cuentas, int CBU, int SaldoTransferir, String Comentario, HttpServletRequest request,
 			HttpServletResponse response) {
 		if (cuentas != 0) {
 			NegPersona negocioPersona = new NegPersona();
@@ -51,6 +51,7 @@ public class ControladorMovimiento {
 				MV.addObject("personaDestino", personaDestino);
 				MV.addObject("CuentaDestino", CuentaDestino);
 				MV.addObject("SaldoTransferir", SaldoTransferir);
+				MV.addObject("Comentario", Comentario);
 				MV.setViewName("Transferencia");
 				return MV;
 
@@ -82,7 +83,7 @@ public class ControladorMovimiento {
 	}
 	
 	@RequestMapping(value = "TransferirDinero.html", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView Transferir(int CBU, int CBUOrigen , int SaldoTransferir , HttpServletRequest request,
+	public ModelAndView Transferir(int CBU, int CBUOrigen , int SaldoTransferir , String Comentario,HttpServletRequest request,
 			HttpServletResponse response) {
 		NegPersona negocioPersona = new NegPersona();
 		Cuenta CuentaOrigen = negocioPersona.obtenerCuentaxCbu(CBUOrigen);
@@ -120,17 +121,17 @@ public class ControladorMovimiento {
 				Movimiento Movimiento = new Movimiento();
 				Movimiento.setCbuOrigen(CuentaOrigen.getCbu());
 				Movimiento.setCbuDestino(CuentaDestino.getCbu());
-				Movimiento.setDetalle("porro");
+				Movimiento.setDetalle(Comentario);
 				Movimiento.setSaldo(-SaldoParaMovimiento);
-				Movimiento.setFecha(LocalDateTime.now().toString());
+				Movimiento.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 				negocioMovimiento.agregarMovimiento(Movimiento);
 				
 				Movimiento = new Movimiento();
 				Movimiento.setCbuOrigen(CuentaDestino.getCbu());
 				Movimiento.setCbuDestino(CuentaOrigen.getCbu());
-				Movimiento.setDetalle("porro");
+				Movimiento.setDetalle(Comentario);
 				Movimiento.setSaldo(SaldoParaMovimiento);
-				Movimiento.setFecha(LocalDateTime.now().toString());
+				Movimiento.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 				negocioMovimiento.agregarMovimiento(Movimiento);
 
 				
