@@ -274,21 +274,21 @@
 														<div class="form-group">
 															<label class="form-control-label" for="input-city">Nombre</label>
 															<input type="text" id="Nombre" name="Nombre" class="form-control"
-																disabled="disabled" value="${personaDestino.nombre}" required>
+																readonly value="${personaDestino.nombre}" required>
 														</div>
 													</div>
 													<div class="col-lg-4">
 														<div class="form-group">
 															<label class="form-control-label" for="input-country">Apellido
 															</label> <input type="text" id="Apellido" name="Apellido" class="form-control"
-																disabled="disabled" value="${personaDestino.apellido}" required>
+																readonly value="${personaDestino.apellido}" required>
 														</div>
 													</div>
 													<div class="col-lg-4">
 														<div class="form-group">
 															<label class="form-control-label" for="input-country">Alias</label>
 															<input type="number" id="input-postal-code"
-																class="form-control" disabled="disabled" name="Alias"
+																class="form-control" readonly name="Alias"
 																 value="${CuentaDestino.alias}" required>
 														</div>
 													</div>
@@ -322,8 +322,9 @@
 											</div>
 											<div class="col-lg-6">
 												<div class="form-group">
-													<label class="form-control-label" for="input-email"></label>
-													
+													<label class="form-control-label" for="input-email">Comentario</label>
+													<input type="text" id="Saldo" name="Comentario"
+														class="form-control" value="${Comentario}" required>
 												</div>
 											</div>
 											<div class="col-lg-6">
@@ -367,14 +368,18 @@
 										<!-- Address -->
 
 										<hr class="my-12" />
-										<div class="form-group">
+										<c:choose>
+												<c:when test="${personaDestino.nombre != null}">
+													<div class="form-group">
 											<div class="col-12 text-center">
 												<input type="submit" class="btn btn-sm btn-primary"
-													style="width: 250px;" value="Transferir">
+													style="width: 250px;" value="Transferir" ${ personaDestino.nombre eq '' ? 'disabled="disabled"' : ''}>
 													<input type="hidden" value="${cuenta.cbu}"
 													class="myButton" name="CBUOrigen" id="numeroCuenta">
 											</div>
 										</div>
+												</c:when>
+										</c:choose>		
 									</form>
 								</div>
 							</div>
