@@ -71,6 +71,11 @@ public class NegPersona {
 
 		return daoPersona.obtenerCuenta(dni);
 	}
+	
+	public Cuenta obtenerCuentaxCbu(int cbu) {
+
+		return daoPersona.obtenerCuentaxCbu(cbu);
+	}
 
 	public boolean verificarDniExistente(Integer dni) throws Exception {
 		return daoPersona.verificarDniExistente(dni);

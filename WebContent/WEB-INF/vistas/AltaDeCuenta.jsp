@@ -296,7 +296,7 @@
 														<div class="col-lg-4">
 															<div class="form-group">
 																<label class="form-control-label" for="input-country">Alias</label>
-																<input type="text" name="alias"	class="form-control" value="${CuentaParcial.alias}"	placehlder="Alias">
+																<input type="text" name="alias"	class="form-control" value="${CuentaParcial.alias}"	placeholder="Alias">
 																
 				
 															</div>

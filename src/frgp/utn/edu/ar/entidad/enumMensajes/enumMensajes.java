@@ -5,7 +5,11 @@ public enum enumMensajes {
 	ALTA_EXITOSA("Cliente agregado exitosamente", 1),
 	MODIFICACION_EXITOSA("Cliente modificado exitosamente", 2),
 	DNI_EXISTENTE("El dni ya se encuentra en el sistema", 3),
-
+	SELECCIONAR_CUENTA("Seleccione una cuenta valida", 4),
+	CBU_INCORRECTO("CBU incorrecto", 5),
+	SALDO_INSUFICIENTE("Saldo insuficiente", 6),
+	TRANSFERIR_MISMA_CUENTA("No es posible transferir a la misma cuenta", 7),
+	TRANSFERENCIA_EXITOSA("Se ha transferido exitosamente", 8)
 	;
 
 	private String mensaje;

@@ -3,6 +3,10 @@ package frgp.utn.edu.ar.controller;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -155,10 +159,15 @@ public class ControladorCuenta {
 	}
 	
 	@RequestMapping("Transferencia.html")
-	public ModelAndView eventoRedireccionarTransferencia()
+	public ModelAndView eventoRedireccionarTransferencia(HttpServletRequest request,
+	HttpServletResponse response)
 	{
-
+		HttpSession misession= (HttpSession) request.getSession(); 
+		Persona Persona = (Persona) misession.getAttribute("Usuario");
+		negocioPersona = new NegPersona();
+		ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(Persona.getDni());
 		ModelAndView MV = new ModelAndView();
+		MV.addObject("listaCuenta", listaCuenta);
 		MV.setViewName("Transferencia");
 		return MV;
 
