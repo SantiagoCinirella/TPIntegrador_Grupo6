@@ -54,13 +54,27 @@ public class DaoCuenta {
 
 	}
 	
+	public Cuenta buscarSaldo(int cbu) {
+		try {
+			Cuenta Cuenta = new Cuenta();
+			Session session = conexion.abrirConexion();
+			Query buscarSaldo = session.createQuery("SELECT p FROM Cuenta p WHERE p.cbu = ? ");
+			buscarSaldo.setParameter(0, cbu);
+			Cuenta = (Cuenta) buscarSaldo.uniqueResult();
+			session.close();
+			return Cuenta;
+		} catch (Exception ex) {
+			throw ex;
+		}
+
+	}
+	
 	public List<Movimiento> listarMovimientos(int cbu) {
 		try {
 			ArrayList<Movimiento> listaMov = new ArrayList<Movimiento>();
 			Session session = conexion.abrirConexion();
-			Query buscarCBU = session.createQuery("SELECT p FROM Movimiento p WHERE p.cbuDestino = ? or p.cbuOrigen = ? ORDER BY p.fecha DESC");
+			Query buscarCBU = session.createQuery("SELECT p FROM Movimiento p WHERE p.cbuOrigen = ? ORDER BY p.fecha DESC");
 			buscarCBU.setParameter(0, cbu);
-			buscarCBU.setParameter(1, cbu);
 			listaMov = (ArrayList<Movimiento>) buscarCBU.list();
 			session.close();
 			return listaMov;
@@ -138,6 +152,25 @@ public class DaoCuenta {
 		}
 	}
 
+	public boolean actualizarSaldo(Cuenta cuenta) {
+		Session session = conexion.abrirConexion();
+		Transaction tx = session.beginTransaction();
+		try {
+			String queryUpdate = "UPDATE Cuenta c SET c.saldo = ? WHERE c.cbu = ?";
+			Query update = session.createQuery(queryUpdate);
+			update.setParameter(0, cuenta.getSaldo());
+			update.setParameter(1, cuenta.getCbu());
+			int executeUpdate = update.executeUpdate();
+			tx.commit();
+			return executeUpdate != 0;
+		} catch (Exception e) {
+			tx.rollback();
+			return false;
+		} finally {
+			session.close();
+		}
+	}
+	
 	public int obtenerCuentaMax() {
 
 		int maximaCuenta = 0;
