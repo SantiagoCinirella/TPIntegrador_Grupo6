@@ -93,13 +93,7 @@ public class ControladorCuenta {
 			cuenta.setAlias(alias);
 			cuenta.setNroCuenta(numCuentaint);
 			cuenta.setDni(dniInt);
-			persona = new Persona();
 			
-			persona.setDni(dniInt);
-			persona.setNombre(txtNombre);
-			persona.setApellido(txtApellido);
-		
-			cuenta.setPersona(persona);
 			cuenta.setSaldo(10000.00);
 			cuenta.setFechaCreacion(LocalDateTime.now().toString() );
 			
