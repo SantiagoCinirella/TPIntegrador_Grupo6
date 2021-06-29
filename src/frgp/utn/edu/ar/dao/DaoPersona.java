@@ -26,6 +26,7 @@ public class DaoPersona {
 		Transaction tx = session.beginTransaction();
 		ArrayList<Persona> listaPersonas = (ArrayList<Persona>) session.createCriteria(Persona.class).list();
 		tx = session.getTransaction();
+		session.close();
 		return listaPersonas;
 	}
 

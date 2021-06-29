@@ -140,15 +140,7 @@ public class main {
 		mov.setSaldo(10000.);
 		listaMov.add(mov);
 		mov = new Movimiento();	
-		
-		
-		//'13', '1000011', '0', 'Saldo Inicial', '2021-06-27T22:53:32.731', '10000'
-		mov.setCbuDestino(1000011);
-		mov.setCbuOrigen(1000011);
-		mov.setDetalle("Saldo Inicial");
-		mov.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
-		mov.setSaldo(10000.);
-		listaMov.add(mov);
+
 		
 		for (Movimiento movimiento : listaMov) {
 			
@@ -167,7 +159,7 @@ public class main {
 		//'1000000', 'perro.gato', '11111111', '0', '2021-06-27T22:32:56.681', '5000000', '10000', 'Caja de ahorro en pesos'
 		cuenta.setCbu(1000000);
 		cuenta.setAlias("perro.gato");
-		cuenta.setDni(18000000);
+		cuenta.setDni(11111111);
 		cuenta.setEstado(false);
 		cuenta.setFechaCreacion(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		cuenta.setNroCuenta(5000000);
