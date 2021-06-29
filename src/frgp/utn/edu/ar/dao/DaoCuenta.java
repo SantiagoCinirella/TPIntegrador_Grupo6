@@ -141,9 +141,13 @@ public class DaoCuenta {
 		Session session = conexion.abrirConexion();
 		Transaction tx = session.beginTransaction();
 		try {
-			session.update(cuenta);
-			session.getTransaction().commit();
-			return true;
+			String queryUpdate = "UPDATE Cuenta c SET c.alias = ? WHERE c.cbu = ?";
+			Query update = session.createQuery(queryUpdate);
+			update.setParameter(0, cuenta.getAlias());
+			update.setParameter(1, cuenta.getCbu());
+			int executeUpdate = update.executeUpdate();
+			tx.commit();
+			return executeUpdate != 0;
 		} catch (Exception e) {
 			tx.rollback();
 			return false;

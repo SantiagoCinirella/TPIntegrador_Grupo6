@@ -39,12 +39,19 @@
 
 
 <script type="text/javascript">
-	function alertAgregarUsuario() {
-		alert("Usuario creado exitosamente");
-	}
-
-	function alertModificarUsuario() {
-		alert("Usuario modificado exitosamente");
+	function ValidarDNI() {
+		objeto = document.getElementById("dnitxt");
+		Validar = document.getElementById("btnCrear");
+		valueForm = objeto.value;
+		if (valueForm.length > 8) {
+			objeto.className = "form-control border border-danger";
+			objeto.style.boxShadow = "0 0 0 0.2rem rgba(255, 0, 0, 0.23)";
+			Validar.disabled = true;
+		} else {
+			objeto.className = "form-control border border-success";
+			objeto.style.boxShadow = "0 0 0 0.2rem rgba(79, 162, 51, 0.25)";
+			Validar.disabled = false;
+		}
 	}
 </script>
 
@@ -53,9 +60,9 @@
 
 <body>
 	<%
-	HttpSession misession = (HttpSession) request.getSession();
+		HttpSession misession = (HttpSession) request.getSession();
 
-	Persona Persona = (Persona) misession.getAttribute("Usuario");
+		Persona Persona = (Persona) misession.getAttribute("Usuario");
 	%>
 	<form method="post" action="agregarCliente.html">
 		<script type="text/javascript">
@@ -142,7 +149,7 @@
 										</span>
 										<div class="media-body  ml-2  d-none d-lg-block">
 											<span class="mb-0 text-sm  font-weight-bold"><%=Persona.getNombre()%>,
-											<%=Persona.getApellido()%></span>
+												<%=Persona.getApellido()%></span>
 										</div>
 									</div>
 							</a>
@@ -177,8 +184,18 @@
 										<li class="breadcrumb-item"><a href="#"><i
 												class="fas fa-home"></i></a></li>
 										<li class="breadcrumb-item"><a href="#">ABML</a></li>
-										<li class="breadcrumb-item active" aria-current="page">Alta
-											de cliente</li>
+										<c:choose>
+											<c:when test="${esNuevoCliente==true}">
+												<li class="breadcrumb-item active" aria-current="page">Alta
+													de cliente</li>
+											</c:when>
+											<c:otherwise>
+												<li class="breadcrumb-item active" aria-current="page">Modificacion
+													de cliente</li>
+											</c:otherwise>
+
+										</c:choose>
+
 									</ol>
 								</nav>
 							</div>
@@ -204,7 +221,19 @@
 												<div class="card-header">
 													<div class="row align-items-center">
 														<div class="col-xl-12">
-															<h3 class="mb-0">Alta de cliente</h3>
+															<c:choose>
+																<c:when test="${esNuevoCliente==true}">
+																	<li class="breadcrumb-item active" aria-current="page">Alta
+																		de cliente</li>
+																</c:when>
+																<c:otherwise>
+																	<li class="breadcrumb-item active" aria-current="page">Modificacion
+																		de cliente</li>
+																</c:otherwise>
+
+															</c:choose>
+
+
 														</div>
 													</div>
 												</div>
@@ -227,8 +256,8 @@
 																			for="input-last-name">DNI</label>
 																		<c:choose>
 																			<c:when test="${esNuevoCliente==true}">
-																				<input type="text" id="input-dni"
-																					class="form-control" placeholder="DNI"
+																				<input type="text" id="dnitxt" class="form-control"
+																					placeholder="DNI" onkeyup="ValidarDNI()"
 																					name="txtDNI" value="${item.dni}" required
 																					oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
 																				<br />
@@ -272,8 +301,7 @@
 																			<label class="form-control-label" for="input-address">Provincia</label>
 																			<select class="form-control" name="provincia"
 																				required>
-																				<option selected="true" disabled="disabled">Seleccione
-																					una provincia</option>
+																				<option selected="true">Buenos Aires</option>
 																				<c:forEach items="${listaProvincias}"
 																					var="provincia">
 																					<option>${provincia.provincia}</option>
@@ -305,9 +333,8 @@
 																		<div class="form-group">
 																			<label class="form-control-label" for="input-address">Sexo</label>
 																			<select class="form-control" required name="sexo">
-																				<option selected="true" disabled="disabled">Seleccione
-																					un sexo</option>
-																				<c:forEach items="${listaSexo}" var="item" >
+																				<option selected="true">Masculino</option>
+																				<c:forEach items="${listaSexo}" var="item">
 																					<option value="${item.sexo}">${item.sexo}</option>
 																				</c:forEach>
 																			</select>
@@ -339,8 +366,8 @@
 																	<c:choose>
 																		<c:when test="${esNuevoCliente==true}">
 																			<input class="btn btn-sm btn-primary"
-																				style="width: 250px;" type="submit" value="Crear"
-																				name="btnCrear">
+																				style="width: 250px;" type="submit" id="btnCrear"
+																				value="Crear" name="btnCrear">
 																			<br />
 																		</c:when>
 																		<c:otherwise>

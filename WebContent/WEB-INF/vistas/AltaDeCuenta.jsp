@@ -61,7 +61,23 @@
                             }
                             tblData.rows[i].style.display = styleDisplay;
                         }
-                    }                    
+                    }       
+                    
+                    function ValidarDNI() {
+                        objeto = document.getElementById("dnitxt");
+                        Validar = document.getElementById("btnBuscar");
+                        valueForm = objeto.value;
+                        if (valueForm.length > 8) {
+                            objeto.className = "form-control border border-danger";
+                            objeto.style.boxShadow = "0 0 0 0.2rem rgba(255, 0, 0, 0.23)";
+                            Validar.disabled = true;
+                        }
+                        else {
+                            objeto.className = "form-control border border-success";
+                            objeto.style.boxShadow = "0 0 0 0.2rem rgba(79, 162, 51, 0.25)";
+                            Validar.disabled = false;
+                        }
+                    }
                 </script>
 
 
@@ -221,7 +237,7 @@
 														<div class="col-lg-6">
 															<div class="form-group">
 																<label class="form-control-label" for="input-email">DNI</label>
-																<input type="number" id="input-email" class="form-control" placeholder="31222333"
+																<input type="number" id="dnitxt" onkeyup="ValidarDNI()" class="form-control" placeholder="dni" required="required" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
 																	value="${clienteObtenido.dni}" name="txtDni">
 															</div>
 														</div>
@@ -234,9 +250,8 @@
 														</div>
 														<div class="col-lg-4" style="margin-top: 40px;">
 															<div class="form-group">
-																<input type="submit" name="btnAgregarPersona"  class="btn btn-sm btn-primary" value="Buscar" formaction="buscarCliente.html" style="width: 100%;">
+																<input type="submit" name="btnAgregarPersona"  class="btn btn-sm btn-primary" value="Buscar" id="btnBuscar" formaction="buscarCliente.html" style="width: 100%;">
 														
-															<p style="color: red"> ${mensajeCliente} </p>
 															</div>
 														</div>
 													</div>
@@ -268,11 +283,11 @@
 																<label class="form-control-label" for="input-address">Tipo
 																	de cuenta</label>
 																<select class="form-control"  name="tipoCuenta" >
-																	<option selected="true"  >Seleccione
-																		un tipo de Cuenta</option>
-																	<option>Caja de ahorro en pesos</option>
-																	<option>Caja de ahorro en dolares</option>
+																	<option selected="true"  >Seleccione un tipo de Cuenta</option>
+																	<option >Caja de ahorro en pesos</option>
+																	<option >Caja de ahorro en dolares</option>
 																</select>
+																
 															</div>
 														</div>
 													</div>
@@ -289,7 +304,7 @@
 																<label class="form-control-label" for="input-country">Nro
 																	de cuenta</label> 
 																	<input type="text" name="numeroCuenta"
-																	class="form-control" placeholder="11111" readonly="readonly"
+																	class="form-control" placeholder="Nro Cuenta"  readonly="readonly"
 																	 value="${CuentaParcial.nroCuenta}">
 															</div>
 														</div>
@@ -306,9 +321,51 @@
 												<hr class="my-12" />
 													<div class="form-group">
 														  <div class="col-12 text-center">
-										                  	<input type="submit" name="btnAgregarPersona" class="btn btn-sm btn-primary" value="Agregar" style="width: 70%;">
-										                  
-										                  	<p style="color: blue"> ${estadoAgregarCuenta} </p>
+														<c:choose>
+																		<c:when test="${MensajeBack.numeroMensaje == 9}">
+																			<div class="alert alert-success" role="alert">
+																				${MensajeBack.mensaje}</div>
+																		</c:when>
+																		<c:when test="${MensajeBack.numeroMensaje == 10}">
+																			<div class="alert alert-danger" role="alert">
+																				${MensajeBack.mensaje}</div>
+																		</c:when>
+																		<c:when test="${MensajeBack.numeroMensaje == 11}">
+																			<div class="alert alert-danger" role="alert">
+																				${MensajeBack.mensaje}</div>
+																		</c:when>
+																		<c:when test="${MensajeBack.numeroMensaje == 12}">
+																			<div class="alert alert-danger" role="alert">
+																				${MensajeBack.mensaje}</div>
+																		</c:when>
+																		<c:when test="${MensajeBack.numeroMensaje == 13}">
+																			<div class="alert alert-danger" role="alert">
+																				${MensajeBack.mensaje}</div>
+																		</c:when>
+																		
+														</c:choose>
+														
+
+														<c:choose>
+															<c:when test="${clienteObtenido.nombre != null}">
+																<div class="form-group">
+																	<div class="col-12 text-center">
+																		<input type="submit" name="btnAgregarPersona"
+																			class="btn btn-sm btn-primary" style="width: 70%;"
+																			value="Agregar">
+																	</div>
+																</div>
+															</c:when>
+															<c:otherwise>
+										
+				
+															</c:otherwise>
+														</c:choose>
+
+
+
+
+														<p style="color: blue"> ${estadoAgregarCuenta} </p>
 										                  	
 										                </div>
 													</div>
