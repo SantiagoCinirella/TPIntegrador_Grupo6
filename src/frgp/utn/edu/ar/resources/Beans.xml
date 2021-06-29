@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+        <!-- entidades -->
+        <bean id="UsuarioLogin" class="frgp.utn.edu.ar.entidad.UsuarioLogin" scope="prototype"/>
+        <bean id="Persona" class="frgp.utn.edu.ar.entidad.Persona" scope="prototype" />
+	    <bean id="Movimiento" class="frgp.utn.edu.ar.entidad.Movimiento" scope="prototype"/>
+	    <bean id="Cuenta" class="frgp.utn.edu.ar.entidad.Cuenta" scope="prototype"/>
+	    
+		<!-- negocio -->	    
+	    <bean id="LoginNegocio" class="frgp.utn.edu.ar.negocio.LoginNegocio" scope="singleton"/>
+	    <bean id="CuentaNegocio" class="frgp.utn.edu.ar.negocio.NegCuenta" scope="singleton"/>
+	    <bean id="PersonaNegocio" class="frgp.utn.edu.ar.negocio.NegPersona" scope="singleton"/>
+	    
+	    <!-- dao-->
+	   <bean id="DaoCuenta" class="frgp.utn.edu.ar.dao.DaoCuenta" scope="singleton"/>
+	   <bean id="DaoPersona" class="frgp.utn.edu.ar.dao.DaoPersona" scope="singleton"/>
+	   <bean id="LoginDao" class="frgp.utn.edu.ar.dao.LoginDao" scope="singleton"/>
+	    
+</beans>

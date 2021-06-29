@@ -1,17 +1,15 @@
 package frgp.utn.edu.ar.controller;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import frgp.utn.edu.ar.entidad.Cuenta;
 import frgp.utn.edu.ar.entidad.Persona;
 import frgp.utn.edu.ar.entidad.UsuarioLogin;
 import frgp.utn.edu.ar.negocio.LoginNegocio;
@@ -20,8 +18,18 @@ import frgp.utn.edu.ar.negocio.NegPersona;
 @Controller
 public class ControladorLogin {
 
-	@Qualifier("loginNegocio")
-	private NegPersona negocioPersona = new NegPersona();
+	private NegPersona negocioPersona;
+
+	private Persona persona;
+	private UsuarioLogin usuarioLogin;
+
+	private LoginNegocio loginNegocio;
+
+	@Autowired
+	@Qualifier(value = "LoginNegocio")
+	public void setPersonService(LoginNegocio lg) {
+		this.loginNegocio = lg;
+	}
 
 	@RequestMapping("altaDeUsuarios.html")
 	public ModelAndView eventoRedirectLogin(String txtUsuario, String txtPassword, HttpServletRequest request,
@@ -29,26 +37,21 @@ public class ControladorLogin {
 		boolean verificarUsuario = false;
 		ModelAndView MV = new ModelAndView();
 		try {
-			Persona Persona = new Persona();
-			verificarUsuario = new LoginNegocio().verificarUsuario(txtUsuario, txtPassword) ? true : false;
+			verificarUsuario = loginNegocio.verificarUsuario(txtUsuario, txtPassword) ? true : false;
 			if (verificarUsuario) {
-				UsuarioLogin UsuarioLogin = new LoginNegocio().buscarRol(txtUsuario, txtPassword);
-				if(UsuarioLogin.getTipoUsuario() == false)
-				{
-					Persona = (Persona) negocioPersona.obtenerPersonaParaLogin(UsuarioLogin.getDni());
+				usuarioLogin = new LoginNegocio().buscarRol(txtUsuario, txtPassword);
+				if (usuarioLogin.getTipoUsuario() == false) {
+					persona = (Persona) negocioPersona.obtenerPersonaParaLogin(usuarioLogin.getDni());
 					HttpSession misession = request.getSession(true);
-					misession.setAttribute("Usuario", Persona);
+					misession.setAttribute("Usuario", persona);
 					ControladorCuenta ControladorCuenta = new ControladorCuenta();
 					return ControladorCuenta.eventoRedireccionarPag1();
-				}
-				else
-				{
-					Persona = (Persona) negocioPersona.obtenerPersonaParaLogin(UsuarioLogin.getDni());			
+				} else {
+					persona = (Persona) negocioPersona.obtenerPersonaParaLogin(usuarioLogin.getDni());
 					HttpSession misession = request.getSession(true);
-					misession.setAttribute("Usuario",Persona);
+					misession.setAttribute("Usuario", persona);
 					ControladorCuenta ControladorCuenta = new ControladorCuenta();
-					return ControladorCuenta.eventoRedireccionarPagCliente(UsuarioLogin.getDni());
-					
+					return ControladorCuenta.eventoRedireccionarPagCliente(usuarioLogin.getDni());
 				}
 
 			} else {
