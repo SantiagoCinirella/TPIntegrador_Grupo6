@@ -1,5 +1,6 @@
 package main;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import frgp.utn.edu.ar.entidad.Cuenta;
@@ -34,118 +35,118 @@ public class main {
 		
 		//'1', '1000000', '0', 'Saldo Inicial', '2021-06-27T22:32:56.777', '10000'
 		mov.setCbuDestino(1000000);
-		mov.setCbuOrigen(0);
+		mov.setCbuOrigen(1000000);
 		mov.setDetalle("Saldo Inicial");
-		mov.setFecha("2021-06-27T22:32:56.777");
+		mov.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		mov.setSaldo(10000.);
 		listaMov.add(mov);
 		mov = new Movimiento();
 		
 		//'2', '1000001', '0', 'Saldo Inicial', '2021-06-27T22:33:18.753', '10000'
-		mov.setCbuDestino(1000000);
-		mov.setCbuOrigen(0);
+		mov.setCbuDestino(1000001);
+		mov.setCbuOrigen(1000001);
 		mov.setDetalle("Saldo Inicial");
-		mov.setFecha("2021-06-27T22:32:56.777");
-		mov.setSaldo(10000.);
+		mov.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
+		mov.setSaldo(10000.00);
 		listaMov.add(mov);
 		mov = new Movimiento();
 		
 		
 		//'3', '1000002', '0', 'Saldo Inicial', '2021-06-27T22:33:45.383', '10000'
-		mov.setCbuDestino(1000000);
-		mov.setCbuOrigen(0);
+		mov.setCbuDestino(1000002);
+		mov.setCbuOrigen(1000002);
 		mov.setDetalle("Saldo Inicial");
-		mov.setFecha("2021-06-27T22:32:56.777");
+		mov.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		mov.setSaldo(10000.);
 		listaMov.add(mov);
 		mov = new Movimiento();
 		
 		
 		//'4', '1000003', '0', 'Saldo Inicial', '2021-06-27T22:35:48.096', '10000'
-		mov.setCbuDestino(1000000);
-		mov.setCbuOrigen(0);
+		mov.setCbuDestino(1000003);
+		mov.setCbuOrigen(1000003);
 		mov.setDetalle("Saldo Inicial");
-		mov.setFecha("2021-06-27T22:32:56.777");
+		mov.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		mov.setSaldo(10000.);
 		listaMov.add(mov);
 		mov = new Movimiento();
 		
 		
 		//'5', '1000004', '0', 'Saldo Inicial', '2021-06-27T22:36:12.434', '10000'
-		mov.setCbuDestino(1000000);
-		mov.setCbuOrigen(0);
+		mov.setCbuDestino(1000004);
+		mov.setCbuOrigen(1000004);
 		mov.setDetalle("Saldo Inicial");
-		mov.setFecha("2021-06-27T22:32:56.777");
+		mov.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		mov.setSaldo(10000.);
 		listaMov.add(mov);
 		mov = new Movimiento();
 		
 		
 		//'6', '1000005', '0', 'Saldo Inicial', '2021-06-27T22:36:24.594', '10000'
-		mov.setCbuDestino(1000000);
-		mov.setCbuOrigen(0);
+		mov.setCbuDestino(1000005);
+		mov.setCbuOrigen(1000005);
 		mov.setDetalle("Saldo Inicial");
-		mov.setFecha("2021-06-27T22:32:56.777");
+		mov.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		mov.setSaldo(10000.);
 		listaMov.add(mov);
 		mov = new Movimiento();
 		
 		
 		//'7', '1000006', '0', 'Saldo Inicial', '2021-06-27T22:36:38.264', '10000'
-		mov.setCbuDestino(1000000);
-		mov.setCbuOrigen(0);
+		mov.setCbuDestino(1000006);
+		mov.setCbuOrigen(1000006);
 		mov.setDetalle("Saldo Inicial");
-		mov.setFecha("2021-06-27T22:32:56.777");
+		mov.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		mov.setSaldo(10000.);
 		listaMov.add(mov);
 		mov = new Movimiento();
 		
 		
 		//'8', '1000007', '0', 'Saldo Inicial', '2021-06-27T22:36:53.842', '10000'
-		mov.setCbuDestino(1000000);
-		mov.setCbuOrigen(0);
+		mov.setCbuDestino(1000007);
+		mov.setCbuOrigen(1000007);
 		mov.setDetalle("Saldo Inicial");
-		mov.setFecha("2021-06-27T22:32:56.777");
+		mov.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		mov.setSaldo(10000.);
 		listaMov.add(mov);
 		mov = new Movimiento();
 		
 		
 		//'9', '1000008', '0', 'Saldo Inicial', '2021-06-27T22:37:09.692', '10000
-		mov.setCbuDestino(1000000);
-		mov.setCbuOrigen(0);
+		mov.setCbuDestino(1000008);
+		mov.setCbuOrigen(1000008);
 		mov.setDetalle("Saldo Inicial");
-		mov.setFecha("2021-06-27T22:32:56.777");
+		mov.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		mov.setSaldo(10000.);
 		listaMov.add(mov);
 		mov = new Movimiento();
 		
 		
 		//'11', '1000009', '0', 'Saldo Inicial', '2021-06-27T22:47:05.097', '10000'
-		mov.setCbuDestino(1000000);
-		mov.setCbuOrigen(0);
+		mov.setCbuDestino(1000009);
+		mov.setCbuOrigen(1000009);
 		mov.setDetalle("Saldo Inicial");
-		mov.setFecha("2021-06-27T22:32:56.777");
+		mov.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		mov.setSaldo(10000.);
 		listaMov.add(mov);
 		mov = new Movimiento();
 		
 		
 		//'12', '1000010', '0', 'Saldo Inicial', '2021-06-27T22:48:12.157', '10000'
-		mov.setCbuDestino(1000000);
-		mov.setCbuOrigen(0);
+		mov.setCbuDestino(1000010);
+		mov.setCbuOrigen(1000010);
 		mov.setDetalle("Saldo Inicial");
-		mov.setFecha("2021-06-27T22:32:56.777");
+		mov.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		mov.setSaldo(10000.);
 		listaMov.add(mov);
 		mov = new Movimiento();	
 		
 		
 		//'13', '1000011', '0', 'Saldo Inicial', '2021-06-27T22:53:32.731', '10000'
-		mov.setCbuDestino(1000000);
-		mov.setCbuOrigen(0);
+		mov.setCbuDestino(1000011);
+		mov.setCbuOrigen(1000011);
 		mov.setDetalle("Saldo Inicial");
-		mov.setFecha("2021-06-27T22:32:56.777");
+		mov.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		mov.setSaldo(10000.);
 		listaMov.add(mov);
 		
@@ -168,7 +169,7 @@ public class main {
 		cuenta.setAlias("perro.gato");
 		cuenta.setDni(18000000);
 		cuenta.setEstado(false);
-		cuenta.setFechaCreacion("2021-06-27T22:33:18.673");
+		cuenta.setFechaCreacion(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		cuenta.setNroCuenta(5000000);
 		cuenta.setSaldo(10000.00);
 		cuenta.setTipoCuenta("Caja de ahorro en pesos");
@@ -180,7 +181,7 @@ public class main {
 		cuenta.setAlias("condor.celular");
 		cuenta.setDni(18000000);
 		cuenta.setEstado(false);
-		cuenta.setFechaCreacion("2021-06-27T22:33:18.673");
+		cuenta.setFechaCreacion(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		cuenta.setNroCuenta(5000001);
 		cuenta.setSaldo(10000.00);
 		cuenta.setTipoCuenta("Caja de ahorro en pesos");
@@ -192,7 +193,7 @@ public class main {
 		cuenta.setAlias("pato.azul");
 		cuenta.setDni(19000000);
 		cuenta.setEstado(false);
-		cuenta.setFechaCreacion("2021-06-27T22:33:45.302");
+		cuenta.setFechaCreacion(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		cuenta.setNroCuenta(5000002);
 		cuenta.setSaldo(10000.00);
 		cuenta.setTipoCuenta("Caja de ahorro en dolares");
@@ -204,7 +205,7 @@ public class main {
 		cuenta.setAlias("perro.gato");
 		cuenta.setDni(22222222);
 		cuenta.setEstado(false);
-		cuenta.setFechaCreacion("2021-06-27T22:33:18.673");
+		cuenta.setFechaCreacion(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		cuenta.setNroCuenta(5000003);
 		cuenta.setSaldo(10000.00);
 		cuenta.setTipoCuenta("Caja de ahorro en dolares");
@@ -216,7 +217,7 @@ public class main {
 		cuenta.setAlias("cuctenedor.cubierto");
 		cuenta.setDni(44444444);
 		cuenta.setEstado(false);
-		cuenta.setFechaCreacion("2021-06-27T22:33:18.673");
+		cuenta.setFechaCreacion(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		cuenta.setNroCuenta(5000004);
 		cuenta.setSaldo(10000.00);
 		cuenta.setTipoCuenta("Caja de ahorro en dolares");
@@ -228,8 +229,8 @@ public class main {
 		cuenta.setAlias("plato.verde");
 		cuenta.setDni(18000000);
 		cuenta.setEstado(false);
-		cuenta.setFechaCreacion("2021-06-27T22:33:18.673");
-		cuenta.setNroCuenta(5000001);
+		cuenta.setFechaCreacion(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
+		cuenta.setNroCuenta(5000005);
 		cuenta.setSaldo(10000.00);
 		cuenta.setTipoCuenta("Caja de ahorro en pesos");
 		listaCuentas.add(cuenta);
@@ -240,7 +241,7 @@ public class main {
 		cuenta.setAlias("calor.frio");
 		cuenta.setDni(66666666);
 		cuenta.setEstado(false);
-		cuenta.setFechaCreacion("2021-06-27T22:33:18.673");
+		cuenta.setFechaCreacion(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		cuenta.setNroCuenta(5000006);
 		cuenta.setSaldo(10000.00);
 		cuenta.setTipoCuenta("Caja de ahorro en pesos");
@@ -252,7 +253,7 @@ public class main {
 		cuenta.setAlias("termo.negro");
 		cuenta.setDni(77777777);
 		cuenta.setEstado(false);
-		cuenta.setFechaCreacion("2021-06-27T22:33:18.673");
+		cuenta.setFechaCreacion(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		cuenta.setNroCuenta(5000007);
 		cuenta.setSaldo(10000.00);
 		cuenta.setTipoCuenta("Caja de ahorro en pesos");
@@ -264,7 +265,7 @@ public class main {
 		cuenta.setAlias("cancion.nube");
 		cuenta.setDni(88888888);
 		cuenta.setEstado(false);
-		cuenta.setFechaCreacion("2021-06-27T22:33:18.673");
+		cuenta.setFechaCreacion(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		cuenta.setNroCuenta(5000008);
 		cuenta.setSaldo(10000.00);
 		cuenta.setTipoCuenta("Caja de ahorro en pesos");
@@ -276,7 +277,7 @@ public class main {
 		cuenta.setAlias("estrella.cielo");
 		cuenta.setDni(99999999);
 		cuenta.setEstado(false);
-		cuenta.setFechaCreacion("2021-06-27T22:33:18.673");
+		cuenta.setFechaCreacion(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		cuenta.setNroCuenta(5000009);
 		cuenta.setSaldo(10000.00);
 		cuenta.setTipoCuenta("Caja de ahorro en dolares");
@@ -288,7 +289,7 @@ public class main {
 		cuenta.setAlias("estrella.cielo");
 		cuenta.setDni(88888888);
 		cuenta.setEstado(false);
-		cuenta.setFechaCreacion("2021-06-27T22:33:18.673");
+		cuenta.setFechaCreacion(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
 		cuenta.setNroCuenta(5000010);
 		cuenta.setSaldo(10000.00);
 		cuenta.setTipoCuenta("Caja de ahorro en dolares");
@@ -358,7 +359,7 @@ public class main {
 		persona.setDni(19000000);
 		persona.setApellido( "Steele" );
 		persona.setDireccion( "Albania 123" );
-		persona.setEmail("v");
+		persona.setEmail("ante@anteipsumprimis.com");
 		persona.setEstado(false);
 		persona.setFechaNacimiento("14-12-1990");
 		persona.setLocalidad("capital");
@@ -418,9 +419,9 @@ public class main {
 		//'33333333', '0', 'admin', '0', 'admin'
 		usuario.setDni(33333333);
 		usuario.setEstado(false);
-		usuario.setPassword("33333333");
+		usuario.setPassword("admin");
 		usuario.setTipoUsuario(false);
-		usuario.setUsuario("33333333");
+		usuario.setUsuario("admin");
 		
 		
 		persona.setUsuario(usuario);
