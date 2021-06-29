@@ -3,7 +3,6 @@ package frgp.utn.edu.ar.entidad.enumDatos;
 public enum Provincias {
 
 
-	BUENOS_AIRES("Buenos Aires"),
 	CATAMARCA("Catamarca"),
 	CHACO("Chaco"),
 	CHUBUT("Chubut"),

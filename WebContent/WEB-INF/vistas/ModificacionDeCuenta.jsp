@@ -260,10 +260,21 @@
 												<hr class="my-12" />
 												<div class="form-group">
 													<div class="col-12 text-center">
+														<c:choose>
+																		<c:when test="${MensajeBack.numeroMensaje == 14}">
+																			<div class="alert alert-success" role="alert">
+																				${MensajeBack.mensaje}</div>
+																		</c:when>
+																		<c:when test="${MensajeBack.numeroMensaje == 15}">
+																			<div class="alert alert-danger" role="alert">
+																				${MensajeBack.mensaje}</div>
+																		</c:when>
+	
+														</c:choose>
 														<input type="submit" name="btnAgregarPersona"
 															class="btn btn-sm btn-primary" value="Modificar"
 															style="width: 70%;">
-														<p style="color: blue">${mesajeActualizacion}</p>
+		
 													</div>
 												</div>
 											</form>

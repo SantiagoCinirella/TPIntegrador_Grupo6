@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import frgp.utn.edu.ar.entidad.Cuenta;
 import frgp.utn.edu.ar.entidad.Movimiento;
 import frgp.utn.edu.ar.entidad.Persona;
+import frgp.utn.edu.ar.entidad.enumMensajes.enumMensajes;
 import frgp.utn.edu.ar.negocio.NegCuenta;
 import frgp.utn.edu.ar.negocio.NegMovimiento;
 import frgp.utn.edu.ar.negocio.NegPersona;
@@ -32,7 +33,6 @@ public class ControladorCuenta {
 	@Autowired
 	private Cuenta cuenta;
 	private Persona persona;
-	String cartel = null;
 
 	@RequestMapping(value = "/buscarCliente.html", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView eventoRedireccionar(String txtDni) {
@@ -45,7 +45,7 @@ public class ControladorCuenta {
 		persona = (Persona) negocioPersona.obtenerPersona(dni);
 
 		if (persona == null) {
-			mensajeCliente = "El usuario no existe o esta dado de baja";
+			MV.addObject("MensajeBack",enumMensajes.USUARIO_NO_EXISTE);
 
 		} else {
 
@@ -68,75 +68,70 @@ public class ControladorCuenta {
 		}
 
 		MV.addObject("CuentaParcial", cuenta);
-		MV.addObject("mensajeCliente", mensajeCliente);
 		MV.addObject("clienteObtenido", persona);
 		MV.setViewName("AltaDeCuenta");
 		return MV;
 	}
 
-	@RequestMapping(value ="/agregarCuenta.html" , method= { RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView eventoRedireccionarPag2( String tipoCuenta,String cbu ,String numeroCuenta, String alias , String txtDni ,String txtNombre ,String txtApellido)
-	{
-		int idCliente , cbuint, numCuentaint,dniInt;
+	@RequestMapping(value = "/agregarCuenta.html", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView eventoRedireccionarPag2(String tipoCuenta, String cbu, String numeroCuenta, String alias,
+		int txtDni, String txtNombre, String txtApellido) {
+		
+		int idCliente, cbuint, numCuentaint, dniInt;
 		ModelAndView MV = new ModelAndView();
+
+		cbuint = Integer.parseInt(cbu);
+		numCuentaint = Integer.parseInt(numeroCuenta);
+
+		boolean estado = false, estadoAgregarMovimiento = false;
+		int cantidadCuentas;
+		cuenta.setCbu(cbuint);
+		cuenta.setTipoCuenta(tipoCuenta);
+		cuenta.setAlias(alias);
+		cuenta.setNroCuenta(numCuentaint);
+		cuenta.setDni(txtDni);
+
+		cuenta.setSaldo(10000.00);
+		cuenta.setFechaCreacion(LocalDateTime.now().toString());
 		
-		if(tipoCuenta !=  "" && cbu !=  "" &&  numeroCuenta  !=  "" &&  alias   !=  "" && txtDni    !=  "" && txtNombre   !=  "" && txtApellido  !=  "" )
-		{
+		persona = (Persona) negocioPersona.obtenerPersona(txtDni);
+		if (!tipoCuenta.equals("Seleccione un tipo de Cuenta")  ) {
+
 			
-			cbuint = Integer.parseInt(cbu);
-			numCuentaint = Integer.parseInt(numeroCuenta);
-			dniInt = Integer.parseInt(txtDni);
-			boolean estado = false, estadoAgregarMovimiento = false;
-			int cantidadCuentas;
-			cuenta.setCbu(cbuint);
-			cuenta.setTipoCuenta(tipoCuenta);
-			cuenta.setAlias(alias);
-			cuenta.setNroCuenta(numCuentaint);
-			cuenta.setDni(dniInt);
-			persona = new Persona();
-			
-			persona.setDni(dniInt);
-			persona.setNombre(txtNombre);
-			persona.setApellido(txtApellido);
-		
-			cuenta.setPersona(persona);
-			cuenta.setSaldo(10000.00);
-			cuenta.setFechaCreacion(LocalDateTime.now().toString() );
-			
+
 			cantidadCuentas = negocioCuenta.getCantidadCuentas(cuenta.getDni());
-			if(cantidadCuentas < 4 )
-				{
-				estado = negocioCuenta.agregarCuenta(cuenta);
+			if (cantidadCuentas < 4) {
+
+				MV.addObject("MensajeBack",enumMensajes.ERROR_CUENTA_NO_AGREGADA);
 				
-				cartel="No se pudo agregar la cuenta";
-				if(estado)
-				{
-					cartel="La cuenta ha sido agregada exitosamente";
+				if (negocioCuenta.agregarCuenta(cuenta)) {
+					MV.addObject("MensajeBack",enumMensajes.CUENTA_AGREGADA_EXITOSAMENTE);
+
 					negocioMovimiento = new NegMovimiento();
-					Movimiento movimiento = new Movimiento() ;
+					Movimiento movimiento = new Movimiento();
+					movimiento.setCbuOrigen(cuenta.getCbu());
 					movimiento.setCbuDestino(cuenta.getCbu());
 					movimiento.setDetalle("Saldo Inicial");
 					movimiento.setFecha(LocalDateTime.now().toString());
 					movimiento.setSaldo(10000.00);
 					estadoAgregarMovimiento = negocioMovimiento.agregarMovimiento(movimiento);
-					
+
 				}
+			} else {
+				MV.addObject("MensajeBack",enumMensajes.ERROR_CANTIDAD_CUENTA);
+
 			}
-			else
-			{
-				cartel="El cliente no puede tener mas de 4 cuentas";
-			}
-			
 		}
 		else 
 		{
-			cartel="Debe completar todos los campos";
+			MV.addObject("MensajeBack",enumMensajes.DEBE_SELECCIONAR_TIPOCUENTA);
+
 		}
-		MV.addObject("estadoAgregarCuenta",cartel);
+		MV.addObject("CuentaParcial", cuenta);
+		MV.addObject("clienteObtenido", persona);
 		MV.setViewName("AltaDeCuenta");
 		return MV;
-		
-		
+
 	}
 
 	@RequestMapping(value = "/recargaGrillaCuentas.html", method = { RequestMethod.GET, RequestMethod.POST })
@@ -156,8 +151,7 @@ public class ControladorCuenta {
 	}
 
 	@RequestMapping("homeCliente.html")
-	public ModelAndView eventoRedireccionarPagCliente(int Usuario)
-	{
+	public ModelAndView eventoRedireccionarPagCliente(int Usuario) {
 
 		ModelAndView MV = new ModelAndView();
 		negocioPersona = new NegPersona();
@@ -167,12 +161,10 @@ public class ControladorCuenta {
 		return MV;
 
 	}
-	
+
 	@RequestMapping("Transferencia.html")
-	public ModelAndView eventoRedireccionarTransferencia(HttpServletRequest request,
-	HttpServletResponse response)
-	{
-		HttpSession misession= (HttpSession) request.getSession(); 
+	public ModelAndView eventoRedireccionarTransferencia(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession misession = (HttpSession) request.getSession();
 		Persona Persona = (Persona) misession.getAttribute("Usuario");
 		negocioPersona = new NegPersona();
 		ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(Persona.getDni());
@@ -182,7 +174,7 @@ public class ControladorCuenta {
 		return MV;
 
 	}
-	
+
 	@RequestMapping("abmlCuentas.html")
 	public ModelAndView eventoRedireccionarPag1() {
 		NegCuenta negocioCuenta = new NegCuenta();
@@ -199,21 +191,20 @@ public class ControladorCuenta {
 	}
 
 	@RequestMapping("Movimientos.html")
-	public ModelAndView movimientos(int cbu)
-	{
+	public ModelAndView movimientos(int cbu) {
 		NegCuenta negocioCuenta = new NegCuenta();
 		ModelAndView MV = new ModelAndView();
-		
+
 		ArrayList<Movimiento> listaMovimientos = new ArrayList<>();
-		
+
 		listaMovimientos = (ArrayList<Movimiento>) negocioCuenta.listarMovimientos(cbu);
-		
+
 		MV.addObject("listaMovimientos", listaMovimientos);
 		MV.setViewName("HistorialDeMovimientos");
 		return MV;
 
 	}
-	
+
 	@RequestMapping("eliminacionCuenta.html")
 	public ModelAndView eliminar(int numeroCuenta) {
 		negocioCuenta.bajaLogica(numeroCuenta);
@@ -246,6 +237,8 @@ public class ControladorCuenta {
 
 	@RequestMapping("ModificarCuenta_AltaDecuenta.html")
 	public ModelAndView modificarDesdeAlta(int numeroCuenta, int cbu, String alias, String tipoCuenta) {
+		
+		ModelAndView MV = new ModelAndView();
 		Cuenta Cuenta = new Cuenta();
 		Cuenta.setAlias(alias);
 		Cuenta.setCbu(cbu);
@@ -253,13 +246,13 @@ public class ControladorCuenta {
 		Cuenta.setTipoCuenta(tipoCuenta);
 
 		boolean estado = negocioCuenta.update(Cuenta);
-		String mesajeActualizacion = "Cuenta Modificada correctamente";
+		MV.addObject("MensajeBack",enumMensajes.CUENTA_MODIFICADA_EXITOSAMENTE);
+		
 		if (!estado) {
-			mesajeActualizacion = "No se pudo actualizar la cuenta";
+			MV.addObject("MensajeBack",enumMensajes.ERROR_ACTUALIZAR_CUENTA);
 		}
 
-		ModelAndView MV = new ModelAndView();
-		MV.addObject("mesajeActualizacion", mesajeActualizacion);
+		MV.addObject("CuentaModificar", Cuenta);
 		MV.setViewName("ModificacionDeCuenta");
 		return MV;
 

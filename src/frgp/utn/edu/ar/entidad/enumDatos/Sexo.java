@@ -2,7 +2,7 @@ package frgp.utn.edu.ar.entidad.enumDatos;
 
 public enum Sexo {
 
-	MASCULINO("Masculino"), FEMENINO("Femenino"), NO_ESPECIFICA("No especifica");
+	 FEMENINO("Femenino"), NO_ESPECIFICA("No especifica");
 
 	private String sexo;
 
