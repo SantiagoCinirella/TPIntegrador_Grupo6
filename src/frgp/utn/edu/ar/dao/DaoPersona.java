@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import frgp.utn.edu.ar.dao.queries.ClienteQueries;
 import frgp.utn.edu.ar.entidad.Cuenta;
-import frgp.utn.edu.ar.entidad.Movimiento;
 import frgp.utn.edu.ar.entidad.Persona;
 
 @Repository("daoPersona")
@@ -174,8 +173,6 @@ public class DaoPersona {
 			Query busqueda = session.createQuery(ClienteQueries.BUSCA_CLIENTE_SQL.getQuery());
 			persona = (Persona)busqueda.setParameter(0, dni).uniqueResult();
 			ArrayList<Persona> listaPersonas = (ArrayList<Persona>) session.createCriteria(Persona.class).list();
-			
-			//List results = busqueda.list();			
 			return persona;
 		} catch (Exception e) {
 			return persona;

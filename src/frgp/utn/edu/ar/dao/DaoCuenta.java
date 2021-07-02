@@ -23,7 +23,6 @@ public class DaoCuenta {
 
 		Session session = conexion.abrirConexion();
 		Transaction tx = session.beginTransaction();
-		Cuenta cuenta;
 
 		/*
 		 * String hql = "FROM Employee E"; Query query = session.createQuery(hql); List
@@ -178,9 +177,6 @@ public class DaoCuenta {
 	public int obtenerCuentaMax() {
 
 		int maximaCuenta = 0;
-
-		Cuenta cuenta = new Cuenta();
-
 		Session session = conexion.abrirConexion();
 		try {
 			Query busqueda = session.createQuery(CuentaQueries.BUSCA_MAX_CUENTA_SQL.getQuery());
@@ -196,14 +192,11 @@ public class DaoCuenta {
 	public int obtenerCbuMax() {
 
 		int maximaCbu = 0;
-
 		Session session = conexion.abrirConexion();
 		try {
 
 			Query busqueda = session.createQuery(CuentaQueries.BUSCA_MAX_CBU_SQL.getQuery());
 			maximaCbu = (int) busqueda.uniqueResult();
-
-			// List results = busqueda.list();
 			return maximaCbu;
 		} catch (Exception e) {
 			return maximaCbu;
@@ -222,7 +215,6 @@ public class DaoCuenta {
 
 			Query busqueda = session.createQuery(CuentaQueries.CANT_CUENTAS_SQL.getQuery());
 			cantidadCuenta = ((Long) busqueda.setParameter(0, dni).uniqueResult()).intValue();
-			// List results = busqueda.list();
 			return cantidadCuenta;
 		} catch (Exception e) {
 			return cantidadCuenta;

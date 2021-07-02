@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.eclipse.jdt.internal.compiler.parser.ParserBasicInformation;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -37,7 +37,6 @@ public class ControladorCuenta {
 	@RequestMapping(value = "/buscarCliente.html", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView eventoRedireccionar(String txtDni) {
 		ModelAndView MV = new ModelAndView();
-		String mensajeCliente = null;
 		int dni, cbu, nroCuenta, maxCuenta, maxCbu;
 
 		dni = Integer.parseInt(txtDni);
@@ -77,13 +76,12 @@ public class ControladorCuenta {
 	public ModelAndView eventoRedireccionarPag2(String tipoCuenta, String cbu, String numeroCuenta, String alias,
 		int txtDni, String txtNombre, String txtApellido) {
 		
-		int idCliente, cbuint, numCuentaint, dniInt;
+		int cbuint, numCuentaint;
 		ModelAndView MV = new ModelAndView();
 
 		cbuint = Integer.parseInt(cbu);
 		numCuentaint = Integer.parseInt(numeroCuenta);
 
-		boolean estado = false, estadoAgregarMovimiento = false;
 		int cantidadCuentas;
 		cuenta.setCbu(cbuint);
 		cuenta.setTipoCuenta(tipoCuenta);
@@ -114,7 +112,6 @@ public class ControladorCuenta {
 					movimiento.setDetalle("Saldo Inicial");
 					movimiento.setFecha(LocalDateTime.now().toString());
 					movimiento.setSaldo(10000.00);
-					estadoAgregarMovimiento = negocioMovimiento.agregarMovimiento(movimiento);
 
 				}
 			} else {

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import frgp.utn.edu.ar.entidad.Persona;
-import frgp.utn.edu.ar.entidad.UsuarioLogin;
 import frgp.utn.edu.ar.negocio.LoginNegocio;
 import frgp.utn.edu.ar.negocio.NegPersona;
 

@@ -7,7 +7,6 @@ import frgp.utn.edu.ar.entidad.Cuenta;
 import frgp.utn.edu.ar.entidad.Movimiento;
 import frgp.utn.edu.ar.entidad.Persona;
 import frgp.utn.edu.ar.entidad.UsuarioLogin;
-import frgp.utn.edu.ar.negocio.LoginNegocio;
 import frgp.utn.edu.ar.negocio.NegCuenta;
 import frgp.utn.edu.ar.negocio.NegMovimiento;
 import frgp.utn.edu.ar.negocio.NegPersona;

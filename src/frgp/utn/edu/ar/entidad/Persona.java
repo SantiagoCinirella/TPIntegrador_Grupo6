@@ -1,7 +1,6 @@
 package frgp.utn.edu.ar.entidad;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -15,9 +14,6 @@ import org.springframework.stereotype.Component;
 @Entity
 public class Persona implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Id
 	private int dni;
