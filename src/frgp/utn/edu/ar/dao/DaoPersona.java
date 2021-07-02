@@ -26,6 +26,8 @@ public class DaoPersona {
 		Transaction tx = session.beginTransaction();
 		ArrayList<Persona> listaPersonas = (ArrayList<Persona>) session.createCriteria(Persona.class).list();
 		tx = session.getTransaction();
+		
+		
 		return listaPersonas;
 	}
 
@@ -120,7 +122,9 @@ public class DaoPersona {
 		boolean aux = true;
 		try {
 			session.save(p);
+			session.update(p);
 			tx = session.getTransaction();
+			session.flush();
 			tx.commit();
 		} catch (Exception e) {
 			aux = false;
@@ -152,6 +156,7 @@ public class DaoPersona {
 		try {
 			Query busqueda = session.createQuery(ClienteQueries.BUSCA_CLIENTE_TIPO_USUARIO_SQL.getQuery());
 			persona = (Persona)busqueda.setParameter(0, dni).uniqueResult();
+			ArrayList<Persona> listaPersonas = (ArrayList<Persona>) session.createCriteria(Persona.class).list();
 			return persona;
 		} catch (Exception e) {
 			return persona;
@@ -166,11 +171,9 @@ public class DaoPersona {
 		
 		Session session = conexion.abrirConexion();
 		try {
-			
-			
 			Query busqueda = session.createQuery(ClienteQueries.BUSCA_CLIENTE_SQL.getQuery());
 			persona = (Persona)busqueda.setParameter(0, dni).uniqueResult();
-			
+			ArrayList<Persona> listaPersonas = (ArrayList<Persona>) session.createCriteria(Persona.class).list();
 			
 			//List results = busqueda.list();			
 			return persona;

@@ -31,11 +31,11 @@ public class Persona implements Serializable {
 	private String direccion;
 	private String localidad;
 	private String provincia;
-	
+
 	@OneToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "dni")
 	private UsuarioLogin usuario;
-	
+
 	public UsuarioLogin getUsuario() {
 		return usuario;
 	}
@@ -70,7 +70,10 @@ public class Persona implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Persona [nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + "]";
+		return "Persona [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
+				+ ", estado=" + estado + ", sexo=" + sexo + ", nacionalidad=" + nacionalidad + ", fechaNacimiento="
+				+ fechaNacimiento + ", direccion=" + direccion + ", localidad=" + localidad + ", provincia=" + provincia
+				+ ", usuario=" + usuario + "]";
 	}
 
 	public String getEmail() {

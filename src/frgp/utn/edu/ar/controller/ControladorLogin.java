@@ -1,7 +1,5 @@
 package frgp.utn.edu.ar.controller;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import frgp.utn.edu.ar.entidad.Cuenta;
 import frgp.utn.edu.ar.entidad.Persona;
 import frgp.utn.edu.ar.entidad.UsuarioLogin;
 import frgp.utn.edu.ar.negocio.LoginNegocio;
@@ -30,12 +27,10 @@ public class ControladorLogin {
 		ModelAndView MV = new ModelAndView();
 		try {
 			Persona Persona = new Persona();
-			verificarUsuario = new LoginNegocio().verificarUsuario(txtUsuario, txtPassword) ? true : false;
-			if (verificarUsuario) {
-				UsuarioLogin UsuarioLogin = new LoginNegocio().buscarRol(txtUsuario, txtPassword);
-				if(UsuarioLogin.getTipoUsuario() == false)
+			Persona = new LoginNegocio().verificarUsuario(txtUsuario, txtPassword);
+			if (!(Persona == null)) {
+				if(Persona.getUsuario().getTipoUsuario()== false)
 				{
-					Persona = (Persona) negocioPersona.obtenerPersonaParaLogin(UsuarioLogin.getDni());
 					HttpSession misession = request.getSession(true);
 					misession.setAttribute("Usuario", Persona);
 					ControladorCuenta ControladorCuenta = new ControladorCuenta();
@@ -43,11 +38,10 @@ public class ControladorLogin {
 				}
 				else
 				{
-					Persona = (Persona) negocioPersona.obtenerPersonaParaLogin(UsuarioLogin.getDni());			
 					HttpSession misession = request.getSession(true);
 					misession.setAttribute("Usuario",Persona);
 					ControladorCuenta ControladorCuenta = new ControladorCuenta();
-					return ControladorCuenta.eventoRedireccionarPagCliente(UsuarioLogin.getDni());
+					return ControladorCuenta.eventoRedireccionarPagCliente(Persona.getDni());
 					
 				}
 
