@@ -24,7 +24,7 @@ public class DaoMovimiento {
             aux = false;
             tx.rollback();
         }
-        session.close();
+		session.close();
         return aux;
 	}
 

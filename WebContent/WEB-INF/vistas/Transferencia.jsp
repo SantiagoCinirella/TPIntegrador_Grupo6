@@ -41,6 +41,23 @@
 
 	Persona Persona = (Persona) misession.getAttribute("Usuario");
 	%>
+	<script>
+	  function ValidarDNI() {
+          objeto = document.getElementById("CBU");
+          Validar = document.getElementById("btnVerificar");
+          valueForm = objeto.value;
+          if (valueForm.length > 10) {
+              objeto.className = "form-control border border-danger";
+              objeto.style.boxShadow = "0 0 0 0.2rem rgba(255, 0, 0, 0.23)";
+              Validar.disabled = true;
+          }
+          else {
+              objeto.className = "form-control border border-success";
+              objeto.style.boxShadow = "0 0 0 0.2rem rgba(79, 162, 51, 0.25)";
+              Validar.disabled = false;
+          }
+      }
+	  </script>
 	<!-- Sidenav -->
 	<nav
 		class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white"
@@ -265,7 +282,7 @@
 														<div class="form-group">
 															<label class="form-control-label" for="input-address">Tipo
 																de cuenta</label> <input type="text" id="CBU"
-																class="form-control" placeholder="CBU" name="CBU" value="${CuentaDestino.cbu}" required>
+																class="form-control" placeholder="CBU" onkeyup="ValidarDNI()"  name="CBU" value="${CuentaDestino.cbu}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1')" required>
 														</div>
 													</div>
 												</div>
@@ -287,7 +304,7 @@
 													<div class="col-lg-4">
 														<div class="form-group">
 															<label class="form-control-label" for="input-country">Alias</label>
-															<input type="number" id="input-postal-code"
+															<input type="text" id="input-postal-code"
 																class="form-control" readonly name="Alias"
 																 value="${CuentaDestino.alias}" required>
 														</div>
@@ -331,11 +348,11 @@
 												<div class="form-group">
 													<label class="form-control-label" for="input-email">Saldo a transferir</label>
 													<input type="number" id="Saldo" name="SaldoTransferir" 
-														class="form-control" value="${SaldoTransferir}" required>
+														class="form-control" value="${SaldoTransferir}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1')" required>
 												</div>
 											</div>
 											<div class="col-12 text-center">
-												<input type="submit" class="btn btn-success"
+												<input type="submit" class="btn btn-success" id="btnVerificar"
 													value="Verificar" formaction="buscarSaldo.html"
 													style="width: 120px;">
 											</div>
@@ -372,7 +389,7 @@
 												<c:when test="${personaDestino.nombre != null}">
 													<div class="form-group">
 											<div class="col-12 text-center">
-												<input type="submit" class="btn btn-sm btn-primary"
+												<input type="submit" class="btn btn-sm btn-primary" 
 													style="width: 250px;" value="Transferir" ${ personaDestino.nombre eq '' ? 'disabled="disabled"' : ''}>
 													<input type="hidden" value="${cuenta.cbu}"
 													class="myButton" name="CBUOrigen" id="numeroCuenta">

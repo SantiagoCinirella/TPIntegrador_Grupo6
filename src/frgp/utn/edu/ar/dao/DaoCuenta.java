@@ -33,7 +33,7 @@ public class DaoCuenta {
 
 		// cuenta = (Cuenta) session.get(Cuenta.class,"ID");
 		tx = session.getTransaction();
-		conexion.cerrarSession();
+		session.close();
 		return listaCuentas;
 
 	}
@@ -93,6 +93,7 @@ public class DaoCuenta {
 			session.delete(cuenta);
 			tx = session.getTransaction();
 			tx.commit();
+			
 		} catch (Exception e) {
 			aux = false;
 			tx.rollback();

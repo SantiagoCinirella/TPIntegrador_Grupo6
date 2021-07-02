@@ -44,25 +44,17 @@ public class ControladorCuenta {
 		persona = (Persona) negocioPersona.obtenerPersona(dni);
 
 		if (persona == null) {
-			MV.addObject("MensajeBack",enumMensajes.USUARIO_NO_EXISTE);
+			MV.addObject("MensajeBack", enumMensajes.USUARIO_NO_EXISTE);
 
 		} else {
 
 			maxCuenta = negocioCuenta.obtenerCuentaMax();
 			maxCbu = negocioCuenta.obtenerCbuMax();
 
-			if (maxCuenta == 0 && maxCbu == 0) {
-				cuenta = new Cuenta();
-				cbu = 1000000;
-				nroCuenta = 5000000;
-				cuenta.setCbu(cbu);
-				cuenta.setNroCuenta(nroCuenta);
-			} else {
-				cbu = maxCbu + 1;
-				nroCuenta = maxCuenta + 1;
-				cuenta.setCbu(cbu);
-				cuenta.setNroCuenta(nroCuenta);
-			}
+			cbu = maxCbu + 1;
+			nroCuenta = maxCuenta + 1;
+			cuenta.setCbu(cbu);
+			cuenta.setNroCuenta(nroCuenta);
 
 		}
 
@@ -74,9 +66,9 @@ public class ControladorCuenta {
 
 	@RequestMapping(value = "/agregarCuenta.html", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView eventoRedireccionarPag2(String tipoCuenta, String cbu, String numeroCuenta, String alias,
-		int txtDni, String txtNombre, String txtApellido) {
-		
-		int cbuint, numCuentaint;
+			int txtDni, String txtNombre, String txtApellido) {
+
+		int idCliente, cbuint, numCuentaint, dniInt;
 		ModelAndView MV = new ModelAndView();
 
 		cbuint = Integer.parseInt(cbu);
@@ -90,38 +82,34 @@ public class ControladorCuenta {
 		cuenta.setDni(txtDni);
 
 		cuenta.setSaldo(10000.00);
-		cuenta.setFechaCreacion(LocalDateTime.now().toString());
-		
-		persona = (Persona) negocioPersona.obtenerPersona(txtDni);
-		if (!tipoCuenta.equals("Seleccione un tipo de Cuenta")  ) {
+		cuenta.setFechaCreacion(LocalDateTime.now().toString().replace("T", " ").substring(0, 16));
 
-			
+		Persona persona = (Persona) negocioPersona.obtenerPersona(txtDni);
+		if (!tipoCuenta.equals("Seleccione un tipo de Cuenta")) {
 
 			cantidadCuentas = negocioCuenta.getCantidadCuentas(cuenta.getDni());
 			if (cantidadCuentas < 4) {
 
-				MV.addObject("MensajeBack",enumMensajes.ERROR_CUENTA_NO_AGREGADA);
-				
+				MV.addObject("MensajeBack", enumMensajes.ERROR_CUENTA_NO_AGREGADA);
+
 				if (negocioCuenta.agregarCuenta(cuenta)) {
-					MV.addObject("MensajeBack",enumMensajes.CUENTA_AGREGADA_EXITOSAMENTE);
+					MV.addObject("MensajeBack", enumMensajes.CUENTA_AGREGADA_EXITOSAMENTE);
 
 					negocioMovimiento = new NegMovimiento();
 					Movimiento movimiento = new Movimiento();
 					movimiento.setCbuOrigen(cuenta.getCbu());
 					movimiento.setCbuDestino(cuenta.getCbu());
 					movimiento.setDetalle("Saldo Inicial");
-					movimiento.setFecha(LocalDateTime.now().toString());
+					movimiento.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0, 16));
 					movimiento.setSaldo(10000.00);
 
 				}
 			} else {
-				MV.addObject("MensajeBack",enumMensajes.ERROR_CANTIDAD_CUENTA);
+				MV.addObject("MensajeBack", enumMensajes.ERROR_CANTIDAD_CUENTA);
 
 			}
-		}
-		else 
-		{
-			MV.addObject("MensajeBack",enumMensajes.DEBE_SELECCIONAR_TIPOCUENTA);
+		} else {
+			MV.addObject("MensajeBack", enumMensajes.DEBE_SELECCIONAR_TIPOCUENTA);
 
 		}
 		MV.addObject("CuentaParcial", cuenta);
@@ -234,7 +222,7 @@ public class ControladorCuenta {
 
 	@RequestMapping("ModificarCuenta_AltaDecuenta.html")
 	public ModelAndView modificarDesdeAlta(int numeroCuenta, int cbu, String alias, String tipoCuenta) {
-		
+
 		ModelAndView MV = new ModelAndView();
 		Cuenta Cuenta = new Cuenta();
 		Cuenta.setAlias(alias);
@@ -243,10 +231,10 @@ public class ControladorCuenta {
 		Cuenta.setTipoCuenta(tipoCuenta);
 
 		boolean estado = negocioCuenta.update(Cuenta);
-		MV.addObject("MensajeBack",enumMensajes.CUENTA_MODIFICADA_EXITOSAMENTE);
-		
+		MV.addObject("MensajeBack", enumMensajes.CUENTA_MODIFICADA_EXITOSAMENTE);
+
 		if (!estado) {
-			MV.addObject("MensajeBack",enumMensajes.ERROR_ACTUALIZAR_CUENTA);
+			MV.addObject("MensajeBack", enumMensajes.ERROR_ACTUALIZAR_CUENTA);
 		}
 
 		MV.addObject("CuentaModificar", Cuenta);
