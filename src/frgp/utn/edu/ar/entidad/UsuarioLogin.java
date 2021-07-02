@@ -23,9 +23,9 @@ public class UsuarioLogin implements Serializable {
 	private Boolean tipoUsuario;
 
 	public UsuarioLogin() {
-		
+
 	}
-	
+
 	public String getUsuario() {
 		return usuario;
 	}
@@ -65,6 +65,5 @@ public class UsuarioLogin implements Serializable {
 	public void setTipoUsuario(Boolean tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
-	
 
 }

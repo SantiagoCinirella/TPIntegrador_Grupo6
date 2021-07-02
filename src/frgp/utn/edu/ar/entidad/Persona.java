@@ -1,7 +1,6 @@
 package frgp.utn.edu.ar.entidad;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -15,9 +14,6 @@ import org.springframework.stereotype.Component;
 @Entity
 public class Persona implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Id
 	private int dni;
@@ -31,11 +27,11 @@ public class Persona implements Serializable {
 	private String direccion;
 	private String localidad;
 	private String provincia;
-	
+
 	@OneToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "dni")
 	private UsuarioLogin usuario;
-	
+
 	public UsuarioLogin getUsuario() {
 		return usuario;
 	}
@@ -70,7 +66,10 @@ public class Persona implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Persona [nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + "]";
+		return "Persona [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
+				+ ", estado=" + estado + ", sexo=" + sexo + ", nacionalidad=" + nacionalidad + ", fechaNacimiento="
+				+ fechaNacimiento + ", direccion=" + direccion + ", localidad=" + localidad + ", provincia=" + provincia
+				+ ", usuario=" + usuario + "]";
 	}
 
 	public String getEmail() {

@@ -14,19 +14,19 @@ import org.springframework.stereotype.Component;
 public class Movimiento implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int nroTx;
-	
+
 	private int cbuOrigen;
 	private int cbuDestino;
 	private String fecha;
 	private String detalle;
 	private Double saldo;
-	
+
 	public Movimiento() {
-		
+
 	}
 
 	public int getCbuOrigen() {
@@ -68,7 +68,5 @@ public class Movimiento implements Serializable {
 	public void setSaldo(Double saldo) {
 		this.saldo = saldo;
 	}
-	
-	
 
 }
