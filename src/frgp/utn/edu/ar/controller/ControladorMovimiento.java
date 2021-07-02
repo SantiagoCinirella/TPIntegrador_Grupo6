@@ -30,13 +30,13 @@ public class ControladorMovimiento {
 	private NegMovimiento negocioMovimiento;
 
 	@RequestMapping(value = "buscarSaldo.html", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView eventoRedireccionar(int cuentas, int CBU, int SaldoTransferir, String Comentario, HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView eventoRedireccionar(int cuentas, int CBU, int SaldoTransferir, String Comentario,
+			HttpServletRequest request, HttpServletResponse response) {
 		if (cuentas != 0) {
 			NegPersona negocioPersona = new NegPersona();
 			Cuenta CuentaDestino = negocioPersona.obtenerCuentaxCbu(CBU);
 			if (CuentaDestino != null) {
-				
+
 				Persona personaDestino = negocioPersona.obtenerPersona(CuentaDestino.getDni());
 				NegCuenta negocioCuenta = new NegCuenta();
 				Cuenta cuenta = negocioCuenta.buscarSaldo(cuentas);
@@ -55,14 +55,17 @@ public class ControladorMovimiento {
 				MV.setViewName("Transferencia");
 				return MV;
 
-			} 
-			else {
+			} else {
 				HttpSession misession = (HttpSession) request.getSession();
 				Persona Persona = (Persona) misession.getAttribute("Usuario");
 				ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(Persona.getDni());
-
+				NegCuenta negocioCuenta = new NegCuenta();
+				Cuenta cuenta = negocioCuenta.buscarSaldo(cuentas);
 				ModelAndView MV = new ModelAndView();
 				MV.addObject("listaCuenta", listaCuenta);
+				MV.addObject("cuenta", cuenta);
+				MV.addObject("SaldoTransferir", SaldoTransferir);
+				MV.addObject("Comentario", Comentario);
 				MV.setViewName("Transferencia");
 				MV.addObject("mensaje", enumMensajes.CBU_INCORRECTO);
 				return MV;
@@ -73,89 +76,123 @@ public class ControladorMovimiento {
 			Persona Persona = (Persona) misession.getAttribute("Usuario");
 			NegPersona negocioPersona = new NegPersona();
 			ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(Persona.getDni());
+			Cuenta CuentaDestino = negocioPersona.obtenerCuentaxCbu(CBU);
+			NegCuenta negocioCuenta = new NegCuenta();
+			Cuenta cuenta = negocioCuenta.buscarSaldo(cuentas);
+			Persona personaDestino = negocioPersona.obtenerPersona(CuentaDestino.getDni());
+
 			ModelAndView MV = new ModelAndView();
+			MV.addObject("cuenta", cuenta);
+			MV.addObject("personaDestino", personaDestino);
 			MV.addObject("listaCuenta", listaCuenta);
+			MV.addObject("CuentaDestino", CuentaDestino);
+			MV.addObject("SaldoTransferir", SaldoTransferir);
+			MV.addObject("Comentario", Comentario);
 			MV.setViewName("Transferencia");
 			MV.addObject("mensaje", enumMensajes.SELECCIONAR_CUENTA);
 			return MV;
 		}
 
 	}
-	
+
 	@RequestMapping(value = "TransferirDinero.html", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView Transferir(int CBU, int CBUOrigen , int SaldoTransferir , String Comentario,HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView Transferir(int CBU, int CBUOrigen, int SaldoTransferir, String Comentario,
+			HttpServletRequest request, HttpServletResponse response) {
 		NegPersona negocioPersona = new NegPersona();
 		Cuenta CuentaOrigen = negocioPersona.obtenerCuentaxCbu(CBUOrigen);
 
-		if (CuentaOrigen.getSaldo() != 0 && CuentaOrigen.getSaldo() >= SaldoTransferir ) {
-			
-			if(CBU == CBUOrigen)
-			{
+		if (CuentaOrigen.getSaldo() != 0 && CuentaOrigen.getSaldo() >= SaldoTransferir) {
+
+			if (CBU == CBUOrigen) {
+
 				HttpSession misession = (HttpSession) request.getSession();
 				Persona Persona = (Persona) misession.getAttribute("Usuario");
 				ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(Persona.getDni());
-
+				NegCuenta negocioCuenta = new NegCuenta();
+				Cuenta cuenta = negocioCuenta.buscarSaldo(CBUOrigen);
+				negocioPersona = new NegPersona();
+				Cuenta CuentaDestino = negocioPersona.obtenerCuentaxCbu(CBU);
+				Persona personaDestino = negocioPersona.obtenerPersona(CuentaDestino.getDni());
 				ModelAndView MV = new ModelAndView();
+				MV.addObject("cuenta", cuenta);
+				MV.addObject("personaDestino", personaDestino);
 				MV.addObject("listaCuenta", listaCuenta);
+				MV.addObject("CuentaDestino", CuentaDestino);
+				MV.addObject("SaldoTransferir", SaldoTransferir);
+				MV.addObject("Comentario", Comentario);
 				MV.setViewName("Transferencia");
 				MV.addObject("mensaje", enumMensajes.TRANSFERIR_MISMA_CUENTA);
 				return MV;
-			}
-			else
-			{
+			} else {
 				double SaldoParaMovimiento = SaldoTransferir;
 				Cuenta CuentaDestino = negocioPersona.obtenerCuentaxCbu(CBU);
+				Persona personaDestino = negocioPersona.obtenerPersona(CuentaDestino.getDni());
 				double SaldoCuentaDestino = CuentaDestino.getSaldo();
 				SaldoCuentaDestino += SaldoTransferir;
 				CuentaDestino.setSaldo(SaldoCuentaDestino);
 				NegCuenta negocioCuenta = new NegCuenta();
 				negocioCuenta.actualizarSaldo(CuentaDestino);
-				
+
 				double SaldoCuentaOrigen = CuentaOrigen.getSaldo();
 				SaldoCuentaOrigen = SaldoCuentaOrigen - SaldoTransferir;
 				CuentaOrigen.setSaldo(SaldoCuentaOrigen);
 				negocioCuenta.actualizarSaldo(CuentaOrigen);
-				
+
 				NegMovimiento negocioMovimiento = new NegMovimiento();
 				Movimiento Movimiento = new Movimiento();
 				Movimiento.setCbuOrigen(CuentaOrigen.getCbu());
 				Movimiento.setCbuDestino(CuentaDestino.getCbu());
 				Movimiento.setDetalle(Comentario);
 				Movimiento.setSaldo(-SaldoParaMovimiento);
-				Movimiento.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
+				Movimiento.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0, 16));
 				negocioMovimiento.agregarMovimiento(Movimiento);
-				
+
 				Movimiento = new Movimiento();
 				Movimiento.setCbuOrigen(CuentaDestino.getCbu());
 				Movimiento.setCbuDestino(CuentaOrigen.getCbu());
 				Movimiento.setDetalle(Comentario);
 				Movimiento.setSaldo(SaldoParaMovimiento);
-				Movimiento.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0,16));
+				Movimiento.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0, 16));
 				negocioMovimiento.agregarMovimiento(Movimiento);
 
-				
+				Cuenta cuenta = negocioCuenta.buscarSaldo(CBUOrigen);
+
 				HttpSession misession = (HttpSession) request.getSession();
 				Persona Persona = (Persona) misession.getAttribute("Usuario");
 				ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(Persona.getDni());
-				
+
 				ModelAndView MV = new ModelAndView();
+				MV.addObject("cuenta", cuenta);
+				MV.addObject("personaDestino", personaDestino);
 				MV.addObject("listaCuenta", listaCuenta);
+				MV.addObject("CuentaDestino", CuentaDestino);
+				MV.addObject("SaldoTransferir", SaldoTransferir);
+				MV.addObject("Comentario", Comentario);
 				MV.setViewName("Transferencia");
 				MV.addObject("mensaje", enumMensajes.TRANSFERENCIA_EXITOSA);
 				return MV;
-				
-				}
 
-		} 
-		else
-		{
+			}
+
+		} else {
+			negocioPersona = new NegPersona();
+			Cuenta CuentaDestino = negocioPersona.obtenerCuentaxCbu(CBU);
+			Persona personaDestino = negocioPersona.obtenerPersona(CuentaDestino.getDni());
+
 			HttpSession misession = (HttpSession) request.getSession();
 			Persona Persona = (Persona) misession.getAttribute("Usuario");
 			ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(Persona.getDni());
 
+			NegCuenta negocioCuenta = new NegCuenta();
+			Cuenta cuenta = negocioCuenta.buscarSaldo(CBUOrigen);
+
 			ModelAndView MV = new ModelAndView();
+			MV.addObject("cuenta", cuenta);
 			MV.addObject("listaCuenta", listaCuenta);
+			MV.addObject("personaDestino", personaDestino);
+			MV.addObject("CuentaDestino", CuentaDestino);
+			MV.addObject("SaldoTransferir", SaldoTransferir);
+			MV.addObject("Comentario", Comentario);
 			MV.setViewName("Transferencia");
 			MV.addObject("mensaje", enumMensajes.SALDO_INSUFICIENTE);
 			return MV;
