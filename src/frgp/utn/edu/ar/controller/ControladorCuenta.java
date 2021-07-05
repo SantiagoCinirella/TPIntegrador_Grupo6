@@ -102,6 +102,8 @@ public class ControladorCuenta {
 					movimiento.setDetalle("Saldo Inicial");
 					movimiento.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0, 16));
 					movimiento.setSaldo(10000.00);
+					cuenta.setNroCuenta(negocioCuenta.obtenerCuentaMax()+1);
+					cuenta.setCbu(negocioCuenta.obtenerCbuMax()+1);
 
 				}
 			} else {
