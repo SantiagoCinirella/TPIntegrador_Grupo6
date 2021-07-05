@@ -37,27 +37,26 @@
 
 <body>
 	<%
-	HttpSession misession = (HttpSession) request.getSession();
+		HttpSession misession = (HttpSession) request.getSession();
 
-	Persona Persona = (Persona) misession.getAttribute("Usuario");
+		Persona Persona = (Persona) misession.getAttribute("Usuario");
 	%>
 	<script>
-	  function ValidarDNI() {
-          objeto = document.getElementById("CBU");
-          Validar = document.getElementById("btnVerificar");
-          valueForm = objeto.value;
-          if (valueForm.length > 10) {
-              objeto.className = "form-control border border-danger";
-              objeto.style.boxShadow = "0 0 0 0.2rem rgba(255, 0, 0, 0.23)";
-              Validar.disabled = true;
-          }
-          else {
-              objeto.className = "form-control border border-success";
-              objeto.style.boxShadow = "0 0 0 0.2rem rgba(79, 162, 51, 0.25)";
-              Validar.disabled = false;
-          }
-      }
-	  </script>
+		function ValidarDNI() {
+			objeto = document.getElementById("CBU");
+			Validar = document.getElementById("btnVerificar");
+			valueForm = objeto.value;
+			if (valueForm.length > 10) {
+				objeto.className = "form-control border border-danger";
+				objeto.style.boxShadow = "0 0 0 0.2rem rgba(255, 0, 0, 0.23)";
+				Validar.disabled = true;
+			} else {
+				objeto.className = "form-control border border-success";
+				objeto.style.boxShadow = "0 0 0 0.2rem rgba(79, 162, 51, 0.25)";
+				Validar.disabled = false;
+			}
+		}
+	</script>
 	<!-- Sidenav -->
 	<nav
 		class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white"
@@ -282,7 +281,11 @@
 														<div class="form-group">
 															<label class="form-control-label" for="input-address">Tipo
 																de cuenta</label> <input type="text" id="CBU"
-																class="form-control" placeholder="CBU" onkeyup="ValidarDNI()"  name="CBU" value="${CuentaDestino.cbu}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1')" required>
+																class="form-control" placeholder="CBU"
+																onkeyup="ValidarDNI()" name="CBU"
+																value="${CuentaDestino.cbu}"
+																oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1')"
+																required>
 														</div>
 													</div>
 												</div>
@@ -290,15 +293,17 @@
 													<div class="col-lg-4">
 														<div class="form-group">
 															<label class="form-control-label" for="input-city">Nombre</label>
-															<input type="text" id="Nombre" name="Nombre" class="form-control"
-																readonly value="${personaDestino.nombre}" required>
+															<input type="text" id="Nombre" name="Nombre"
+																class="form-control" readonly
+																value="${personaDestino.nombre}" required>
 														</div>
 													</div>
 													<div class="col-lg-4">
 														<div class="form-group">
 															<label class="form-control-label" for="input-country">Apellido
-															</label> <input type="text" id="Apellido" name="Apellido" class="form-control"
-																readonly value="${personaDestino.apellido}" required>
+															</label> <input type="text" id="Apellido" name="Apellido"
+																class="form-control" readonly
+																value="${personaDestino.apellido}" required>
 														</div>
 													</div>
 													<div class="col-lg-4">
@@ -306,15 +311,15 @@
 															<label class="form-control-label" for="input-country">Alias</label>
 															<input type="text" id="input-postal-code"
 																class="form-control" readonly name="Alias"
-																 value="${CuentaDestino.alias}" required>
+																value="${CuentaDestino.alias}" required>
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
 										<br>
-																				<hr class="my-4" />
-										
+										<hr class="my-4" />
+
 										<h6 class="heading-small text-muted mb-4">Elegi tu cuenta
 											para hacer la transferencia</h6>
 										<div class="row">
@@ -332,9 +337,10 @@
 											</div>
 											<div class="col-lg-6">
 												<div class="form-group">
-													<label class="form-control-label" for="input-email">Saldo disponible</label>
-													<input type="number" id="Saldo" name="Saldo" disabled="disabled"
-														class="form-control" value="${cuenta.saldo}">
+													<label class="form-control-label" for="input-email">Saldo
+														disponible</label> <input type="number" id="Saldo" name="Saldo"
+														disabled="disabled" class="form-control"
+														value="${cuenta.saldo}">
 												</div>
 											</div>
 											<div class="col-lg-6">
@@ -346,15 +352,18 @@
 											</div>
 											<div class="col-lg-6">
 												<div class="form-group">
-													<label class="form-control-label" for="input-email">Saldo a transferir</label>
-													<input type="number" id="Saldo" name="SaldoTransferir" 
-														class="form-control" value="${SaldoTransferir}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1')" required>
+													<label class="form-control-label" for="input-email">Saldo
+														a transferir</label> <input type="number" id="Saldo"
+														name="SaldoTransferir" class="form-control"
+														value="${SaldoTransferir}"
+														oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1')"
+														required>
 												</div>
 											</div>
 											<div class="col-12 text-center">
-												<input type="submit" class="btn btn-success" id="btnVerificar"
-													value="Verificar" formaction="buscarSaldo.html"
-													style="width: 120px;">
+												<input type="submit" class="btn btn-success"
+													id="btnVerificar" value="Verificar"
+													formaction="buscarSaldo.html" style="width: 120px;">
 											</div>
 										</div>
 										<br>
@@ -368,11 +377,11 @@
 													<div class="alert alert-danger" role="alert">
 														${mensaje.mensaje}</div>
 												</c:when>
-													<c:when test="${mensaje.numeroMensaje == 6}">
+												<c:when test="${mensaje.numeroMensaje == 6}">
 													<div class="alert alert-danger" role="alert">
 														${mensaje.mensaje}</div>
 												</c:when>
-													<c:when test="${mensaje.numeroMensaje == 7}">
+												<c:when test="${mensaje.numeroMensaje == 7}">
 													<div class="alert alert-danger" role="alert">
 														${mensaje.mensaje}</div>
 												</c:when>
@@ -385,18 +394,28 @@
 										<!-- Address -->
 
 										<hr class="my-12" />
-										<c:choose>
-												<c:when test="${personaDestino.nombre != null}">
-													<div class="form-group">
+										<div class="form-group">
 											<div class="col-12 text-center">
-												<input type="submit" class="btn btn-sm btn-primary" 
-													style="width: 250px;" value="Transferir" ${ personaDestino.nombre eq '' ? 'disabled="disabled"' : ''}>
-													<input type="hidden" value="${cuenta.cbu}"
-													class="myButton" name="CBUOrigen" id="numeroCuenta">
+												<c:choose>
+													<c:when
+														test="${personaDestino.nombre != null && cuentas == 0}">
+
+														<input type="submit" class="btn btn-sm btn-primary"
+															style="width: 250px;" value="Transferir"
+															${ personaDestino.nombre eq '' ? 'disabled="disabled"' : ''}>
+														<input type="hidden" value="${cuenta.cbu}"
+															class="myButton" name="CBUOrigen" id="numeroCuenta">
+
+													</c:when>
+													<c:otherwise>
+														<input type="submit" class="btn btn-sm btn-primary"
+															style="width: 250px;" value="Transferir">
+														<input type="hidden" value="${cuenta.cbu}"
+															class="myButton" name="CBUOrigen" id="numeroCuenta">
+													</c:otherwise>
+												</c:choose>
 											</div>
 										</div>
-												</c:when>
-										</c:choose>		
 									</form>
 								</div>
 							</div>

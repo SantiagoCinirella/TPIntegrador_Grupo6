@@ -154,10 +154,14 @@ public class ControladorCuenta {
 		negocioPersona = new NegPersona();
 		ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(Persona.getDni());
 		ModelAndView MV = new ModelAndView();
-		MV.addObject("listaCuenta", listaCuenta);
-		MV.setViewName("Transferencia");
+		if (listaCuenta.isEmpty()) {
+			MV.addObject("mensaje", enumMensajes.CLIENTE_SIN_CUENTA);
+			MV.setViewName("Cliente");
+		} else {
+			MV.setViewName("Transferencia");
+			MV.addObject("listaCuenta", listaCuenta);
+		}
 		return MV;
-
 	}
 
 	@RequestMapping("abmlCuentas.html")

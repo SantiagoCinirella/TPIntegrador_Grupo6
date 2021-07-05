@@ -16,7 +16,8 @@ public enum enumMensajes {
 	ERROR_CUENTA_NO_AGREGADA("La cuneta no se ha podido agregar",12),
 	USUARIO_NO_EXISTE("El usuario no existe o está dado de baja",13),
 	CUENTA_MODIFICADA_EXITOSAMENTE("La cuenta ha sido actualizada exitosamente",14),
-	ERROR_ACTUALIZAR_CUENTA("No se pudo actualizar la cuenta",15)
+	ERROR_ACTUALIZAR_CUENTA("No se pudo actualizar la cuenta",15),
+	CLIENTE_SIN_CUENTA("Necesita tener una cuenta para transferir", 16),
 	;
 
 	private String mensaje;

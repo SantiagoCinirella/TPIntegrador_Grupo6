@@ -32,20 +32,21 @@ public class ControladorMovimiento {
 	@RequestMapping(value = "buscarSaldo.html", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView eventoRedireccionar(int cuentas, int CBU, int SaldoTransferir, String Comentario,
 			HttpServletRequest request, HttpServletResponse response) {
+		NegCuenta negocioCuenta = new NegCuenta();
+		NegPersona negocioPersona = new NegPersona();
+		ModelAndView MV = new ModelAndView();
 		if (cuentas != 0) {
-			NegPersona negocioPersona = new NegPersona();
 			Cuenta CuentaDestino = negocioPersona.obtenerCuentaxCbu(CBU);
 			if (CuentaDestino != null) {
 
 				Persona personaDestino = negocioPersona.obtenerPersona(CuentaDestino.getDni());
-				NegCuenta negocioCuenta = new NegCuenta();
+
 				Cuenta cuenta = negocioCuenta.buscarSaldo(cuentas);
 
 				HttpSession misession = (HttpSession) request.getSession();
 				Persona Persona = (Persona) misession.getAttribute("Usuario");
 				ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(Persona.getDni());
 
-				ModelAndView MV = new ModelAndView();
 				MV.addObject("listaCuenta", listaCuenta);
 				MV.addObject("cuenta", cuenta);
 				MV.addObject("personaDestino", personaDestino);
@@ -59,9 +60,7 @@ public class ControladorMovimiento {
 				HttpSession misession = (HttpSession) request.getSession();
 				Persona Persona = (Persona) misession.getAttribute("Usuario");
 				ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(Persona.getDni());
-				NegCuenta negocioCuenta = new NegCuenta();
 				Cuenta cuenta = negocioCuenta.buscarSaldo(cuentas);
-				ModelAndView MV = new ModelAndView();
 				MV.addObject("listaCuenta", listaCuenta);
 				MV.addObject("cuenta", cuenta);
 				MV.addObject("SaldoTransferir", SaldoTransferir);
@@ -74,18 +73,9 @@ public class ControladorMovimiento {
 		} else {
 			HttpSession misession = (HttpSession) request.getSession();
 			Persona Persona = (Persona) misession.getAttribute("Usuario");
-			NegPersona negocioPersona = new NegPersona();
 			ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(Persona.getDni());
-			Cuenta CuentaDestino = negocioPersona.obtenerCuentaxCbu(CBU);
-			NegCuenta negocioCuenta = new NegCuenta();
-			Cuenta cuenta = negocioCuenta.buscarSaldo(cuentas);
-			Persona personaDestino = negocioPersona.obtenerPersona(CuentaDestino.getDni());
-
-			ModelAndView MV = new ModelAndView();
-			MV.addObject("cuenta", cuenta);
-			MV.addObject("personaDestino", personaDestino);
+			MV.addObject("cuentaSeleccionada", cuentas);
 			MV.addObject("listaCuenta", listaCuenta);
-			MV.addObject("CuentaDestino", CuentaDestino);
 			MV.addObject("SaldoTransferir", SaldoTransferir);
 			MV.addObject("Comentario", Comentario);
 			MV.setViewName("Transferencia");
