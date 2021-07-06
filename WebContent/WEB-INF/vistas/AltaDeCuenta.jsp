@@ -1,84 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="frgp.utn.edu.ar.entidad.Persona"%>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-<link rel="stylesheet"
-	href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description"
-	content="Start your development with a Dashboard for Bootstrap 4.">
-<meta name="author" content="Creative Tim">
-<title>UTN FRGP</title>
-<!-- Favicon -->
-<link rel="icon"
-	href="https://play-lh.googleusercontent.com/on7AWbuav44mB2ztIB6mp1BUu6bhIMcNd-9YjbjNDxgViamcJ3bo1dkEo06EGbC7njw"
-	type="image/png">
-<!-- Fonts -->
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-<!-- Icons -->
-<link rel="stylesheet" href="assets/vendor/nucleo/css/nucleo.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
-	type="text/css">
-<!-- Page plugins -->
-<!-- Argon CSS -->
-<link rel="stylesheet" href="assets/css/argon.css?v=1.2.0"
-	type="text/css">
-	
+<jsp:include page="Header.jsp"></jsp:include>
 </head>
 
 <body>
-					    <% 
-	HttpSession misession= (HttpSession) request.getSession();
-	 
-	Persona Persona = (Persona) misession.getAttribute("Usuario");
-	%>  
+	<%
+		HttpSession misession = (HttpSession) request.getSession();
+
+		Persona Persona = (Persona) misession.getAttribute("Usuario");
+	%>
 	<script type="text/javascript">
-                    function Filtrar(strKey) {
-                        var strData = strKey.value.toLowerCase().split(" ");
-                        var tblData = document.getElementById('example');
-                        var rowData;
-                        for (var i = 1; i < tblData.rows.length; i++) {
-                            rowData = tblData.rows[i].innerHTML;
-                            var styleDisplay = 'none';
-                            for (var j = 0; j < strData.length; j++) {
-                                if (rowData.toLowerCase().indexOf(strData[j]) >= 0)
-                                    styleDisplay = '';
-                                else {
-                                    styleDisplay = 'none';
-                                    break;
-                                }
-                            }
-                            tblData.rows[i].style.display = styleDisplay;
-                        }
-                    }       
-                    
-                    function ValidarDNI() {
-                        objeto = document.getElementById("dnitxt");
-                        Validar = document.getElementById("btnBuscar");
-                        valueForm = objeto.value;
-                        if (valueForm.length > 8) {
-                            objeto.className = "form-control border border-danger";
-                            objeto.style.boxShadow = "0 0 0 0.2rem rgba(255, 0, 0, 0.23)";
-                            Validar.disabled = true;
-                        }
-                        else {
-                            objeto.className = "form-control border border-success";
-                            objeto.style.boxShadow = "0 0 0 0.2rem rgba(79, 162, 51, 0.25)";
-                            Validar.disabled = false;
-                        }
-                    }
-                </script>
+		function Filtrar(strKey) {
+			var strData = strKey.value.toLowerCase().split(" ");
+			var tblData = document.getElementById('example');
+			var rowData;
+			for (var i = 1; i < tblData.rows.length; i++) {
+				rowData = tblData.rows[i].innerHTML;
+				var styleDisplay = 'none';
+				for (var j = 0; j < strData.length; j++) {
+					if (rowData.toLowerCase().indexOf(strData[j]) >= 0)
+						styleDisplay = '';
+					else {
+						styleDisplay = 'none';
+						break;
+					}
+				}
+				tblData.rows[i].style.display = styleDisplay;
+			}
+		}
+
+		function ValidarDNI() {
+			objeto = document.getElementById("dnitxt");
+			Validar = document.getElementById("btnBuscar");
+			valueForm = objeto.value;
+			if (valueForm.length > 8) {
+				objeto.className = "form-control border border-danger";
+				objeto.style.boxShadow = "0 0 0 0.2rem rgba(255, 0, 0, 0.23)";
+				Validar.disabled = true;
+			} else {
+				objeto.className = "form-control border border-success";
+				objeto.style.boxShadow = "0 0 0 0.2rem rgba(79, 162, 51, 0.25)";
+				Validar.disabled = false;
+			}
+		}
+	</script>
 
 
 
@@ -116,76 +87,9 @@
 	</nav>
 	<!-- Main content -->
 	<div class="main-content" id="panel">
-		<!-- Topnav -->
-		<nav
-			class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
-			<div class="container-fluid">
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<!-- Search form -->
-					<form class="navbar-search navbar-search-light form-inline mr-sm-3"
-						id="navbar-search-main">
-						<div class="form-group mb-0">
-							<div
-								class="input-group input-group-alternative input-group-merge">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fas fa-search"></i></span>
-								</div>
-								<input class="form-control" placeholder="Buscar" type="text"
-									onkeyup=Filtrar(this)>
-							</div>
-						</div>
-						<button type="button" class="close" data-action="search-close"
-							data-target="#navbar-search-main" aria-label="Close">
-							<span aria-hidden="true">Ã</span>
-						</button>
-					</form>
-					<!-- Navbar links -->
-					<ul class="navbar-nav align-items-center  ml-md-auto ">
-						<li class="nav-item d-xl-none">
-							<!-- Sidenav toggler -->
-							<div class="pr-3 sidenav-toggler sidenav-toggler-dark"
-								data-action="sidenav-pin" data-target="#sidenav-main">
-								<div class="sidenav-toggler-inner">
-									<i class="sidenav-toggler-line"></i> <i
-										class="sidenav-toggler-line"></i> <i
-										class="sidenav-toggler-line"></i>
-								</div>
-							</div>
-						</li>
-					</ul>
-					<ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
-						<li class="nav-item dropdown"><a class="nav-link pr-0"
-							href="#" role="button" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">
-								<div class="media align-items-center">
-									<span class="avatar avatar-sm rounded-circle"> <img
-										alt="Image placeholder" src="assets/img/theme/team-1.jpg">
-									</span>
-									<div class="media-body  ml-2  d-none d-lg-block">
-										<span class="mb-0 text-sm  font-weight-bold"><%=Persona.getNombre()%>, <%=Persona.getApellido()%></span>
-									</div>
-								</div>
-						</a>
-							<div class="dropdown-menu  dropdown-menu-right ">
-								<div class="dropdown-header noti-title">
-									<h6 class="text-overflow m-0">Bienvenido!</h6>
-								</div>
-								<a href="#!" class="dropdown-item"> <i
-									class="ni ni-single-02"></i> <span>Mi perfil</span>
-								</a> <a href="#!" class="dropdown-item"> <i
-									class="ni ni-settings-gear-65"></i> <span>Configuracion</span>
-								</a>
-								<div class="dropdown-divider"></div>
-								<a href="index.html" class="dropdown-item"> <i
-									class="ni ni-user-run"></i> <span>Salir</span>
-								</a>
-							</div></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<!-- Header -->
-		<!-- Header -->
+
+		<jsp:include page="Sesion.jsp"></jsp:include>
+
 		<div class="header bg-primary pb-6">
 			<div class="container-fluid">
 				<div class="header-body">
@@ -233,25 +137,29 @@
 													de cliente</h6>
 												<div class="pl-lg-4">
 													<div class="row">
-														
+
 														<div class="col-lg-6">
 															<div class="form-group">
 																<label class="form-control-label" for="input-email">DNI</label>
-																<input type="number" id="dnitxt" onkeyup="ValidarDNI()" class="form-control" placeholder="dni" required="required" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+																<input type="number" id="dnitxt" onkeyup="ValidarDNI()"
+																	class="form-control" placeholder="dni"
+																	required="required"
+																	oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
 																	value="${clienteObtenido.dni}" name="txtDni">
 															</div>
 														</div>
-														
-														
+
+
 														<div class="col-lg-1" style="margin-top: 40px;">
-															<div class="form-group">
-																
-															</div>
+															<div class="form-group"></div>
 														</div>
 														<div class="col-lg-4" style="margin-top: 40px;">
 															<div class="form-group">
-																<input type="submit" name="btnAgregarPersona"  class="btn btn-sm btn-primary" value="Buscar" id="btnBuscar" formaction="buscarCliente.html" style="width: 100%;">
-														
+																<input type="submit" name="btnAgregarPersona"
+																	class="btn btn-sm btn-primary" value="Buscar"
+																	id="btnBuscar" formaction="buscarCliente.html"
+																	style="width: 100%;">
+
 															</div>
 														</div>
 													</div>
@@ -259,15 +167,19 @@
 														<div class="col-lg-6">
 															<div class="form-group">
 																<label class="form-control-label" for="input-first-name">Nombres</label>
-																<input type="text" id="input-first-name" readonly="readonly" class="form-control"
-																	placeholder="Nombres" value="${clienteObtenido.nombre}" name="txtNombre">
+																<input type="text" id="input-first-name"
+																	readonly="readonly" class="form-control"
+																	placeholder="Nombres" value="${clienteObtenido.nombre}"
+																	name="txtNombre">
 															</div>
 														</div>
 														<div class="col-lg-6">
 															<div class="form-group">
 																<label class="form-control-label" for="input-last-name">Apellido</label>
-																<input type="text" id="input-last-name" class="form-control" readonly="readonly"
-																	placeholder="Apellido" value="${clienteObtenido.apellido}"  name="txtApellido">
+																<input type="text" id="input-last-name"
+																	class="form-control" readonly="readonly"
+																	placeholder="Apellido"
+																	value="${clienteObtenido.apellido}" name="txtApellido">
 															</div>
 														</div>
 													</div>
@@ -281,13 +193,14 @@
 														<div class="col-md-12">
 															<div class="form-group">
 																<label class="form-control-label" for="input-address">Tipo
-																	de cuenta</label>
-																<select class="form-control"  name="tipoCuenta" >
-																	<option selected="true"  >Seleccione un tipo de Cuenta</option>
-																	<option >Caja de ahorro en pesos</option>
-																	<option >Caja de ahorro en dolares</option>
+																	de cuenta</label> <select class="form-control"
+																	name="tipoCuenta">
+																	<option selected="true">Seleccione un tipo
+																		de Cuenta</option>
+																	<option>Caja de ahorro en pesos</option>
+																	<option>Caja de ahorro en dolares</option>
 																</select>
-																
+
 															</div>
 														</div>
 													</div>
@@ -295,56 +208,57 @@
 														<div class="col-lg-4">
 															<div class="form-group">
 																<label class="form-control-label" for="input-city">CBU</label>
-																<input type="text" name="cbu" class="form-control" placeholder="CBU"  readonly="readonly"
+																<input type="text" name="cbu" class="form-control"
+																	placeholder="CBU" readonly="readonly"
 																	value="${CuentaParcial.cbu}">
 															</div>
 														</div>
 														<div class="col-lg-4">
 															<div class="form-group">
 																<label class="form-control-label" for="input-country">Nro
-																	de cuenta</label> 
-																	<input type="text" name="numeroCuenta"
-																	class="form-control" placeholder="Nro Cuenta"  readonly="readonly"
-																	 value="${CuentaParcial.nroCuenta}">
+																	de cuenta</label> <input type="text" name="numeroCuenta"
+																	class="form-control" placeholder="Nro Cuenta"
+																	readonly="readonly" value="${CuentaParcial.nroCuenta}">
 															</div>
 														</div>
 														<div class="col-lg-4">
 															<div class="form-group">
 																<label class="form-control-label" for="input-country">Alias</label>
-																<input type="text" name="alias"	class="form-control" value="${CuentaParcial.alias}"	placeholder="Alias">
-																
-				
+																<input type="text" name="alias" class="form-control"
+																	value="${CuentaParcial.alias}" placeholder="Alias">
+
+
 															</div>
 														</div>
 													</div>
 												</div>
 												<hr class="my-12" />
-													<div class="form-group">
-														  <div class="col-12 text-center">
+												<div class="form-group">
+													<div class="col-12 text-center">
 														<c:choose>
-																		<c:when test="${MensajeBack.numeroMensaje == 9}">
-																			<div class="alert alert-success" role="alert">
-																				${MensajeBack.mensaje}</div>
-																		</c:when>
-																		<c:when test="${MensajeBack.numeroMensaje == 10}">
-																			<div class="alert alert-danger" role="alert">
-																				${MensajeBack.mensaje}</div>
-																		</c:when>
-																		<c:when test="${MensajeBack.numeroMensaje == 11}">
-																			<div class="alert alert-danger" role="alert">
-																				${MensajeBack.mensaje}</div>
-																		</c:when>
-																		<c:when test="${MensajeBack.numeroMensaje == 12}">
-																			<div class="alert alert-danger" role="alert">
-																				${MensajeBack.mensaje}</div>
-																		</c:when>
-																		<c:when test="${MensajeBack.numeroMensaje == 13}">
-																			<div class="alert alert-danger" role="alert">
-																				${MensajeBack.mensaje}</div>
-																		</c:when>
-																		
+															<c:when test="${MensajeBack.numeroMensaje == 9}">
+																<div class="alert alert-success" role="alert">
+																	${MensajeBack.mensaje}</div>
+															</c:when>
+															<c:when test="${MensajeBack.numeroMensaje == 10}">
+																<div class="alert alert-danger" role="alert">
+																	${MensajeBack.mensaje}</div>
+															</c:when>
+															<c:when test="${MensajeBack.numeroMensaje == 11}">
+																<div class="alert alert-danger" role="alert">
+																	${MensajeBack.mensaje}</div>
+															</c:when>
+															<c:when test="${MensajeBack.numeroMensaje == 12}">
+																<div class="alert alert-danger" role="alert">
+																	${MensajeBack.mensaje}</div>
+															</c:when>
+															<c:when test="${MensajeBack.numeroMensaje == 13}">
+																<div class="alert alert-danger" role="alert">
+																	${MensajeBack.mensaje}</div>
+															</c:when>
+
 														</c:choose>
-														
+
 
 														<c:choose>
 															<c:when test="${clienteObtenido.nombre != null}">
@@ -357,18 +271,18 @@
 																</div>
 															</c:when>
 															<c:otherwise>
-										
-				
+
+
 															</c:otherwise>
 														</c:choose>
 
 
 
 
-														<p style="color: blue"> ${estadoAgregarCuenta} </p>
-										                  	
-										                </div>
+														<p style="color: blue">${estadoAgregarCuenta}</p>
+
 													</div>
+												</div>
 											</form>
 										</div>
 									</div>
@@ -382,8 +296,8 @@
 			</div>
 		</div>
 	</div>
-	 -->
-	
+	-->
+
 
 	<!-- Argon Scripts -->
 	<!-- Core -->
