@@ -112,9 +112,8 @@
 													<div class="col-md-12">
 
 														<div class="form-group">
-															<label class="form-control-label" for="input-address">Tipo
-																de cuenta</label> <input type="text" id="CBU"
-																class="form-control" placeholder="CBU"
+															<label class="form-control-label" for="input-address">CBU</label> <input type="text" id="CBU"
+																class="form-control" placeholder="Ingrese el CBU"
 																onkeyup="ValidarDNI()" name="CBU"
 																value="${CuentaDestino.cbu}"
 																oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1')"

@@ -51,7 +51,7 @@ public class ControladorCliente {
 	}
 
 	private ModelAndView eventoAltaModificacionCliente(String btnCrear, Persona persona) {
-		
+
 		ModelAndView MV = new ModelAndView();
 		boolean agregarModificar = false;
 		ArrayList<Persona> listaPersona = new ArrayList<>();
@@ -88,77 +88,107 @@ public class ControladorCliente {
 
 	@RequestMapping("agregarPersona.html")
 	public ModelAndView eventoRedireccionarPag1(Integer txtDni, String txtNombre, String txtApellido) {
-		
-		ModelAndView MV = new ModelAndView();
-		persona.setApellido(txtApellido);
-		persona.setDni(txtDni);
-		persona.setNombre(txtNombre);
 
-		boolean estado = negocioPersona.agregarPersona(persona);
+		ModelAndView MV = new ModelAndView();
 		String cartel = "No se pudo agregar la persona";
-		if (estado) {
-			cartel = "La persona ha sido agregada exitosamente";
+		try {
+			persona.setApellido(txtApellido);
+			persona.setDni(txtDni);
+			persona.setNombre(txtNombre);
+			cartel = "No se pudo agregar la persona";
+			if (negocioPersona.agregarPersona(persona)) {
+				cartel = "La persona ha sido agregada exitosamente";
+			}
+
+		} catch (Exception e) {
+			MV.addObject("estadoAgregarPersona", cartel);
+			MV.setViewName("Inicio");
+			return MV;
+		} finally {
+			MV.addObject("estadoAgregarPersona", cartel);
 		}
-		MV.addObject("estadoAgregarPersona", cartel);
 		MV.setViewName("Inicio");
 		return MV;
 	}
 
 	@RequestMapping("abmlClientes.html")
 	public ModelAndView eventoRedireccionarPag1() {
-		
+
 		ModelAndView MV = new ModelAndView();
-		ArrayList<Persona> listaPersona = new ArrayList<>();
-		listaPersona = (ArrayList<Persona>) negocioPersona.listarPersonasBajaLogica();
-		MV.addObject("listaPersona", listaPersona);
-		MV.setViewName("ABMLClientes");
+		try {
+			ArrayList<Persona> listaPersona = new ArrayList<>();
+			listaPersona = (ArrayList<Persona>) negocioPersona.listarPersonasBajaLogica();
+			MV.addObject("listaPersona", listaPersona);
+			MV.setViewName("ABMLClientes");
+		} catch (Exception e) {
+			MV.setViewName("ABMLClientes");
+			return MV;
+		}
 		return MV;
 	}
 
 	@RequestMapping("eliminacion.html")
 	public ModelAndView eliminar(Integer dni) {
-		
-		negocioPersona.bajaLogica(dni);
-		negocioPersona.bajaLogicabajaLogicaUsuarioLogin(dni);
-		ArrayList<Integer> listaCuenta = (ArrayList<Integer>) negocioPersona.obtenerCuentaxCliente(dni);
-		for (Integer cbu : listaCuenta) {
-			negocioPersona.bajaLogicaCuenta(cbu);
-		}
+
 		ModelAndView MV = new ModelAndView();
-		ArrayList<Persona> listaPersona = new ArrayList<>();
-		listaPersona = (ArrayList<Persona>) negocioPersona.listarPersonasBajaLogica();
-		MV.addObject("listaPersona", listaPersona);
-		MV.setViewName("ABMLClientes");
-		return MV;
+		try {
+			negocioPersona.bajaLogica(dni);
+			negocioPersona.bajaLogicabajaLogicaUsuarioLogin(dni);
+			ArrayList<Integer> listaCuenta = (ArrayList<Integer>) negocioPersona.obtenerCuentaxCliente(dni);
+			for (Integer cbu : listaCuenta) {
+				negocioPersona.bajaLogicaCuenta(cbu);
+			}
+			ArrayList<Persona> listaPersona = new ArrayList<>();
+			listaPersona = (ArrayList<Persona>) negocioPersona.listarPersonasBajaLogica();
+			MV.addObject("listaPersona", listaPersona);
+			MV.setViewName("ABMLClientes");
+			return MV;
+
+		} catch (Exception e) {
+			MV.setViewName("ABMLClientes");
+			return MV;
+		}
 	}
 
 	@RequestMapping("ModificarCliente.html")
 	public ModelAndView modificar(int dni, String nombre, String apellido, String email) {
-		
-		Persona persona = negocioPersona.obtenerPersona(dni);
-		ArrayList<Persona> listaPersona = new ArrayList<>();
-		listaPersona.add(persona);
-		ModelAndView MV = new ModelAndView();
-		MV.addObject("listaPersona", listaPersona);
-		MV.addObject("listaProvincias", new ArrayList<Provincias>(Arrays.asList(Provincias.values())));
-		MV.addObject("listaSexo", new ArrayList<Sexo>(Arrays.asList(Sexo.values())));
-		MV.setViewName("AltaUsuarios");
-		return MV;		
-}
 
+		ModelAndView MV = new ModelAndView();
+		try {
+			Persona persona = negocioPersona.obtenerPersona(dni);
+			ArrayList<Persona> listaPersona = new ArrayList<>();
+			listaPersona.add(persona);
+			MV.addObject("listaPersona", listaPersona);
+			MV.addObject("listaProvincias", new ArrayList<Provincias>(Arrays.asList(Provincias.values())));
+			MV.addObject("listaSexo", new ArrayList<Sexo>(Arrays.asList(Sexo.values())));
+			MV.setViewName("AltaUsuarios");
+			return MV;
+			
+		} catch (Exception e) {
+			MV.setViewName("AltaUsuarios");
+			return MV;
+
+		}
+	}
 
 	@RequestMapping("RedireccionNuevoCliente.html")
 	public ModelAndView eventoRedireccionNuevoCliente() {
-		
+
 		ModelAndView MV = new ModelAndView();
-		ArrayList<Persona> listaPersona = new ArrayList<>();
-		Persona persona = new Persona();
-		listaPersona.add(persona);
-		MV.addObject("listaProvincias", new ArrayList<Provincias>(Arrays.asList(Provincias.values())));
-		MV.addObject("listaSexo", new ArrayList<Sexo>(Arrays.asList(Sexo.values())));
-		MV.addObject("esNuevoCliente", true);
-		MV.addObject("listaPersona", listaPersona);
-		MV.setViewName("AltaUsuarios");
-		return MV;
+		try {
+			ArrayList<Persona> listaPersona = new ArrayList<>();
+			Persona persona = new Persona();
+			listaPersona.add(persona);
+			MV.addObject("listaProvincias", new ArrayList<Provincias>(Arrays.asList(Provincias.values())));
+			MV.addObject("listaSexo", new ArrayList<Sexo>(Arrays.asList(Sexo.values())));
+			MV.addObject("esNuevoCliente", true);
+			MV.addObject("listaPersona", listaPersona);
+			MV.setViewName("AltaUsuarios");
+			return MV;
+			
+		} catch (Exception e) {
+			MV.setViewName("AltaUsuarios");
+			return MV;
+		}
 	}
 }

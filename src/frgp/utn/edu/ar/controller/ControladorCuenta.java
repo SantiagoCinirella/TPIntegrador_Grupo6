@@ -37,222 +37,274 @@ public class ControladorCuenta {
 	@RequestMapping(value = "/buscarCliente.html", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView eventoRedireccionar(String txtDni) {
 		ModelAndView MV = new ModelAndView();
+
 		int dni, cbu, nroCuenta, maxCuenta, maxCbu;
+		try {
+			dni = Integer.parseInt(txtDni);
+			negocioPersona = new NegPersona();
+			persona = negocioPersona.obtenerPersona(dni);
+			if (persona == null) {
+				MV.addObject("MensajeBack", enumMensajes.USUARIO_NO_EXISTE);
+			} else {
 
-		dni = Integer.parseInt(txtDni);
-		negocioPersona = new NegPersona();
-		persona = (Persona) negocioPersona.obtenerPersona(dni);
+				maxCuenta = negocioCuenta.obtenerCuentaMax();
+				maxCbu = negocioCuenta.obtenerCbuMax();
 
-		if (persona == null) {
-			MV.addObject("MensajeBack", enumMensajes.USUARIO_NO_EXISTE);
+				cbu = maxCbu + 1;
+				nroCuenta = maxCuenta + 1;
+				cuenta.setCbu(cbu);
+				cuenta.setNroCuenta(nroCuenta);
 
-		} else {
+			}
+			MV.addObject("CuentaParcial", cuenta);
+			MV.addObject("clienteObtenido", persona);
+			MV.setViewName("AltaDeCuenta");
+			return MV;
 
-			maxCuenta = negocioCuenta.obtenerCuentaMax();
-			maxCbu = negocioCuenta.obtenerCbuMax();
-
-			cbu = maxCbu + 1;
-			nroCuenta = maxCuenta + 1;
-			cuenta.setCbu(cbu);
-			cuenta.setNroCuenta(nroCuenta);
+		} catch (Exception e) {
+			MV.setViewName("AltaDeCuenta");
+			return MV;
 
 		}
 
-		MV.addObject("CuentaParcial", cuenta);
-		MV.addObject("clienteObtenido", persona);
-		MV.setViewName("AltaDeCuenta");
-		return MV;
 	}
 
 	@RequestMapping(value = "/agregarCuenta.html", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView eventoRedireccionarPag2(String tipoCuenta, String cbu, String numeroCuenta, String alias,
 			int txtDni, String txtNombre, String txtApellido) {
 
-		int idCliente, cbuint, numCuentaint, dniInt;
+		int cbuint, numCuentaint;
 		ModelAndView MV = new ModelAndView();
 
-		cbuint = Integer.parseInt(cbu);
-		numCuentaint = Integer.parseInt(numeroCuenta);
+		try {
+			cbuint = Integer.parseInt(cbu);
+			numCuentaint = Integer.parseInt(numeroCuenta);
 
-		int cantidadCuentas;
-		cuenta.setCbu(cbuint);
-		cuenta.setTipoCuenta(tipoCuenta);
-		cuenta.setAlias(alias);
-		cuenta.setNroCuenta(numCuentaint);
-		cuenta.setDni(txtDni);
+			int cantidadCuentas;
+			cuenta.setCbu(cbuint);
+			cuenta.setTipoCuenta(tipoCuenta);
+			cuenta.setAlias(alias);
+			cuenta.setNroCuenta(numCuentaint);
+			cuenta.setDni(txtDni);
 
-		cuenta.setSaldo(10000.00);
-		cuenta.setFechaCreacion(LocalDateTime.now().toString().replace("T", " ").substring(0, 16));
+			cuenta.setSaldo(10000.00);
+			cuenta.setFechaCreacion(LocalDateTime.now().toString().replace("T", " ").substring(0, 16));
 
-		Persona persona = (Persona) negocioPersona.obtenerPersona(txtDni);
-		if (!tipoCuenta.equals("Seleccione un tipo de Cuenta")) {
+			Persona persona = (Persona) negocioPersona.obtenerPersona(txtDni);
+			if (!tipoCuenta.equals("Seleccione un tipo de Cuenta")) {
 
-			cantidadCuentas = negocioCuenta.getCantidadCuentas(cuenta.getDni());
-			if (cantidadCuentas < 4) {
+				cantidadCuentas = negocioCuenta.getCantidadCuentas(cuenta.getDni());
+				if (cantidadCuentas < 4) {
 
-				MV.addObject("MensajeBack", enumMensajes.ERROR_CUENTA_NO_AGREGADA);
+					MV.addObject("MensajeBack", enumMensajes.ERROR_CUENTA_NO_AGREGADA);
 
-				if (negocioCuenta.agregarCuenta(cuenta)) {
-					MV.addObject("MensajeBack", enumMensajes.CUENTA_AGREGADA_EXITOSAMENTE);
+					if (negocioCuenta.agregarCuenta(cuenta)) {
+						MV.addObject("MensajeBack", enumMensajes.CUENTA_AGREGADA_EXITOSAMENTE);
 
-					negocioMovimiento = new NegMovimiento();
-					Movimiento movimiento = new Movimiento();
-					movimiento.setCbuOrigen(cuenta.getCbu());
-					movimiento.setCbuDestino(cuenta.getCbu());
-					movimiento.setDetalle("Saldo Inicial");
-					movimiento.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0, 16));
-					movimiento.setSaldo(10000.00);
-					cuenta.setNroCuenta(negocioCuenta.obtenerCuentaMax()+1);
-					cuenta.setCbu(negocioCuenta.obtenerCbuMax()+1);
+						negocioMovimiento = new NegMovimiento();
+						Movimiento movimiento = new Movimiento();
+						movimiento.setCbuOrigen(cuenta.getCbu());
+						movimiento.setCbuDestino(cuenta.getCbu());
+						movimiento.setDetalle("Saldo Inicial");
+						movimiento.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0, 16));
+						movimiento.setSaldo(10000.00);
+						cuenta.setNroCuenta(negocioCuenta.obtenerCuentaMax() + 1);
+						cuenta.setCbu(negocioCuenta.obtenerCbuMax() + 1);
+
+					}
+				} else {
+					MV.addObject("MensajeBack", enumMensajes.ERROR_CANTIDAD_CUENTA);
 
 				}
 			} else {
-				MV.addObject("MensajeBack", enumMensajes.ERROR_CANTIDAD_CUENTA);
+				MV.addObject("MensajeBack", enumMensajes.DEBE_SELECCIONAR_TIPOCUENTA);
 
 			}
-		} else {
-			MV.addObject("MensajeBack", enumMensajes.DEBE_SELECCIONAR_TIPOCUENTA);
+			MV.addObject("CuentaParcial", cuenta);
+			MV.addObject("clienteObtenido", persona);
+			MV.setViewName("AltaDeCuenta");
+			return MV;
 
+		} catch (Exception e) {
+			MV.setViewName("AltaDeCuenta");
+			return MV;
 		}
-		MV.addObject("CuentaParcial", cuenta);
-		MV.addObject("clienteObtenido", persona);
-		MV.setViewName("AltaDeCuenta");
-		return MV;
 
 	}
 
 	@RequestMapping(value = "/recargaGrillaCuentas.html", method = { RequestMethod.GET, RequestMethod.POST })
-	// @RequestMapping("recargaGrillaCuentas.html")
 	public ModelAndView eventoRedireccionarpage12(String txtTipoCuenta, String txtCBU, String txtNumCuenta,
 			String txtAlias) {
 
 		ModelAndView MV = new ModelAndView();
-
 		ArrayList<Cuenta> listaCuenta = new ArrayList<>();
+		try {
+			listaCuenta = (ArrayList<Cuenta>) negocioCuenta.listarCuentas();
+			MV.addObject("listaCuentas", listaCuenta);
+			MV.setViewName("AltaDeCuenta");
+			return MV;
 
-		listaCuenta = (ArrayList<Cuenta>) negocioCuenta.listarCuentas();
-
-		MV.addObject("listaCuentas", listaCuenta);
-		MV.setViewName("AltaDeCuenta");
-		return MV;
+		} catch (Exception e) {
+			MV.setViewName("AltaDeCuenta");
+			return MV;
+		}
 	}
 
 	@RequestMapping("homeCliente.html")
 	public ModelAndView eventoRedireccionarPagCliente(int Usuario) {
 
 		ModelAndView MV = new ModelAndView();
-		negocioPersona = new NegPersona();
-		ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(Usuario);
-		MV.addObject("listaCuenta", listaCuenta);
-		MV.setViewName("Cliente");
-		return MV;
+		try {
+			negocioPersona = new NegPersona();
+			ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(Usuario);
+			MV.addObject("listaCuenta", listaCuenta);
+			MV.setViewName("Cliente");
+			return MV;
+		} catch (Exception e) {
+			MV.setViewName("Cliente");
+			return MV;
+
+		}
 
 	}
 
 	@RequestMapping("Transferencia.html")
 	public ModelAndView eventoRedireccionarTransferencia(HttpServletRequest request, HttpServletResponse response) {
-		HttpSession misession = (HttpSession) request.getSession();
-		Persona Persona = (Persona) misession.getAttribute("Usuario");
-		negocioPersona = new NegPersona();
-		ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(Persona.getDni());
 		ModelAndView MV = new ModelAndView();
-		if (listaCuenta.isEmpty()) {
-			MV.addObject("mensaje", enumMensajes.CLIENTE_SIN_CUENTA);
+		try {
+			HttpSession misession = (HttpSession) request.getSession();
+			Persona Persona = (Persona) misession.getAttribute("Usuario");
+			negocioPersona = new NegPersona();
+			ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(Persona.getDni());
+			if (listaCuenta.isEmpty()) {
+				MV.addObject("mensaje", enumMensajes.CLIENTE_SIN_CUENTA);
+				MV.setViewName("Cliente");
+			} else {
+				MV.setViewName("Transferencia");
+				MV.addObject("listaCuenta", listaCuenta);
+			}
+			return MV;
+		} catch (Exception e) {
 			MV.setViewName("Cliente");
-		} else {
-			MV.setViewName("Transferencia");
-			MV.addObject("listaCuenta", listaCuenta);
+			return MV;
 		}
-		return MV;
+
 	}
 
 	@RequestMapping("abmlCuentas.html")
 	public ModelAndView eventoRedireccionarPag1() {
-		NegCuenta negocioCuenta = new NegCuenta();
 		ModelAndView MV = new ModelAndView();
+		try {
+			NegCuenta negocioCuenta = new NegCuenta();
+			ArrayList<Cuenta> listaPersona = new ArrayList<>();
+			listaPersona = (ArrayList<Cuenta>) negocioCuenta.listarCuentasBajaLogica();
+			MV.addObject("listaPersona", listaPersona);
+			MV.setViewName("ABMLCuentas");
+			return MV;
 
-		ArrayList<Cuenta> listaPersona = new ArrayList<>();
-
-		listaPersona = (ArrayList<Cuenta>) negocioCuenta.listarCuentasBajaLogica();
-
-		MV.addObject("listaPersona", listaPersona);
-		MV.setViewName("ABMLCuentas");
-		return MV;
+		} catch (Exception e) {
+			MV.setViewName("ABMLCuentas");
+			return MV;
+		}
 
 	}
 
 	@RequestMapping("Movimientos.html")
 	public ModelAndView movimientos(int cbu) {
-		NegCuenta negocioCuenta = new NegCuenta();
 		ModelAndView MV = new ModelAndView();
 
-		ArrayList<Movimiento> listaMovimientos = new ArrayList<>();
+		try {
+			NegCuenta negocioCuenta = new NegCuenta();
 
-		listaMovimientos = (ArrayList<Movimiento>) negocioCuenta.listarMovimientos(cbu);
+			ArrayList<Movimiento> listaMovimientos = new ArrayList<>();
 
-		MV.addObject("listaMovimientos", listaMovimientos);
-		MV.setViewName("HistorialDeMovimientos");
-		return MV;
+			listaMovimientos = (ArrayList<Movimiento>) negocioCuenta.listarMovimientos(cbu);
+
+			MV.addObject("listaMovimientos", listaMovimientos);
+			MV.setViewName("HistorialDeMovimientos");
+			return MV;
+
+		} catch (Exception e) {
+			MV.setViewName("HistorialDeMovimientos");
+			return MV;
+		}
 
 	}
 
 	@RequestMapping("eliminacionCuenta.html")
 	public ModelAndView eliminar(int numeroCuenta) {
-		negocioCuenta.bajaLogica(numeroCuenta);
 		ModelAndView MV = new ModelAndView();
 
-		ArrayList<Cuenta> listaPersona = new ArrayList<>();
+		try {
+			negocioCuenta.bajaLogica(numeroCuenta);
 
-		listaPersona = (ArrayList<Cuenta>) negocioCuenta.listarCuentasBajaLogica();
+			ArrayList<Cuenta> listaPersona = new ArrayList<>();
 
-		MV.addObject("listaPersona", listaPersona);
-		MV.setViewName("ABMLCuentas");
-		return MV;
+			listaPersona = (ArrayList<Cuenta>) negocioCuenta.listarCuentasBajaLogica();
+
+			MV.addObject("listaPersona", listaPersona);
+			MV.setViewName("ABMLCuentas");
+			return MV;
+
+		} catch (Exception e) {
+			MV.setViewName("ABMLCuentas");
+			return MV;
+		}
 
 	}
 
 	@RequestMapping(value = "/ModificarCuenta.html", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView modificar(int numeroCuenta, int cbu, String alias, String tipoCuenta) {
-		Cuenta Cuenta = new Cuenta();
-		Cuenta.setAlias(alias);
-		Cuenta.setCbu(cbu);
-		Cuenta.setNroCuenta(numeroCuenta);
-		Cuenta.setTipoCuenta(tipoCuenta);
 
 		ModelAndView MV = new ModelAndView();
-		MV.addObject("CuentaModificar", Cuenta);
-		MV.setViewName("ModificacionDeCuenta");
-		return MV;
+		try {
+			Cuenta Cuenta = new Cuenta();
+			Cuenta.setAlias(alias);
+			Cuenta.setCbu(cbu);
+			Cuenta.setNroCuenta(numeroCuenta);
+			Cuenta.setTipoCuenta(tipoCuenta);
 
+			MV.addObject("CuentaModificar", Cuenta);
+			MV.setViewName("ModificacionDeCuenta");
+			return MV;
+
+		} catch (Exception e) {
+			MV.setViewName("ModificacionDeCuenta");
+			return MV;
+		}
 	}
 
 	@RequestMapping("ModificarCuenta_AltaDecuenta.html")
 	public ModelAndView modificarDesdeAlta(int numeroCuenta, int cbu, String alias, String tipoCuenta) {
 
 		ModelAndView MV = new ModelAndView();
-		Cuenta Cuenta = new Cuenta();
-		Cuenta.setAlias(alias);
-		Cuenta.setCbu(cbu);
-		Cuenta.setNroCuenta(numeroCuenta);
-		Cuenta.setTipoCuenta(tipoCuenta);
+		try {
+			Cuenta Cuenta = new Cuenta();
+			Cuenta.setAlias(alias);
+			Cuenta.setCbu(cbu);
+			Cuenta.setNroCuenta(numeroCuenta);
+			Cuenta.setTipoCuenta(tipoCuenta);
 
-		boolean estado = negocioCuenta.update(Cuenta);
-		MV.addObject("MensajeBack", enumMensajes.CUENTA_MODIFICADA_EXITOSAMENTE);
+			MV.addObject("MensajeBack", enumMensajes.CUENTA_MODIFICADA_EXITOSAMENTE);
 
-		if (!estado) {
+			if (!negocioCuenta.update(Cuenta)) {
+				MV.addObject("MensajeBack", enumMensajes.ERROR_ACTUALIZAR_CUENTA);
+			}
+
+			MV.addObject("CuentaModificar", Cuenta);
+			MV.setViewName("ModificacionDeCuenta");
+			return MV;
+		} catch (Exception e) {
 			MV.addObject("MensajeBack", enumMensajes.ERROR_ACTUALIZAR_CUENTA);
+			MV.setViewName("ModificacionDeCuenta");
+			return MV;
 		}
-
-		MV.addObject("CuentaModificar", Cuenta);
-		MV.setViewName("ModificacionDeCuenta");
-		return MV;
 
 	}
 
 	@RequestMapping("RedireccionAltaDeCuenta.html")
 	public ModelAndView AltaDeCuentaRedireccion() {
 		ModelAndView MV = new ModelAndView();
-
 		MV.setViewName("AltaDeCuenta");
 		return MV;
 	}
