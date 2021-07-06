@@ -6,6 +6,11 @@
 <html lang="en">
 <head>
 <link rel="stylesheet"
+	href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
 <link rel="stylesheet"
 	href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
@@ -33,33 +38,18 @@
 <!-- Argon CSS -->
 <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0"
 	type="text/css">
+<script type="text/javascript"
+	src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript"
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$('#myTable').dataTable();
+	});
+</script>
+
 </head>
-
 <body>
-	<script type="text/javascript">
-                    function Filtrar(strKey) {
-                        var strData = strKey.value.toLowerCase().split(" ");
-                        var tblData = document.getElementById('example');
-                        var rowData;
-                        for (var i = 1; i < tblData.rows.length; i++) {
-                            rowData = tblData.rows[i].innerHTML;
-                            var styleDisplay = 'none';
-                            for (var j = 0; j < strData.length; j++) {
-                                if (rowData.toLowerCase().indexOf(strData[j]) >= 0)
-                                    styleDisplay = '';
-                                else {
-                                    styleDisplay = 'none';
-                                    break;
-                                }
-                            }
-                            tblData.rows[i].style.display = styleDisplay;
-                        }
-                    }                    
-                </script>
-
-
-
-	<!-- Sidenav -->
 	<nav
 		class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white"
 		id="sidenav-main">
@@ -77,8 +67,8 @@
 					<!-- Nav items -->
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link active"
-							href="abmlCuentas.html"> <i class="ni ni-tv-2 text-primary"></i> <span
-								class="nav-link-text">ABML Cuentas</span>
+							href="abmlCuentas.html"> <i class="ni ni-tv-2 text-primary"></i>
+								<span class="nav-link-text">ABML Cuentas</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
 							href="abmlClientes.html"> <i
@@ -91,7 +81,8 @@
 			</div>
 		</div>
 	</nav>
-	<!-- Main content -->
+
+
 	<div class="main-content" id="panel">
 		<!-- Topnav -->
 		<nav
@@ -101,16 +92,7 @@
 					<!-- Search form -->
 					<form class="navbar-search navbar-search-light form-inline mr-sm-3"
 						id="navbar-search-main">
-						<div class="form-group mb-0">
-							<div
-								class="input-group input-group-alternative input-group-merge">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fas fa-search"></i></span>
-								</div>
-								<input class="form-control" placeholder="Buscar" type="text"
-									onkeyup=Filtrar(this)>
-							</div>
-						</div>
+						<div class="form-group mb-0"></div>
 						<button type="button" class="close" data-action="search-close"
 							data-target="#navbar-search-main" aria-label="Close">
 							<span aria-hidden="true">×</span>
@@ -130,11 +112,11 @@
 							</div>
 						</li>
 					</ul>
-					    <% 
-	HttpSession misession= (HttpSession) request.getSession();
-	 
-	Persona Persona = (Persona) misession.getAttribute("Usuario");
-	%>  
+					<%
+						HttpSession misession = (HttpSession) request.getSession();
+
+						Persona Persona = (Persona) misession.getAttribute("Usuario");
+					%>
 					<ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
 						<li class="nav-item dropdown"><a class="nav-link pr-0"
 							href="#" role="button" data-toggle="dropdown"
@@ -144,7 +126,8 @@
 										alt="Image placeholder" src="assets/img/theme/team-1.jpg">
 									</span>
 									<div class="media-body  ml-2  d-none d-lg-block">
-										<span class="mb-0 text-sm  font-weight-bold"><%=Persona.getNombre()%>, <%=Persona.getApellido()%></span>
+										<span class="mb-0 text-sm  font-weight-bold"><%=Persona.getNombre()%>,
+											<%=Persona.getApellido()%></span>
 									</div>
 								</div>
 						</a>
@@ -166,8 +149,8 @@
 				</div>
 			</div>
 		</nav>
-		<!-- Header -->
-		<!-- Header -->
+
+
 		<div class="header bg-primary pb-6">
 			<div class="container-fluid">
 				<div class="header-body">
@@ -184,93 +167,87 @@
 							</nav>
 						</div>
 						<div class="col-lg-6 col-5 text-right">
-							<a href="RedireccionNuevoCliente.html" class="btn btn-sm btn-neutral">Nuevo cliente</a>
+							<a href="RedireccionNuevoCliente.html"
+								class="btn btn-sm btn-neutral">Nuevo cliente</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- Page content -->
 		<div class="container-fluid mt--6">
 			<div class="row justify-content-center">
 				<div class=" col ">
 					<div class="card">
 						<div class="card-header bg-transparent">
-								<h3 class="mb-0">Clientes</h3>
-							</div>
-							<br>
-							<div class="row">
-								<div class="col-xl-12">
-									<div class="card bg-default">
-										<div class="card-header bg-transparent">
-											<div class="row align-items-center">
-												<div class="col-xl-12"></div>
-												<div class="table-responsive">
-													<table id="example"
-														class="table align-items-center table-dark table-flush display"
-														cellspacing="0" width="100%">
-
-														<thead class="thead-dark" id="example">
+							<h3 class="mb-0">Clientes</h3>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-xl-12">
+								<div class="card text-dark bg-light mb-3">
+									<div class="card-header bg-transparent">
+										<div class="row align-items-center">
+											<div class="col-xl-12"></div>
+											<div class="table-responsive">
+												<table id="myTable" class="display table" width="100%">
+													<thead class="thead-dark" id="example">
+														<tr>
+															<th scope="col" class="sort" data-sort="DNI">DNI</th>
+															<th scope="col" class="sort" data-sort="Apellido">Apellido</th>
+															<th scope="col" class="sort" data-sort="Nombre">Nombre</th>
+															<th scope="col" class="sort" data-sort="Nombre">Email</th>
+															<th scope="col" class="sort" data-sort="Modificar">Modificar</th>
+															<th scope="col" class="sort" data-sort="Eliminar">Eliminar</th>
+														</tr>
+													</thead>
+													<tbody class="list">
+														<c:forEach items="${listaPersona}" var="item">
 															<tr>
-																<th scope="col" class="sort" data-sort="DNI">DNI</th>
-																<th scope="col" class="sort" data-sort="Apellido">Apellido</th>
-																<th scope="col" class="sort" data-sort="Nombre">Nombre</th>
-																<th scope="col" class="sort" data-sort="Nombre">Email</th>
-																<th scope="col" class="sort" data-sort="Modificar">Modificar</th>
-																<th scope="col" class="sort" data-sort="Eliminar">Eliminar</th>
+																<td>${item.dni}</td>
+																<td>${item.apellido}</td>
+																<td>${item.nombre}</td>
+																<td>${item.email}</td>
+
+																<td>
+																	<form method="post" action="ModificarCliente.html">
+																		<input type=submit value="Modificar"
+																			class="btn btn-sm btn-neutral" name="btndni" id="dni"
+																			OnClick="return confirm('Estas seguro de modificar a ${item.apellido}, ${item.nombre}?')">
+																		<input type="hidden" value="${item.dni}"
+																			class="myButton" name="dni" id="dni"> <input
+																			type="hidden" value="${item.apellido}"
+																			class="myButton" name="apellido" id="dni"><input
+																			type="hidden" value="${item.nombre}" class="myButton"
+																			name="nombre" id="dni"> <input type="hidden"
+																			value="${item.email}" class="myButton" name="email"
+																			id="dni"> <input type="hidden"
+																			value="${item.provincia}" class="myButton"
+																			name="provincia" id="provincia"> <input
+																			type="hidden" value="${item.localidad}"
+																			class="myButton" name="localidad" id="localidad">
+
+																		<input type="hidden" value="${item.direccion}"
+																			class="myButton" name="direccion" id="direccion">
+
+																		<input type="hidden" value="${item.sexo}"
+																			class="myButton" name="sexo" id="sexo">
+																	</form>
+																</td>
+
+
+																<td>
+																	<form method="post" action="eliminacion.html">
+																		<input type=submit value="Eliminar"
+																			class="btn btn-sm btn-neutral" name="btndni" id="dni"
+																			OnClick="return confirm('Estas seguro de eliminar a ${item.apellido}, ${item.nombre}?')">
+																		<input type="hidden" value="${item.dni}"
+																			class="myButton" name="dni" id="dni">
+																	</form>
+																</td>
 															</tr>
-														</thead>
-														<tbody class="list">
-															<c:forEach items="${listaPersona}" var="item">
-																<tr>
-																	<td>${item.dni}</td>
-																	<td>${item.apellido}</td>
-																	<td>${item.nombre}</td>
-																	<td>${item.email}</td>
-
-																	<td>
-																		<form method="post" action="ModificarCliente.html">
-																			<input type=submit value="Modificar"
-																				class="btn btn-sm btn-neutral" name="btndni"
-																				id="dni"
-																				OnClick="return confirm('Estas seguro de modificar a ${item.apellido}, ${item.nombre}?')">
-																			<input type="hidden" value="${item.dni}"
-																				class="myButton" name="dni" id="dni"> <input
-																				type="hidden" value="${item.apellido}"
-																				class="myButton" name="apellido" id="dni"><input
-																				type="hidden" value="${item.nombre}"
-																				class="myButton" name="nombre" id="dni"> <input
-																				type="hidden" value="${item.email}" class="myButton"
-																				name="email" id="dni"> <input type="hidden"
-																				value="${item.provincia}" class="myButton"
-																				name="provincia" id="provincia"> <input
-																				type="hidden" value="${item.localidad}"
-																				class="myButton" name="localidad" id="localidad">
-
-																			<input type="hidden" value="${item.direccion}"
-																				class="myButton" name="direccion" id="direccion">
-
-																			<input type="hidden" value="${item.sexo}"
-																				class="myButton" name="sexo" id="sexo">
-																		</form>
-																	</td>
-
-
-																	<td>
-																		<form method="post" action="eliminacion.html">
-																			<input type=submit value="Eliminar"
-																				class="btn btn-sm btn-neutral" name="btndni"
-																				id="dni"
-																				OnClick="return confirm('Estas seguro de eliminar a ${item.apellido}, ${item.nombre}?')">
-																			<input type="hidden" value="${item.dni}"
-																				class="myButton" name="dni" id="dni">
-																		</form>
-																	</td>
-																</tr>
-															</c:forEach>
-														</tbody>
-													</table>
-												</div>
+														</c:forEach>
+													</tbody>
+												</table>
 											</div>
 										</div>
 									</div>
@@ -281,20 +258,6 @@
 				</div>
 			</div>
 		</div>
-		<!-- Argon Scripts -->
-		<!-- Core -->
-		<script src="assets/vendor/jquery/dist/jquery.min.js"></script>
-		<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-		<script src="assets/vendor/js-cookie/js.cookie.js"></script>
-		<script src="assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
-		<script
-			src="assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
-		<!-- Optional JS -->
-		<script src="assets/vendor/chart.js/dist/Chart.min.js"></script>
-		<script src="assets/vendor/chart.js/dist/Chart.extension.js"></script>
-		<!-- Argon JS -->
-		<script src="assets/js/argon.js?v=1.2.0"></script>
-	</form>
+	</div>
 </body>
-
 </html>
