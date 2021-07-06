@@ -9,11 +9,6 @@
 </head>
 
 <body>
-	<%
-		HttpSession misession = (HttpSession) request.getSession();
-
-		Persona Persona = (Persona) misession.getAttribute("Usuario");
-	%>
 	<script>
 		function ValidarDNI() {
 			objeto = document.getElementById("CBU");
@@ -30,45 +25,7 @@
 			}
 		}
 	</script>
-	<!-- Sidenav -->
-	<nav
-		class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white"
-		id="sidenav-main">
-		<div class="scrollbar-inner">
-			<!-- Brand -->
-			<div class="sidenav-header  align-items-center">
-				<a class="navbar-brand" href="javascript:void(0)"> <img
-					src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLkhUzGfv2cVnLW35gPKqwpGdOEf7gttt20Q&usqp=CAU"
-					class="navbar-brand-img" alt="...">
-				</a>
-			</div>
-			<div class="navbar-inner">
-				<!-- Collapse -->
-				<div class="collapse navbar-collapse" id="sidenav-collapse-main">
-					<!-- Nav items -->
-					<ul class="navbar-nav">
-						<li class="nav-item">
-							<center>
-								<form method="post" action="homeCliente.html">
-									<i class="ni ni-tv-2 text-primary"></i> <input type=submit
-										value="Cuentas" class="btn btn-primary btn-sm" name="btn"
-										id="btn"> <input type="hidden"
-										value="<%=Persona.getDni()%>" class="myButton" name="Usuario"
-										id="Usuario">
-								</form>
-							</center>
-						</li>
-					</ul>
-					<!-- Divider -->
-					<hr class="my-3">
-					<!-- Heading -->
-
-					<!-- Navigation -->
-				</div>
-			</div>
-		</div>
-	</nav>
-	<!-- Main content -->
+	<jsp:include page="NavegacionCliente.jsp"></jsp:include>
 	<div class="main-content" id="panel">
 		<jsp:include page="Sesion.jsp"></jsp:include>
 		<div class="header bg-primary pb-6">
@@ -112,10 +69,10 @@
 													<div class="col-md-12">
 
 														<div class="form-group">
-															<label class="form-control-label" for="input-address">CBU</label> <input type="text" id="CBU"
-																class="form-control" placeholder="Ingrese el CBU"
-																onkeyup="ValidarDNI()" name="CBU"
-																value="${CuentaDestino.cbu}"
+															<label class="form-control-label" for="input-address">CBU</label>
+															<input type="text" id="CBU" class="form-control"
+																placeholder="Ingrese el CBU" onkeyup="ValidarDNI()"
+																name="CBU" value="${CuentaDestino.cbu}"
 																oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1')"
 																required>
 														</div>
@@ -231,7 +188,8 @@
 														test="${personaDestino.nombre == null || cuentas == 0}">
 
 														<input type="submit" class="btn btn-sm btn-primary"
-															style="width: 250px;" value="Transferir" disabled="disabled">
+															style="width: 250px;" value="Transferir"
+															disabled="disabled">
 														<input type="hidden" value="${cuenta.cbu}"
 															class="myButton" name="CBUOrigen" id="numeroCuenta">
 
