@@ -14,19 +14,21 @@ public class DaoMovimiento {
 	private Conexion conexion = new Conexion();
 
 	public Boolean agregarMovimiento(Movimiento mov) {
-		Session session = conexion.abrirConexion();
-        Transaction tx = session.beginTransaction();
-        boolean aux = true;
-        try {
-            session.save(mov);
-            tx.commit();
-        } catch (Exception e) {
-            aux = false;
-            tx.rollback();
-        }
-		session.close();
-        return aux;
+		boolean aux = true;
+		Session session = null;
+		Transaction tx = null;
+		try {
+			session = conexion.abrirConexion();
+			tx = session.beginTransaction();
+			session.save(mov);
+			tx.commit();
+		} catch (Exception e) {
+			aux = false;
+			tx.rollback();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+		return aux;
 	}
-
-	
 }

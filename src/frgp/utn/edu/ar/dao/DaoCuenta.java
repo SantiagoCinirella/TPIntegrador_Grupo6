@@ -21,108 +21,129 @@ public class DaoCuenta {
 
 	public List<Cuenta> listarCuentas() {
 
-		Session session = conexion.abrirConexion();
-		Transaction tx = session.beginTransaction();
+		Session session = null;
+		try {
+			session = conexion.abrirConexion();
+			Transaction tx = session.beginTransaction();
 
-		/*
-		 * String hql = "FROM Employee E"; Query query = session.createQuery(hql); List
-		 * results = query.list();
-		 */
+			ArrayList<Cuenta> listaCuentas = (ArrayList<Cuenta>) session.createCriteria(Cuenta.class).list();
 
-		ArrayList<Cuenta> listaCuentas = (ArrayList<Cuenta>) session.createCriteria(Cuenta.class).list();
-
-		// cuenta = (Cuenta) session.get(Cuenta.class,"ID");
-		tx = session.getTransaction();
-		session.close();
-		return listaCuentas;
+			tx = session.getTransaction();
+			return listaCuentas;
+		} catch (Exception e) {
+			return null;
+		} finally {
+			if (session != null)
+				session.close();
+		}
 
 	}
 
 	public List<Cuenta> listarCuentasBajaLogica() {
 
+		Session session = null;
 		try {
-			Session session = conexion.abrirConexion();
+			session = conexion.abrirConexion();
 			Transaction tx = session.beginTransaction();
 			ArrayList<Cuenta> listaPersonas = (ArrayList<Cuenta>) session
 					.createQuery("SELECT p FROM Cuenta p WHERE p.estado=0)").list();
-			session.close();
 			return listaPersonas;
 		} catch (Exception ex) {
 			throw ex;
+		} finally {
+			if (session != null)
+				session.close();
 		}
 
 	}
-	
+
 	public Cuenta buscarSaldo(int cbu) {
+		Session session = null;
 		try {
+			session = conexion.abrirConexion();
+			Transaction tx = session.beginTransaction();
 			Cuenta Cuenta = new Cuenta();
-			Session session = conexion.abrirConexion();
 			Query buscarSaldo = session.createQuery("SELECT p FROM Cuenta p WHERE p.cbu = ? ");
 			buscarSaldo.setParameter(0, cbu);
 			Cuenta = (Cuenta) buscarSaldo.uniqueResult();
-			session.close();
 			return Cuenta;
 		} catch (Exception ex) {
 			throw ex;
+		} finally {
+			if (session != null)
+				session.close();
 		}
 
 	}
-	
+
 	public List<Movimiento> listarMovimientos(int cbu) {
+		Session session = null;
 		try {
+			session = conexion.abrirConexion();
 			ArrayList<Movimiento> listaMov = new ArrayList<Movimiento>();
-			Session session = conexion.abrirConexion();
-			Query buscarCBU = session.createQuery("SELECT p FROM Movimiento p WHERE p.cbuOrigen = ? ORDER BY p.fecha DESC");
+			Query buscarCBU = session
+					.createQuery("SELECT p FROM Movimiento p WHERE p.cbuOrigen = ? ORDER BY p.fecha DESC");
 			buscarCBU.setParameter(0, cbu);
 			listaMov = (ArrayList<Movimiento>) buscarCBU.list();
-			session.close();
 			return listaMov;
 		} catch (Exception ex) {
 			throw ex;
+		} finally {
+			if (session != null)
+				session.close();
 		}
 
 	}
 
 	public boolean eliminarCuenta(int NumeroCuenta) {
-		Session session = conexion.abrirConexion();
-		Transaction tx = session.beginTransaction();
 		boolean aux = true;
+		Session session = null;
+		Transaction tx = null;
 		try {
+			session = conexion.abrirConexion();
+			tx = session.beginTransaction();
 			Cuenta cuenta = new Cuenta();
 			cuenta.setCbu(NumeroCuenta);
 			session.delete(cuenta);
 			tx = session.getTransaction();
 			tx.commit();
-			
+
 		} catch (Exception e) {
 			aux = false;
 			tx.rollback();
+		} finally {
+			if (session != null)
+				session.close();
 		}
-		// conexion.cerrarSession();
-		session.close();
 		return aux;
 	}
 
 	public boolean agregarCuenta(Cuenta c) {
 
-		Session session = conexion.abrirConexion();
-		Transaction tx = session.beginTransaction();
 		boolean aux = true;
+		Session session = null;
+		Transaction tx = null;
 		try {
+			session = conexion.abrirConexion();
+			tx = session.beginTransaction();
 			session.save(c);
 			tx.commit();
 		} catch (Exception e) {
 			aux = false;
 			tx.rollback();
+		} finally {
+			if (session != null)
+				session.close();
 		}
-		session.close();
 		return aux;
 	}
 
 	public boolean bajaLogica(int cbu) {
-		Session session = conexion.abrirConexion();
-		Transaction tx = session.beginTransaction();
+		Session session = null;
+		Transaction tx = null;
 		try {
+			session = conexion.abrirConexion();
+			tx = session.beginTransaction();
 			String queryUpdate = "UPDATE Cuenta c SET c.estado = 1 WHERE c.cbu = ?";
 			Query update = session.createQuery(queryUpdate);
 			update.setParameter(0, cbu);
@@ -133,14 +154,17 @@ public class DaoCuenta {
 			tx.rollback();
 			return false;
 		} finally {
-			session.close();
+			if (session != null)
+				session.close();
 		}
 	}
 
 	public boolean update(Cuenta cuenta) {
-		Session session = conexion.abrirConexion();
-		Transaction tx = session.beginTransaction();
+		Session session = null;
+		Transaction tx = null;
 		try {
+			session = conexion.abrirConexion();
+			tx = session.beginTransaction();
 			String queryUpdate = "UPDATE Cuenta c SET c.alias = ? WHERE c.cbu = ?";
 			Query update = session.createQuery(queryUpdate);
 			update.setParameter(0, cuenta.getAlias());
@@ -152,14 +176,17 @@ public class DaoCuenta {
 			tx.rollback();
 			return false;
 		} finally {
-			session.close();
+			if (session != null)
+				session.close();
 		}
 	}
 
 	public boolean actualizarSaldo(Cuenta cuenta) {
-		Session session = conexion.abrirConexion();
-		Transaction tx = session.beginTransaction();
+		Session session = null;
+		Transaction tx = null;
 		try {
+			session = conexion.abrirConexion();
+			tx = session.beginTransaction();
 			String queryUpdate = "UPDATE Cuenta c SET c.saldo = ? WHERE c.cbu = ?";
 			Query update = session.createQuery(queryUpdate);
 			update.setParameter(0, cuenta.getSaldo());
@@ -171,57 +198,61 @@ public class DaoCuenta {
 			tx.rollback();
 			return false;
 		} finally {
-			session.close();
+			if (session != null)
+				session.close();
 		}
 	}
-	
+
 	public int obtenerCuentaMax() {
 
 		int maximaCuenta = 0;
-		Session session = conexion.abrirConexion();
+		Session session = null;
 		try {
+			session = conexion.abrirConexion();
 			Query busqueda = session.createQuery(CuentaQueries.BUSCA_MAX_CUENTA_SQL.getQuery());
 			maximaCuenta = (int) busqueda.uniqueResult();
 			return maximaCuenta;
 		} catch (Exception e) {
 			return maximaCuenta;
 		} finally {
-			session.close();
+			if (session != null)
+				session.close();
 		}
 	}
 
 	public int obtenerCbuMax() {
 
 		int maximaCbu = 0;
-		Session session = conexion.abrirConexion();
+		Session session = null;
 		try {
-
+			session = conexion.abrirConexion();
 			Query busqueda = session.createQuery(CuentaQueries.BUSCA_MAX_CBU_SQL.getQuery());
 			maximaCbu = (int) busqueda.uniqueResult();
 			return maximaCbu;
 		} catch (Exception e) {
 			return maximaCbu;
 		} finally {
-			session.close();
+			if (session != null)
+				session.close();
 		}
 
 	}
 
 	public int getCantidadCuentas(int dni) {
-		
+
 		int cantidadCuenta = 0;
-
-		Session session = conexion.abrirConexion();
+		Session session = null;
 		try {
-
+			session = conexion.abrirConexion();
 			Query busqueda = session.createQuery(CuentaQueries.CANT_CUENTAS_SQL.getQuery());
 			cantidadCuenta = ((Long) busqueda.setParameter(0, dni).uniqueResult()).intValue();
 			return cantidadCuenta;
 		} catch (Exception e) {
 			return cantidadCuenta;
 		} finally {
-			session.close();
+			if (session != null)
+				session.close();
 		}
-		
+
 	}
 }
