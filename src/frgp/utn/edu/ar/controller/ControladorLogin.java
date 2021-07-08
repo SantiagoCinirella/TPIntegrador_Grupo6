@@ -53,6 +53,8 @@ public class ControladorLogin {
 					return MV;
 				} else {
 					ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(Persona.getDni());
+					HttpSession misession = request.getSession(true);
+					misession.setAttribute("Usuario", Persona);
 					MV.addObject("listaCuenta", listaCuenta);
 					MV.setViewName("Cliente");
 					return MV;
