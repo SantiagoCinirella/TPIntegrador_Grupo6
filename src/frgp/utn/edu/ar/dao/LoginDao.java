@@ -7,16 +7,24 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import frgp.utn.edu.ar.dao.interfazDao.InterfaceLoginDao;
 import frgp.utn.edu.ar.dao.queries.UsuarioLoginQueries;
 import frgp.utn.edu.ar.entidad.Persona;
 import frgp.utn.edu.ar.entidad.UsuarioLogin;
 
 @Repository("loginDao")
-public class LoginDao {
+public class LoginDao implements InterfaceLoginDao {
 
 	@Autowired
-	private Conexion conexion = new Conexion();
+	private Conexion conexion;
 
+	@Autowired
+	private UsuarioLogin UsuarioLogin;
+
+	@Autowired
+	private Persona persona;
+
+	@Override
 	public Persona verificarUsuario(String usuario, String password) {
 		Session session = null;
 		try {
@@ -25,13 +33,12 @@ public class LoginDao {
 			verificarUsuario.setParameter(0, password);
 			verificarUsuario.setParameter(1, usuario);
 			ArrayList<UsuarioLogin> listaPersonas = (ArrayList<UsuarioLogin>) verificarUsuario.list();
-			Persona persona1 = null;
 			for (UsuarioLogin usuarioLogin : listaPersonas) {
 				if (!listaPersonas.isEmpty()) {
-					persona1 = (Persona) session.get(Persona.class, usuarioLogin.getDni());
+					persona = (Persona) session.get(Persona.class, usuarioLogin.getDni());
 				}
 			}
-			return persona1;
+			return persona;
 		} catch (Exception e) {
 			return null;
 		} finally {
@@ -40,6 +47,7 @@ public class LoginDao {
 		}
 	}
 
+	@Override
 	public UsuarioLogin buscarRol(String usuario, String password) {
 
 		Session session = null;
@@ -50,7 +58,7 @@ public class LoginDao {
 			buscarRol.setParameter(0, password);
 			buscarRol.setParameter(1, usuario);
 			boolean tipoRol = (boolean) buscarRol.uniqueResult();
-			UsuarioLogin UsuarioLogin = new UsuarioLogin();
+
 			UsuarioLogin.setTipoUsuario(tipoRol);
 
 			Query buscardni = session.createQuery(

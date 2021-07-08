@@ -9,16 +9,21 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import frgp.utn.edu.ar.dao.interfazDao.InterfacePersonaDao;
 import frgp.utn.edu.ar.dao.queries.ClienteQueries;
 import frgp.utn.edu.ar.entidad.Cuenta;
 import frgp.utn.edu.ar.entidad.Persona;
 
 @Repository("daoPersona")
-public class DaoPersona {
+public class DaoPersona implements InterfacePersonaDao {
 
 	@Autowired
-	private Conexion conexion = new Conexion();
+	private Conexion conexion;
 
+	@Autowired
+	private Persona persona;
+
+	@Override
 	public List<Persona> listarPersonas() {
 		Session session = null;
 		try {
@@ -35,6 +40,7 @@ public class DaoPersona {
 		}
 	}
 
+	@Override
 	public List<Persona> listarPersonasBajaLogica() {
 
 		Session session = null;
@@ -55,6 +61,7 @@ public class DaoPersona {
 
 	}
 
+	@Override
 	public boolean eliminarUsuario(int idUsuario) {
 		Transaction tx = null;
 		boolean aux = true;
@@ -62,9 +69,8 @@ public class DaoPersona {
 		try {
 			session = conexion.abrirConexion();
 			tx = session.beginTransaction();
-			Persona user = new Persona();
-			user.setDni(idUsuario);
-			session.delete(user);
+			persona.setDni(idUsuario);
+			session.delete(persona);
 			tx = session.getTransaction();
 			tx.commit();
 		} catch (Exception e) {
@@ -77,6 +83,7 @@ public class DaoPersona {
 		return aux;
 	}
 
+	@Override
 	public boolean bajaLogica(int dni) {
 		Session session = null;
 		Transaction tx = null;
@@ -98,6 +105,7 @@ public class DaoPersona {
 		}
 	}
 
+	@Override
 	public boolean bajaLogicaCuenta(int dni) {
 		Session session = null;
 		Transaction tx = null;
@@ -119,6 +127,7 @@ public class DaoPersona {
 		}
 	}
 
+	@Override
 	public boolean bajaLogicaUsuarioLogin(int dni) {
 		Session session = null;
 		Transaction tx = null;
@@ -140,6 +149,7 @@ public class DaoPersona {
 		}
 	}
 
+	@Override
 	public boolean agregarPersona(Persona p) {
 		boolean aux = true;
 		Session session = null;
@@ -162,6 +172,7 @@ public class DaoPersona {
 		return aux;
 	}
 
+	@Override
 	public boolean editarPersona(Persona persona) {
 		Session session = null;
 		Transaction tx = null;
@@ -180,9 +191,9 @@ public class DaoPersona {
 		}
 	}
 
+	@Override
 	public Persona obtenerPersona(int dni) {
 
-		Persona persona = new Persona();
 		Session session = null;
 		try {
 			session = conexion.abrirConexion();
@@ -198,9 +209,9 @@ public class DaoPersona {
 		}
 	}
 
+	@Override
 	public Persona obtenerPersonaParaLogin(int dni) {
 
-		Persona persona = new Persona();
 		Session session = null;
 		try {
 			session = conexion.abrirConexion();
@@ -216,6 +227,7 @@ public class DaoPersona {
 		}
 	}
 
+	@Override
 	public List<Integer> obtenerCuentaxCliente(int dni) {
 		Session session = null;
 		try {
@@ -233,6 +245,7 @@ public class DaoPersona {
 
 	}
 
+	@Override
 	public Cuenta obtenerCuentaxCbu(int dni) {
 		Session session = null;
 		try {
@@ -250,6 +263,7 @@ public class DaoPersona {
 
 	}
 
+	@Override
 	public List<Cuenta> obtenerCuenta(int dni) {
 		Session session = null;
 		try {
@@ -267,6 +281,7 @@ public class DaoPersona {
 
 	}
 
+	@Override
 	public boolean verificarDniExistente(Integer dni) throws Exception {
 		Session session = null;
 		try {

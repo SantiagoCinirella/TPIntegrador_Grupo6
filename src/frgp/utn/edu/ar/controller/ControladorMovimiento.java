@@ -29,19 +29,39 @@ public class ControladorMovimiento {
 	@Qualifier("servicioMovimiento")
 	private NegMovimiento negocioMovimiento;
 
+	@Autowired
+	private NegCuenta negocioCuenta;
+	
+	@Autowired
+	private Cuenta cuentaDestino;
+	
+	@Autowired
+	private Cuenta cuenta;
+	
+	@Autowired
+	private NegPersona negocioPersona;
+	
+	@Autowired
+	private Persona personaDestino;
+	
+	@Autowired
+	private Movimiento Movimiento;
+	
+	@Autowired
+	private Persona persona;
+	
 	@RequestMapping(value = "buscarSaldo.html", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView eventoRedireccionar(int cuentas, int CBU, int SaldoTransferir, String Comentario,
 			HttpServletRequest request, HttpServletResponse response) {
-		NegCuenta negocioCuenta = new NegCuenta();
-		NegPersona negocioPersona = new NegPersona();
+		
 		ModelAndView MV = new ModelAndView();
 		if (cuentas != 0) {
-			Cuenta CuentaDestino = negocioPersona.obtenerCuentaxCbu(CBU);
-			if (CuentaDestino != null) {
+			cuentaDestino = negocioPersona.obtenerCuentaxCbu(CBU);
+			if (cuentaDestino != null) {
 
-				Persona personaDestino = negocioPersona.obtenerPersona(CuentaDestino.getDni());
+				personaDestino = negocioPersona.obtenerPersona(cuentaDestino.getDni());
 
-				Cuenta cuenta = negocioCuenta.buscarSaldo(cuentas);
+				cuenta = negocioCuenta.buscarSaldo(cuentas);
 
 				HttpSession misession = (HttpSession) request.getSession();
 				Persona Persona = (Persona) misession.getAttribute("Usuario");
@@ -50,7 +70,7 @@ public class ControladorMovimiento {
 				MV.addObject("listaCuenta", listaCuenta);
 				MV.addObject("cuenta", cuenta);
 				MV.addObject("personaDestino", personaDestino);
-				MV.addObject("CuentaDestino", CuentaDestino);
+				MV.addObject("CuentaDestino", cuentaDestino);
 				MV.addObject("SaldoTransferir", SaldoTransferir);
 				MV.addObject("Comentario", Comentario);
 				MV.setViewName("Transferencia");
@@ -88,7 +108,6 @@ public class ControladorMovimiento {
 	@RequestMapping(value = "TransferirDinero.html", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView Transferir(int CBU, int CBUOrigen, int SaldoTransferir, String Comentario,
 			HttpServletRequest request, HttpServletResponse response) {
-		NegPersona negocioPersona = new NegPersona();
 		Cuenta CuentaOrigen = negocioPersona.obtenerCuentaxCbu(CBUOrigen);
 
 		if (CuentaOrigen.getSaldo() != 0 && CuentaOrigen.getSaldo() >= SaldoTransferir) {
@@ -98,16 +117,14 @@ public class ControladorMovimiento {
 				HttpSession misession = (HttpSession) request.getSession();
 				Persona Persona = (Persona) misession.getAttribute("Usuario");
 				ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(Persona.getDni());
-				NegCuenta negocioCuenta = new NegCuenta();
-				Cuenta cuenta = negocioCuenta.buscarSaldo(CBUOrigen);
-				negocioPersona = new NegPersona();
-				Cuenta CuentaDestino = negocioPersona.obtenerCuentaxCbu(CBU);
-				Persona personaDestino = negocioPersona.obtenerPersona(CuentaDestino.getDni());
+				cuenta = negocioCuenta.buscarSaldo(CBUOrigen);
+				cuentaDestino = negocioPersona.obtenerCuentaxCbu(CBU);
+				personaDestino = negocioPersona.obtenerPersona(cuentaDestino.getDni());
 				ModelAndView MV = new ModelAndView();
 				MV.addObject("cuenta", cuenta);
 				MV.addObject("personaDestino", personaDestino);
 				MV.addObject("listaCuenta", listaCuenta);
-				MV.addObject("CuentaDestino", CuentaDestino);
+				MV.addObject("CuentaDestino", cuentaDestino);
 				MV.addObject("SaldoTransferir", SaldoTransferir);
 				MV.addObject("Comentario", Comentario);
 				MV.setViewName("Transferencia");
@@ -120,7 +137,6 @@ public class ControladorMovimiento {
 				double SaldoCuentaDestino = CuentaDestino.getSaldo();
 				SaldoCuentaDestino += SaldoTransferir;
 				CuentaDestino.setSaldo(SaldoCuentaDestino);
-				NegCuenta negocioCuenta = new NegCuenta();
 				negocioCuenta.actualizarSaldo(CuentaDestino);
 
 				double SaldoCuentaOrigen = CuentaOrigen.getSaldo();
@@ -128,8 +144,6 @@ public class ControladorMovimiento {
 				CuentaOrigen.setSaldo(SaldoCuentaOrigen);
 				negocioCuenta.actualizarSaldo(CuentaOrigen);
 
-				NegMovimiento negocioMovimiento = new NegMovimiento();
-				Movimiento Movimiento = new Movimiento();
 				Movimiento.setCbuOrigen(CuentaOrigen.getCbu());
 				Movimiento.setCbuDestino(CuentaDestino.getCbu());
 				Movimiento.setDetalle(Comentario);
@@ -137,7 +151,6 @@ public class ControladorMovimiento {
 				Movimiento.setFecha(LocalDateTime.now().toString().replace("T", " ").substring(0, 16));
 				negocioMovimiento.agregarMovimiento(Movimiento);
 
-				Movimiento = new Movimiento();
 				Movimiento.setCbuOrigen(CuentaDestino.getCbu());
 				Movimiento.setCbuDestino(CuentaOrigen.getCbu());
 				Movimiento.setDetalle(Comentario);
@@ -165,22 +178,20 @@ public class ControladorMovimiento {
 			}
 
 		} else {
-			negocioPersona = new NegPersona();
-			Cuenta CuentaDestino = negocioPersona.obtenerCuentaxCbu(CBU);
-			Persona personaDestino = negocioPersona.obtenerPersona(CuentaDestino.getDni());
+			cuentaDestino = negocioPersona.obtenerCuentaxCbu(CBU);
+			personaDestino = negocioPersona.obtenerPersona(cuentaDestino.getDni());
 
 			HttpSession misession = (HttpSession) request.getSession();
-			Persona Persona = (Persona) misession.getAttribute("Usuario");
-			ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(Persona.getDni());
+			persona = (Persona) misession.getAttribute("Usuario");
+			ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(persona.getDni());
 
-			NegCuenta negocioCuenta = new NegCuenta();
-			Cuenta cuenta = negocioCuenta.buscarSaldo(CBUOrigen);
+			cuenta = negocioCuenta.buscarSaldo(CBUOrigen);
 
 			ModelAndView MV = new ModelAndView();
 			MV.addObject("cuenta", cuenta);
 			MV.addObject("listaCuenta", listaCuenta);
 			MV.addObject("personaDestino", personaDestino);
-			MV.addObject("CuentaDestino", CuentaDestino);
+			MV.addObject("CuentaDestino", cuentaDestino);
 			MV.addObject("SaldoTransferir", SaldoTransferir);
 			MV.addObject("Comentario", Comentario);
 			MV.setViewName("Transferencia");

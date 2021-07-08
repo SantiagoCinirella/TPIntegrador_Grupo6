@@ -1,4 +1,4 @@
-package frgp.utn.edu.ar.negocio.interfaceNegocio;
+package frgp.utn.edu.ar.interfazNegocio;
 
 import frgp.utn.edu.ar.entidad.Persona;
 import frgp.utn.edu.ar.entidad.UsuarioLogin;

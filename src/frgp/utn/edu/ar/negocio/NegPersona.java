@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 import frgp.utn.edu.ar.dao.DaoPersona;
 import frgp.utn.edu.ar.entidad.Cuenta;
 import frgp.utn.edu.ar.entidad.Persona;
-import frgp.utn.edu.ar.negocio.interfaceNegocio.interfacePersona;
+import frgp.utn.edu.ar.interfazNegocio.interfacePersona;
 
 @Service("servicioPersona")
 public class NegPersona implements interfacePersona {
 
 	@Autowired
-	private DaoPersona daoPersona = new DaoPersona();
+	private DaoPersona daoPersona;
 
 	@Override
 	public List<Persona> listarPersonas() {

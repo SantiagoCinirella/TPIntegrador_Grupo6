@@ -1,13 +1,11 @@
-package frgp.utn.edu.ar.negocio.interfaceNegocio;
+package frgp.utn.edu.ar.dao.interfazDao;
 
 import java.util.List;
 
 import frgp.utn.edu.ar.entidad.Cuenta;
 import frgp.utn.edu.ar.entidad.Movimiento;
 
-public interface interfaceCuenta {
-
-	public List<Cuenta> listarCuentas();
+public interface InterfaceCuentaDao {
 
 	public List<Cuenta> listarCuentasBajaLogica();
 
@@ -15,11 +13,11 @@ public interface interfaceCuenta {
 
 	public List<Movimiento> listarMovimientos(int cbu);
 
-	public boolean agregarCuenta(Cuenta p);
+	public boolean eliminarCuenta(int NumeroCuenta);
 
-	public boolean eliminarCuenta(int numeroCuenta);
+	public boolean agregarCuenta(Cuenta c);
 
-	public boolean bajaLogica(int numeroCuenta);
+	public boolean bajaLogica(int cbu);
 
 	public boolean update(Cuenta cuenta);
 
@@ -31,4 +29,5 @@ public interface interfaceCuenta {
 
 	public int getCantidadCuentas(int dni);
 
+	public List<Cuenta> listarCuentas();
 }

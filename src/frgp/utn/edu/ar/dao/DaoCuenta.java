@@ -9,16 +9,21 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import frgp.utn.edu.ar.dao.interfazDao.InterfaceCuentaDao;
 import frgp.utn.edu.ar.dao.queries.CuentaQueries;
 import frgp.utn.edu.ar.entidad.Cuenta;
 import frgp.utn.edu.ar.entidad.Movimiento;
 
 @Repository("daoCuenta")
-public class DaoCuenta {
+public class DaoCuenta implements InterfaceCuentaDao {
 
 	@Autowired
-	private Conexion conexion = new Conexion();
+	private Conexion conexion;
 
+	@Autowired
+	private Cuenta cuenta;
+
+	@Override
 	public List<Cuenta> listarCuentas() {
 
 		Session session = null;
@@ -39,6 +44,7 @@ public class DaoCuenta {
 
 	}
 
+	@Override
 	public List<Cuenta> listarCuentasBajaLogica() {
 
 		Session session = null;
@@ -62,11 +68,11 @@ public class DaoCuenta {
 		try {
 			session = conexion.abrirConexion();
 			Transaction tx = session.beginTransaction();
-			Cuenta Cuenta = new Cuenta();
+
 			Query buscarSaldo = session.createQuery("SELECT p FROM Cuenta p WHERE p.cbu = ? ");
 			buscarSaldo.setParameter(0, cbu);
-			Cuenta = (Cuenta) buscarSaldo.uniqueResult();
-			return Cuenta;
+			cuenta = (Cuenta) buscarSaldo.uniqueResult();
+			return cuenta;
 		} catch (Exception ex) {
 			throw ex;
 		} finally {
@@ -102,7 +108,6 @@ public class DaoCuenta {
 		try {
 			session = conexion.abrirConexion();
 			tx = session.beginTransaction();
-			Cuenta cuenta = new Cuenta();
 			cuenta.setCbu(NumeroCuenta);
 			session.delete(cuenta);
 			tx = session.getTransaction();

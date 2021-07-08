@@ -28,12 +28,23 @@ public class ControladorCuenta {
 	@Autowired
 	@Qualifier("servicioCuenta")
 	private NegCuenta negocioCuenta;
+	
+	@Autowired
+	@Qualifier("servicioPersona")
 	private NegPersona negocioPersona;
+	
+	@Autowired
 	private NegMovimiento negocioMovimiento;
+	
 	@Autowired
 	private Cuenta cuenta;
+	
+	@Autowired
 	private Persona persona;
 
+	@Autowired
+	private Movimiento movimiento;
+	
 	@RequestMapping(value = "/buscarCliente.html", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView eventoRedireccionar(String txtDni) {
 		ModelAndView MV = new ModelAndView();
@@ -41,7 +52,6 @@ public class ControladorCuenta {
 		int dni, cbu, nroCuenta, maxCuenta, maxCbu;
 		try {
 			dni = Integer.parseInt(txtDni);
-			negocioPersona = new NegPersona();
 			persona = negocioPersona.obtenerPersona(dni);
 			if (persona == null) {
 				MV.addObject("MensajeBack", enumMensajes.USUARIO_NO_EXISTE);
@@ -101,8 +111,6 @@ public class ControladorCuenta {
 					if (negocioCuenta.agregarCuenta(cuenta)) {
 						MV.addObject("MensajeBack", enumMensajes.CUENTA_AGREGADA_EXITOSAMENTE);
 
-						negocioMovimiento = new NegMovimiento();
-						Movimiento movimiento = new Movimiento();
 						movimiento.setCbuOrigen(cuenta.getCbu());
 						movimiento.setCbuDestino(cuenta.getCbu());
 						movimiento.setDetalle("Saldo Inicial");
@@ -156,7 +164,6 @@ public class ControladorCuenta {
 
 		ModelAndView MV = new ModelAndView();
 		try {
-			negocioPersona = new NegPersona();
 			ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(Usuario);
 			MV.addObject("listaCuenta", listaCuenta);
 			MV.setViewName("Cliente");
@@ -175,7 +182,6 @@ public class ControladorCuenta {
 		try {
 			HttpSession misession = (HttpSession) request.getSession();
 			Persona Persona = (Persona) misession.getAttribute("Usuario");
-			negocioPersona = new NegPersona();
 			ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) negocioPersona.obtenerCuenta(Persona.getDni());
 			if (listaCuenta.isEmpty()) {
 				MV.addObject("mensaje", enumMensajes.CLIENTE_SIN_CUENTA);
@@ -196,7 +202,6 @@ public class ControladorCuenta {
 	public ModelAndView eventoRedireccionarPag1() {
 		ModelAndView MV = new ModelAndView();
 		try {
-			NegCuenta negocioCuenta = new NegCuenta();
 			ArrayList<Cuenta> listaPersona = new ArrayList<>();
 			listaPersona = (ArrayList<Cuenta>) negocioCuenta.listarCuentasBajaLogica();
 			MV.addObject("listaPersona", listaPersona);
@@ -215,7 +220,6 @@ public class ControladorCuenta {
 		ModelAndView MV = new ModelAndView();
 
 		try {
-			NegCuenta negocioCuenta = new NegCuenta();
 
 			ArrayList<Movimiento> listaMovimientos = new ArrayList<>();
 
@@ -259,13 +263,12 @@ public class ControladorCuenta {
 
 		ModelAndView MV = new ModelAndView();
 		try {
-			Cuenta Cuenta = new Cuenta();
-			Cuenta.setAlias(alias);
-			Cuenta.setCbu(cbu);
-			Cuenta.setNroCuenta(numeroCuenta);
-			Cuenta.setTipoCuenta(tipoCuenta);
+			cuenta.setAlias(alias);
+			cuenta.setCbu(cbu);
+			cuenta.setNroCuenta(numeroCuenta);
+			cuenta.setTipoCuenta(tipoCuenta);
 
-			MV.addObject("CuentaModificar", Cuenta);
+			MV.addObject("CuentaModificar", cuenta);
 			MV.setViewName("ModificacionDeCuenta");
 			return MV;
 
@@ -280,19 +283,18 @@ public class ControladorCuenta {
 
 		ModelAndView MV = new ModelAndView();
 		try {
-			Cuenta Cuenta = new Cuenta();
-			Cuenta.setAlias(alias);
-			Cuenta.setCbu(cbu);
-			Cuenta.setNroCuenta(numeroCuenta);
-			Cuenta.setTipoCuenta(tipoCuenta);
+			cuenta.setAlias(alias);
+			cuenta.setCbu(cbu);
+			cuenta.setNroCuenta(numeroCuenta);
+			cuenta.setTipoCuenta(tipoCuenta);
 
 			MV.addObject("MensajeBack", enumMensajes.CUENTA_MODIFICADA_EXITOSAMENTE);
 
-			if (!negocioCuenta.update(Cuenta)) {
+			if (!negocioCuenta.update(cuenta)) {
 				MV.addObject("MensajeBack", enumMensajes.ERROR_ACTUALIZAR_CUENTA);
 			}
 
-			MV.addObject("CuentaModificar", Cuenta);
+			MV.addObject("CuentaModificar", cuenta);
 			MV.setViewName("ModificacionDeCuenta");
 			return MV;
 		} catch (Exception e) {

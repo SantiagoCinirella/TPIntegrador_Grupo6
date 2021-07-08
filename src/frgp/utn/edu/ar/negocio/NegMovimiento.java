@@ -5,13 +5,13 @@ import org.springframework.stereotype.Service;
 
 import frgp.utn.edu.ar.dao.DaoMovimiento;
 import frgp.utn.edu.ar.entidad.Movimiento;
-import frgp.utn.edu.ar.negocio.interfaceNegocio.interfaceMovimiento;
+import frgp.utn.edu.ar.interfazNegocio.interfaceMovimiento;
 
 @Service("servicioMovimiento")
 public class NegMovimiento implements interfaceMovimiento {
 
 	@Autowired
-	private DaoMovimiento daoMovimiento = new DaoMovimiento();
+	private DaoMovimiento daoMovimiento;
 
 	@Override
 	public Boolean agregarMovimiento(Movimiento mov) {

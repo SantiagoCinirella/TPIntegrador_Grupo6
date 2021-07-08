@@ -5,14 +5,16 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import frgp.utn.edu.ar.dao.interfazDao.InterfaceMovimientoDao;
 import frgp.utn.edu.ar.entidad.Movimiento;
 
 @Repository("daoMovimiento")
-public class DaoMovimiento {
+public class DaoMovimiento implements InterfaceMovimientoDao{
 
 	@Autowired
-	private Conexion conexion = new Conexion();
+	private Conexion conexion;
 
+	@Override
 	public Boolean agregarMovimiento(Movimiento mov) {
 		boolean aux = true;
 		Session session = null;

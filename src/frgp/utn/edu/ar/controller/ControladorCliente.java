@@ -22,8 +22,12 @@ public class ControladorCliente {
 	@Autowired
 	@Qualifier("servicioPersona")
 	private NegPersona negocioPersona;
+
 	@Autowired
 	private Persona persona;
+
+	@Autowired
+	private UsuarioLogin usuario;
 
 	@RequestMapping("agregarCliente.html")
 	public ModelAndView eventoRedireccionarPag1(String txtEmail, Integer txtDNI, String txtNombre, String txtApellido,
@@ -39,7 +43,6 @@ public class ControladorCliente {
 		persona.setDireccion(direccion);
 		persona.setNacionalidad("Argentina");
 
-		UsuarioLogin usuario = new UsuarioLogin();
 		usuario.setPassword(txtDNI.toString());
 		usuario.setUsuario(txtDNI.toString());
 		usuario.setDni(txtDNI);
@@ -59,7 +62,7 @@ public class ControladorCliente {
 			if (btnCrear != null) {
 				if (negocioPersona.verificarDniExistente(persona.getDni())) {
 					agregarModificar = negocioPersona.agregarPersona(persona);
-					listaPersona.add(new Persona());
+					listaPersona.add(persona);
 					MV.addObject("mensaje", enumMensajes.ALTA_EXITOSA);
 				} else {
 					MV.addObject("mensaje", enumMensajes.DNI_EXISTENTE);
@@ -163,7 +166,7 @@ public class ControladorCliente {
 			MV.addObject("listaSexo", new ArrayList<Sexo>(Arrays.asList(Sexo.values())));
 			MV.setViewName("AltaUsuarios");
 			return MV;
-			
+
 		} catch (Exception e) {
 			MV.setViewName("AltaUsuarios");
 			return MV;
@@ -185,7 +188,7 @@ public class ControladorCliente {
 			MV.addObject("listaPersona", listaPersona);
 			MV.setViewName("AltaUsuarios");
 			return MV;
-			
+
 		} catch (Exception e) {
 			MV.setViewName("AltaUsuarios");
 			return MV;
