@@ -13,6 +13,12 @@ public class DaoMovimiento implements InterfaceMovimientoDao{
 
 	@Autowired
 	private Conexion conexion;
+	
+	public DaoMovimiento() {}
+	
+	public DaoMovimiento(Conexion conexion) {
+		this.conexion = conexion;
+	}
 
 	@Override
 	public Boolean agregarMovimiento(Movimiento mov) {

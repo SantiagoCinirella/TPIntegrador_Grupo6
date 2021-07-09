@@ -23,6 +23,12 @@ public class DaoCuenta implements InterfaceCuentaDao {
 	@Autowired
 	private Cuenta cuenta;
 
+	public DaoCuenta() {}
+
+	public DaoCuenta(Conexion conexion) {
+		this.conexion = conexion;
+	}
+
 	@Override
 	public List<Cuenta> listarCuentas() {
 

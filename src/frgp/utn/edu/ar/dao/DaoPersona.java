@@ -23,6 +23,12 @@ public class DaoPersona implements InterfacePersonaDao {
 	@Autowired
 	private Persona persona;
 
+	public DaoPersona() {}
+
+	public DaoPersona(Conexion conexion) {
+		this.conexion = conexion;
+	}
+
 	@Override
 	public List<Persona> listarPersonas() {
 		Session session = null;
